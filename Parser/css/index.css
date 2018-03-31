@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: solid 10px cyan;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+input#input {
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea#output {
+    margin: 10px 0 0 0;
+    padding: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
