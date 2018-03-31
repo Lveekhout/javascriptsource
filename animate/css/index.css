@@ -1,0 +1,15 @@
+img {
+    position: absolute;
+    width: 10%;
+    opacity: 0;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+@keyframes example {
+    0%   { opacity: 0; left: 0; }
+    25%  { opacity: 1; left: 0; }
+    75%  { opacity: 1; left: 100%; }
+    100% { opacity: 0; left: 100%; }
+}

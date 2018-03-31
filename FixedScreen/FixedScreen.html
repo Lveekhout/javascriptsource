@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bracketstest</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            div.holder {
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            div.container {
+                position: relative;
+                margin: 0 auto;
+                width: 640px;
+                height: 480px;
+            }
+            div.header {
+                position: absolute;
+                width: 100%;
+                height: 10%;
+                background-color: rgba(255, 0, 0, 0.2);
+            }
+            div.navigate {
+                position: absolute;
+                top: 10%;
+                width: 10%;
+                bottom: 10%;
+                background-color: rgba(0, 0, 255, 0.2);
+            }
+            div.content {
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                right: 0;
+                bottom: 10%;
+                background-color: rgba(255, 255, 0, 0.2);
+                font-size: 28pt;
+                overflow: auto;
+            }
+            div.footer {
+                position: absolute;
+                width: 100%;
+                height: 10%;
+                bottom: 0;
+                background-color: rgba(0, 128, 0, 0.2);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="holder">
+            <div class="container">
+                <div class="header"></div>
+                <div class="navigate"></div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus finibus lectus, lacinia ullamcorper lacus lobortis sit amet. Donec cursus sem eget augue posuere tempus. Nulla sed nunc quis tellus vehicula maximus eget ac turpis. Nullam vulputate lorem vel interdum feugiat. Duis vitae libero et tellus tincidunt convallis at a ex. Phasellus maximus sem eu tortor molestie, eget dignissim metus lacinia. Aliquam feugiat malesuada fermentum. Nunc id orci non est maximus congue. Quisque lectus lacus, mattis sit amet elit eget, interdum dictum mi. Quisque mollis luctus est id ultricies. Vivamus metus arcu, sollicitudin non rhoncus semper, tincidunt sed est. Etiam tincidunt nec orci ac ornare. Nullam fermentum felis ac erat molestie porttitor. Integer vulputate eros orci, vitae sodales ligula posuere sed. Phasellus ut imperdiet odio, in interdum ante. Aliquam erat volutpat.</div>
+                <div class="footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

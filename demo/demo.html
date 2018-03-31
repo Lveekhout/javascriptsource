@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+Datum       Versie   Naam               Opmerking
+----------  -------  -----------------  ---------------------------------
+25-03-2015  1.0.0.0  LJ van Eekhout     Tbv demo van 26-03-2015.
+-->
+
+<HTML>
+<HEAD>
+	<TITLE>DRUPAL Surrogaat</TITLE>
+</HEAD>
+
+<BODY>
+	<H2>PensioenUitvoeringRelatie</H2>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: black; display: block;">
+			<INPUT value="3590029" />
+			<INPUT type="button" value="haal PUR" onClick="javascript: alert('halen'); getPURASync(ta001);" />
+		</DIV>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: cyan; display: block;">
+			<TABLE>
+				<TR>
+					<TD>nummer</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>uitvoerder.nummer</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>uitvoerder.code</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>uitvoerder.naamVerkort</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>regeling.nummer</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>regeling.naam</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>regeling.naam</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnemer.nummer</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnemer.hoofdstatus.code</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnemer.hoofdstatus.omschrijving</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnemer.hoofdstatus.geldigheidsperiode.ingangsdatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnemer.hoofdstatus.geldigheidsperiode.einddatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>geldigheidsperiode.ingangsdatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>geldigheidsperiode.einddatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+			</TABLE>
+		</DIV>
+	<H2>Begunstigden</H2>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: black; display: block;">
+			<INPUT value="3590029" />
+			<INPUT type="button" value="haal Begunstigden" onClick="javascript: alert('halen'); getPURASync(ta001);" />
+		</DIV>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: cyan; display: block;">
+			<TABLE>
+				<TR>
+					<TD>nummer</TD>
+					<TD><INPUT value="3590029" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>begunstigden.nummer</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>begunstigden.status.code</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>begunstigden.status.omschrijving</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>begunstigden.status.ingangsdatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>begunstigden.status.einddatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+			</TABLE>
+		</DIV>
+	<H2>Deelnames</H2>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: black; display: block;">
+			<INPUT value="3590029" />
+			<INPUT type="button" value="haalDeelnames" onClick="javascript: alert('halen'); getPURASync(ta001);" />
+		</DIV>
+		<DIV style="margin: 0 0 0 0; padding: 10px 10px 10px 10px; background-color: cyan; display: block;">
+			<TABLE>
+				<TR>
+					<TD>nummer</TD>
+					<TD><INPUT value="3590029" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnames.status.code</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnames.status.omschrijving</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnames.status.ingangsdatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+				<TR>
+					<TD>deelnames.status.einddatum</TD>
+					<TD><INPUT value="" disabled /></TD>
+				</TR>
+			</TABLE>
+		</DIV>
+</BODY>
+</HTML>

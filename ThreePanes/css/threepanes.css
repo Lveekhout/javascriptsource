@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    height: 100px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+tr:hover {
+    background-color: black;
+}
+td {
+    position: relative;
+}
+div.cellcontent {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Errorobject</title>
+        <script>
+            function getErrorString(foutobject) {
+                if (foutobject.omschrijving)
+                    if (foutobject.oorzaak)
+                        return getErrorString(foutobject.oorzaak);
+                    else
+                        return foutobject.omschrijving;
+                else
+                    if (foutobject.oorzaak)
+                        return getErrorString(foutobject.oorzaak);
+                    else
+                        return "";
+            }
+            function start() {
+                document.getElementsByTagName('body')[0].getElementsByTagName('h1')[0].innerHTML = getErrorString({"omschrijving":"Er is een onverwachte technische fout opgetreden. Deze is gelogd onder sleutel [1ce6dbdb-b192-431c-bdee-d317e6ac0e2d].",});
+            }
+        </script>
+    </head>
+    <body onload="start()">
+        <h1>Errorobject</h1>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Expression Parser</title>
+        <script src="js/jsep-0.3.2/jsep.min.js"></script>
+        <style>
+            input:focus {
+                background-color: lightsteelblue;
+            }
+        </style>
+        <script>
+            function MijnParser(element) {
+                this.start = () => {
+                    try {
+                        let parse_tree = jsep(element.value)
+                        element.style.boxShadow = 'none'
+                    } catch(e) {
+                        element.style.boxShadow = '0 0 30px red'
+                    }
+                }
+            }
+            window.onload = event => invoer.object = new MijnParser(invoer)
+        </script>
+    </head>
+    <body>
+        <input id="invoer" type="text" onkeyup="this.object.start()" style="width: 50%">
+    </body>
+</html>

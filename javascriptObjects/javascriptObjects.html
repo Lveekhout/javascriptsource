@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>object</title>
+        <script src="js/objects.js"></script>
+        <script>
+            let mijnKlasse = new myClass(1,2);
+            mijnKlasse.registreer(()=>alert("mijnCallback()"));
+        </script>
+    </head>
+    <body>
+        <button type="button" onclick="mijnKlasse.callback()">Klik</button>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+body {
+    font-size: 18pt;
+}
+
+body p {
+    display: block;
+}
+
+.img_trans {
+    transition: width 3000ms;
+}
+
+.display {
+    width: 100px;
+    float: left;
+}
+
+.display:hover {
+    width: 300px;
+}
+
+.margin {
+    margin: 0;
+    padding: 0;
+    border: solid 10px black;
+}
