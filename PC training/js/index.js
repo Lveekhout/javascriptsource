@@ -14,10 +14,10 @@ function stoppen() {
     window.speechSynthesis.speak(stop)
 }
 
-function einde() {
+function beeindigen() {
     blok.style.backgroundColor="azure"
     window.speechSynthesis.speak(einde)
-    clearInterval(timer)
+    while (timer.length>0) clearTimeout(timer.pop())
 }
 
 window.onload = () => {
@@ -37,12 +37,16 @@ window.onload = () => {
     }
 
     timer.push(setTimeout(() => window.speechSynthesis.speak(snel), 540000))
-    timer.push(setTimeout(einde, 600000))
+    timer.push(setTimeout(beeindigen, 600000))
 
-    blok.addEventListener("click", () => timer.forEach(v => clearTimeout(v)))
+    blok.addEventListener("click", () => {
+        while (timer.length>0) clearTimeout(timer.pop())
+        console.log(timer.length)
+    })
 
     starttijd = new Date()
     timer.push(setInterval(() => {
         tijd.innerHTML = getYoutubeLikeToDisplay(new Date() - starttijd)
     }, 1000))
+    console.log(timer.length)
 }
