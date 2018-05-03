@@ -1,5 +1,6 @@
 console.dir(window.speechSynthesis)
 var msg = new SpeechSynthesisUtterance('start')
+msg.lang = "nl"
 let success = new Audio("sound/success.wav"); success.playbackspeed = -1.0
 let enya = new Audio("sound/enya.mp3")
 enya.onabort = () => console.log("onabort")
@@ -90,6 +91,7 @@ enya.onwheel = () => console.log("onwheel")
 //}
 
 window.onload = () => {
+    console.log("language: " + msg.lang)
     enyabutton.addEventListener("click", () => {
         if (enyabutton.innerHTML==="Enya - stop") { enya.load(); enyabutton.innerHTML="Enya - resume" }
         else { enya.play(); enyabutton.innerHTML="Enya - stop" }
