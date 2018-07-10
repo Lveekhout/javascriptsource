@@ -9,6 +9,7 @@ table thead tr {
     color: white;
     font-weight: bold;
     text-align: left;
+    cursor: pointer;
 }
 
 table thead tr th {

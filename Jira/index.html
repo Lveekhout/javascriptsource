@@ -10,15 +10,18 @@
             <a style="padding: 5px 10px; border: solid 3px black; border-radius: 5px;" href="https://docs.atlassian.com/greenhopper/REST/cloud/">https://docs.atlassian.com/greenhopper/REST/cloud/</a>
         </div>
         <select id="select" onchange="selectChange()"></select>
+        <button onclick="selectChange()">Refresh</button>
+        <button onclick="alert(getChromeVersion())">Chrome version</button>
         <table id="table" border="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Summary</th>
-                    <th>Epic</th>
-                    <th>Reporter</th>
-                    <th>Assignee</th>
-                    <th>Substatus</th>                    
+                    <th onclick="sortKey(); toonIssues()">Key</th>
+                    <th onclick="sortSummary(); toonIssues()">Summary</th>
+                    <th>#</th>
+                    <th onclick="sortEpic(); toonIssues()">Epic</th>
+                    <th onclick="sortReporter(); toonIssues()">Reporter</th>
+                    <th onclick="sortAssignee(); toonIssues()">Assignee</th>
+                    <th onclick="sortSubstatus(); toonIssues()">Substatus</th>                    
                 </tr>
             </thead>
             <tbody>
