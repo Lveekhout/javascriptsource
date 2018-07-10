@@ -1,0 +1,9 @@
+canvas#canvas {
+    background-color: #EEE;
+    cursor: pointer;
+}
+
+input {
+    display: block;
+    width: 1000px;
+}

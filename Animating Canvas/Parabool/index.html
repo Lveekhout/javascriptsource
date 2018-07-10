@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parabool</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <input id="functie" oninput="window.requestAnimationFrame(draw)">
+        <input id="zoominput" oninput="zoom=parseInt(this.value); window.requestAnimationFrame(draw)" type="range" min="10" max="500">
+        <canvas id="canvas" width="1000px" height="780px"></canvas>
+    </body>
+</html>
