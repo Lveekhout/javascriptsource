@@ -1,0 +1,37 @@
+.blokje {
+    transition: background-color 1s;
+    background-color: blueviolet;
+    width: 300px;
+    height: 300px;
+}
+
+.logo {
+    transition: background-color 1s;
+    border-radius: 50px;
+    background-color: blueviolet;
+    margin-left: 25px;
+    width: 250px;
+    height: 250px;
+}
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .logo .vierkant {
+    position: absolute;
+    background-color: #FFF8;
+    left: 50px;
+    top: 50px;
+    width: 150px;
+    height: 150px;
+}
+
+.rotating {
+    animation: rotating 2s linear infinite;
+}
