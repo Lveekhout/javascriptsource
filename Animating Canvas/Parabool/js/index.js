@@ -4,6 +4,9 @@ let step = 5
 let zoom = 100
 let ox, oy
 let drag
+let a = 1
+let b = 0
+let c = 0
 function rooster() {
     ctx.save()
     ctx.lineWidth = 1
