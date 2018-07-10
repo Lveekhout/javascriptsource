@@ -1,26 +1,34 @@
-window.onload = event => {
+var x, y
+
+window.onload = () => {
+    butDraw.addEventListener("click", () => draw())
+    myCanvas.addEventListener("mousedown", event => {
+        x=event.offsetX
+        y=event.offsetY
+        draw()
+    })
+}
+
+function draw() {
     var c = document.getElementById("myCanvas")
     var ctx = c.getContext("2d")
 
-    console.dir(event)
+    // c.width = 600
 
-    c.width  = window.innerWidth
-    c.height = window.innerHeight
+    // var grd = ctx.createRadialGradient(75,50,5,90,60,100)
+    // grd.addColorStop(0,"red")
+    // grd.addColorStop(1,"white")
 
-    var grd = ctx.createRadialGradient(75,50,5,90,60,100)
-    grd.addColorStop(0,"red")
-    grd.addColorStop(1,"white")
+    // ctx.fillStyle = grd
+    // ctx.fillRect(10,10,150,80)
 
-    ctx.fillStyle = grd
-    ctx.fillRect(10,10,150,80)
+    // ctx.moveTo(0,0)
+    // ctx.lineTo(100, 100)
+    // ctx.stroke()
 
-    ctx.moveTo(0,0)
-    ctx.lineTo(100, 100)
-    ctx.stroke()
-
-//    ctx.beginPath()
-//    canvas_arrow(ctx, 0,0, 100,100)
-//    ctx.stroke()
+   ctx.beginPath()
+   canvas_arrow(ctx, 0,0, x,y)
+   ctx.stroke()
 }
 
 function canvas_arrow(context, fromx, fromy, tox, toy){
