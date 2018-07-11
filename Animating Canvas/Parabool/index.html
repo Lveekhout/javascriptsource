@@ -6,7 +6,8 @@
         <script src="js/index.js"></script>
     </head>
     <body>
-        <input id="functie" oninput="window.requestAnimationFrame(draw)" value="a*x*x + b*x + c">
+        <input id="functie1" class="functie" oninput="window.requestAnimationFrame(draw)" value="a*x*x + b*x + c">
+        <input id="functie2" class="functie" oninput="window.requestAnimationFrame(draw)" value="a*x*x + b*x + c">
         <input id="zoominput" oninput="zoom=parseInt(this.value); window.requestAnimationFrame(draw)" type="range" min="10" max="500">
         <input oninput="a=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-2" max="2" value="1">
         <input oninput="b=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-5" max="5" value="0">

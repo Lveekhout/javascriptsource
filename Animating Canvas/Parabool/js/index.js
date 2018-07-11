@@ -1,13 +1,13 @@
 let canvas
 let ctx
-let step = 5
+let step = 1
 let zoom = 100
 let ox, oy
 let drag
 let a = 1
 let b = 0
 let c = 0
-function rooster() {
+function raster() {
     ctx.save()
     ctx.lineWidth = 1
     ctx.strokeStyle = "#CCC"
@@ -29,13 +29,22 @@ function rooster() {
 function draw() {
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight); // clear canvas
 
-    rooster()
+    raster()
 
     ctx.beginPath();
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
         let x = (-ox+_x)/zoom
-        try { ctx.lineTo(_x, eval(functie.value)*-zoom+oy) } catch(e) {}
+        try { ctx.lineTo(_x, eval(functie1.value)*-zoom+oy) } catch(e) {}
     }
+    ctx.strokeStyle = "deepskyblue"
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
+        let x = (-ox+_x)/zoom
+        try { ctx.lineTo(_x, eval(functie2.value)*-zoom+oy) } catch(e) {}
+    }
+    ctx.strokeStyle = "brown"
     ctx.stroke();
 
     let datum = new Date()
@@ -46,6 +55,7 @@ window.onload = () => {
     canvas = document.getElementById('canvas')
     ox = Math.trunc(canvas.clientWidth/2)
     oy = Math.trunc(canvas.clientHeight/2)
+
     canvas.addEventListener("mousewheel", e => { zoom -= e.deltaY/10; if (zoom<zoominput.min) zoom = parseInt(zoominput.min); if (zoom>zoominput.max) zoom = parseInt(zoominput.max); zoominput.value = zoom; window.requestAnimationFrame(draw) })
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
@@ -56,7 +66,6 @@ window.onload = () => {
     ctx.globalCompositeOperation = 'source-over';
     ctx.font = "10pt Verdana"
     ctx.fillStyle = "gray"
-    ctx.strokeStyle = "deepskyblue"
     ctx.lineWidth = 3
 
     zoominput.value = zoom
