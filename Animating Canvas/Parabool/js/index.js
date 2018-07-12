@@ -10,19 +10,19 @@ let c = 0
 function raster() {
     ctx.save()
     ctx.lineWidth = 1
-    ctx.strokeStyle = "#CCC"
     ctx.beginPath();
         for (let x=ox+zoom; x<canvas.clientWidth; x+=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
         for (let y=oy+zoom; y<canvas.clientHeight; y+=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
         for (let x=ox-zoom; x>0; x-=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
         for (let y=oy-zoom; y>0; y-=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
+        ctx.strokeStyle = "#CCC"
     ctx.stroke();
     ctx.beginPath();
-        ctx.strokeStyle = "#F88"
         ctx.moveTo(ox, 0)
         ctx.lineTo(ox, canvas.clientHeight)
         ctx.moveTo(0, oy)
         ctx.lineTo(canvas.clientWidth, oy)
+        ctx.strokeStyle = "#F88"
     ctx.stroke();
     ctx.restore()
 }
