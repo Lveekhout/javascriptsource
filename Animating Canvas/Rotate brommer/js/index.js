@@ -3,12 +3,12 @@ let canvas
 let ctx
 let brommer, buggy
 let football = {scale: 0.05, posx: 0, posy: 0, speedx: 1/0.05, speedy: 0, image:new Image()}
-let lfo2 = new LFO(0.01)
-let lfo = new LFO(lfo2.value/10)
+let lfo2 = new LFO(0.005)
+let lfo = new LFO(lfo2.value/3)
 let stop = false
 function update() {
     lfo2.update()
-    lfo.speed = lfo2.value/10
+    lfo.speed = lfo2.value/3
     lfo.update()
     
     football.speedy += 10
