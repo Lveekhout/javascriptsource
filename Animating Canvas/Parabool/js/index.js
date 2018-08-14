@@ -10,42 +10,42 @@ let c = 0
 function raster() {
     ctx.save()
     ctx.lineWidth = 1
-    ctx.beginPath();
+    ctx.beginPath()
         for (let x=ox+zoom; x<canvas.clientWidth; x+=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
         for (let y=oy+zoom; y<canvas.clientHeight; y+=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
         for (let x=ox-zoom; x>0; x-=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
         for (let y=oy-zoom; y>0; y-=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
         ctx.strokeStyle = "#CCC"
-    ctx.stroke();
-    ctx.beginPath();
+    ctx.stroke()
+    ctx.beginPath()
         ctx.moveTo(ox, 0)
         ctx.lineTo(ox, canvas.clientHeight)
         ctx.moveTo(0, oy)
         ctx.lineTo(canvas.clientWidth, oy)
         ctx.strokeStyle = "#F88"
-    ctx.stroke();
+    ctx.stroke()
     ctx.restore()
 }
 function draw() {
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight); // clear canvas
+    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
     raster()
 
-    ctx.beginPath();
+    ctx.beginPath()
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
         let x = (-ox+_x)/zoom
         try { ctx.lineTo(_x, eval(functie1.value)*-zoom+oy) } catch(e) {}
     }
     ctx.strokeStyle = "deepskyblue"
-    ctx.stroke();
+    ctx.stroke()
 
-    ctx.beginPath();
+    ctx.beginPath()
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
         let x = (-ox+_x)/zoom
         try { ctx.lineTo(_x, eval(functie2.value)*-zoom+oy) } catch(e) {}
     }
     ctx.strokeStyle = "brown"
-    ctx.stroke();
+    ctx.stroke()
 
     let datum = new Date()
     ctx.fillText(datum, 5, 15)
@@ -61,13 +61,16 @@ window.onload = () => {
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
     canvas.addEventListener("mousemove", e => { if (drag) { ox += e.movementX;  oy += e.movementY; window.requestAnimationFrame(draw) } })
+    canvas.addEventListener("dblclick", e => console.log(e))
 
     ctx = canvas.getContext('2d')
-    ctx.globalCompositeOperation = 'source-over';
+//    ctx.globalCompositeOperation = 'source-over'
     ctx.font = "10pt Verdana"
     ctx.fillStyle = "gray"
     ctx.lineWidth = 3
 
     zoominput.value = zoom
     window.requestAnimationFrame(draw)
+
+    new Vierkant(document.getElementById('vierkantcanvas'))
 }
