@@ -71,6 +71,4 @@ window.onload = () => {
 
     zoominput.value = zoom
     window.requestAnimationFrame(draw)
-
-    new Vierkant(document.getElementById('vierkantcanvas'))
 }
