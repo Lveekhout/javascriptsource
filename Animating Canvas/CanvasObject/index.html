@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parabool</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/Vierkant.js"></script>
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <canvas id="vierkantcanvas" width="1000px" height="800px" style="border: solid 1px black; background-color: #FFFFFA"></canvas>
+        <input type="range" min="-500" max="500" value="200" oninput="vierkant.draw(parseFloat(this.value), 120, 30)">
+    </body>
+</html>
