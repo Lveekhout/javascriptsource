@@ -1,4 +1,4 @@
-function Vierkant(canvas) {
+function Parabool(canvas) {
     canvas.addEventListener("mousewheel", e => {
         let zoom = this.zoom - e.deltaY/100
         if (zoom<10) zoom = 10
@@ -6,21 +6,24 @@ function Vierkant(canvas) {
         this.setZoom(zoom)
     })
 
+    this.onSetXPos
     let drag = false
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
-    canvas.addEventListener("mousemove", e => { if (drag) this.setOrigin(this.x0+e.movementX, this.y0+e.movementY) })
+    canvas.addEventListener("mousemove", e => {
+        if (e.ctrlKey) { if (this.onSetXPos) this.onSetXPos(parseFloat(((e.offsetX-this.x0)/this.zoom).toFixed(1))) }
+        else if (drag) this.setOrigin(this.x0+e.movementX, this.y0+e.movementY)
+    })
 
     this.ctx = canvas.getContext('2d')
     this.x0 = canvas.clientWidth / 2
     this.y0 = canvas.clientHeight / 2
     this.animate = false
 
-    this.x
-    this.b = 2
-    this.c = 1
-    this.zoom = 50
+    this.p = 2
+    this.q = 1
+    this.zoom
 
     let raster = () => {
         this.ctx.save()
@@ -49,42 +52,17 @@ function Vierkant(canvas) {
         this.ctx.fillStyle = "blue"
         this.ctx.fillText(new Date(), 5, 15)
 
-        this.ctx.save()
-        this.ctx.beginPath()
-            this.ctx.globalAlpha = 0.5
-            this.ctx.fillStyle = "blue"
-            this.ctx.fillRect(this.x0, this.y0, this.x*this.zoom, -this.x*this.zoom)
-            this.ctx.fillStyle = "red"
-            this.ctx.fillRect(this.x0 + this.x*this.zoom, this.y0, this.b*this.zoom, -this.x*this.zoom)
-            this.ctx.fillStyle = "green"
-            this.ctx.fillRect(this.x0, this.y0 - this.x*this.zoom, this.x*this.zoom, -this.c*this.zoom)
-            this.ctx.fillStyle = "orange"
-            this.ctx.fillRect(this.x0 + this.x*this.zoom, this.y0 - this.x*this.zoom, this.b*this.zoom, -this.c*this.zoom)
-
-            console.log(this.x)
-            if (Math.abs((this.x+this.b)*(this.x+this.c)) > 0) {
-                this.ctx.globalAlpha = 1
-                this.ctx.lineWidth = 2
-                this.ctx.rect(this.x0, this.y0, this.x*this.zoom + this.b*this.zoom, -(this.x*this.zoom + this.c*this.zoom))
-            }
-        this.ctx.stroke()
-        this.ctx.restore()
- 
         if (this.animate) window.requestAnimationFrame(this.draw)
     }
     this.paint = () => {
         if (!this.animate) window.requestAnimationFrame(this.draw)
     }
-    this.setX = x => {
-        this.x = x
+    this.setP = p => {
+        this.p = p
         this.paint()
     }
-    this.setB = b => {
-        this.b = b
-        this.paint()
-    }
-    this.setC = c => {
-        this.c = c
+    this.setQ = q => {
+        this.q = q
         this.paint()
     }
     this.setZoom = zoom => {
@@ -100,5 +78,5 @@ function Vierkant(canvas) {
         this.animate = checked
         if (checked) window.requestAnimationFrame(this.draw)
     }
-    this.setX(4)
+    this.setZoom(50)
 }

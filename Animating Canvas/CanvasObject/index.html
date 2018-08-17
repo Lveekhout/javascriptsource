@@ -3,14 +3,18 @@
     <head>
         <title>Parabool</title>
         <link rel="stylesheet" href="css/Vierkant.css">
+        <link rel="stylesheet" href="css/Parabool.css">
         <link rel="stylesheet" href="css/index.css">
         <script src="js/Vierkant.js"></script>
+        <script src="js/Parabool.js"></script>
         <script src="js/index.js"></script>
     </head>
     <body>
-        <canvas id="vierkantcanvas" width="500px" height="250px"></canvas>
-        <canvas width="500px" height="250px"></canvas>
+        <canvas id="vierkant" width="600px" height="800px"></canvas>
+        <canvas id="parabool" width="600px" height="800px"></canvas>
         <input type="range" min="-10" max="10" value="4" step="0.2" oninput="vierkant.setX(parseFloat(this.value))">
+        <input type="range" min="-10" max="10" value="2" step="0.2" oninput="vierkant.setB(parseFloat(this.value))">
+        <input type="range" min="-10" max="10" value="1" step="0.2" oninput="vierkant.setC(parseFloat(this.value))">
         <input type="checkbox" onclick="vierkant.setAnimate(this.checked)">Animate
     </body>
 </html>
