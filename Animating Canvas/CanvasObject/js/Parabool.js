@@ -12,7 +12,8 @@ function Parabool(canvas) {
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
     canvas.addEventListener("mousemove", e => {
-        if (e.ctrlKey) { if (this.onSetXPos) this.onSetXPos(parseFloat(((e.offsetX-x0)/zoom).toFixed(1))) }
+        if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
+        else if (e.ctrlKey) { if (this.onSetXPos) this.onSetXPos(parseFloat(((e.offsetX-x0)/zoom).toFixed(1))) }
         else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
     })
 

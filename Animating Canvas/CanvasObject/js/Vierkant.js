@@ -10,14 +10,17 @@ function Vierkant(canvas) {
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
-    canvas.addEventListener("mousemove", e => { if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY) })
+    canvas.addEventListener("mousemove", e => {
+        if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
+        else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
+    })
 
     let ctx = canvas.getContext('2d')
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
     let animate = false
 
-    let x
+    let x = 4
     let b = 2
     let c = 1
     let zoom = 50
@@ -99,5 +102,5 @@ function Vierkant(canvas) {
         animate = v
         if (animate) window.requestAnimationFrame(draw)
     }
-    this.setX(4)
+    paint()
 }
