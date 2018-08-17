@@ -1,104 +1,103 @@
 function Vierkant(canvas) {
     canvas.addEventListener("mousewheel", e => {
-        let zoom = this.zoom - e.deltaY/100
-        if (zoom<10) zoom = 10
-        if (zoom>500) zoom = 500
-        this.setZoom(zoom)
+        let _zoom = zoom - e.deltaY/100
+        if (_zoom<10) _zoom = 10
+        if (_zoom>500) _zoom = 500
+        this.setZoom(_zoom)
     })
 
     let drag = false
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
-    canvas.addEventListener("mousemove", e => { if (drag) this.setOrigin(this.x0+e.movementX, this.y0+e.movementY) })
+    canvas.addEventListener("mousemove", e => { if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY) })
 
-    this.ctx = canvas.getContext('2d')
-    this.x0 = canvas.clientWidth / 2
-    this.y0 = canvas.clientHeight / 2
-    this.animate = false
+    let ctx = canvas.getContext('2d')
+    let x0 = canvas.clientWidth / 2
+    let y0 = canvas.clientHeight / 2
+    let animate = false
 
-    this.x
-    this.b = 2
-    this.c = 1
-    this.zoom = 50
+    let x
+    let b = 2
+    let c = 1
+    let zoom = 50
 
     let raster = () => {
-        this.ctx.save()
-        this.ctx.lineWidth = 1
-        this.ctx.beginPath()
-            for (let x=this.x0+this.zoom; x<canvas.clientWidth; x+=this.zoom) { this.ctx.moveTo(x, 0); this.ctx.lineTo(x, canvas.clientHeight) }
-            for (let y=this.y0+this.zoom; y<canvas.clientHeight; y+=this.zoom) { this.ctx.moveTo(0, y); this.ctx.lineTo(canvas.clientWidth, y) }
-            for (let x=this.x0-this.zoom; x>0; x-=this.zoom) { this.ctx.moveTo(x, 0); this.ctx.lineTo(x, canvas.clientHeight) }
-            for (let y=this.y0-this.zoom; y>0; y-=this.zoom) { this.ctx.moveTo(0, y); this.ctx.lineTo(canvas.clientWidth, y) }
-            this.ctx.strokeStyle = "#CCC"
-        this.ctx.stroke()
-        this.ctx.beginPath()
-            this.ctx.moveTo(this.x0, 0)
-            this.ctx.lineTo(this.x0, canvas.clientHeight)
-            this.ctx.moveTo(0, this.y0)
-            this.ctx.lineTo(canvas.clientWidth, this.y0)
-            this.ctx.strokeStyle = "#F88"
-        this.ctx.stroke()
-        this.ctx.restore()
+        ctx.save()
+        ctx.lineWidth = 1
+        ctx.beginPath()
+            for (let x=x0+zoom; x<canvas.clientWidth; x+=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
+            for (let y=y0+zoom; y<canvas.clientHeight; y+=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
+            for (let x=x0-zoom; x>0; x-=zoom) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.clientHeight) }
+            for (let y=y0-zoom; y>0; y-=zoom) { ctx.moveTo(0, y); ctx.lineTo(canvas.clientWidth, y) }
+            ctx.strokeStyle = "#CCC"
+        ctx.stroke()
+        ctx.beginPath()
+            ctx.moveTo(x0, 0)
+            ctx.lineTo(x0, canvas.clientHeight)
+            ctx.moveTo(0, y0)
+            ctx.lineTo(canvas.clientWidth, y0)
+            ctx.strokeStyle = "#F88"
+        ctx.stroke()
+        ctx.restore()
     }
-    this.draw = m => {
-        this.ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
+    let draw = m => {
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()
-        this.ctx.font = "10pt Verdana"
-        this.ctx.fillStyle = "blue"
-        this.ctx.fillText(new Date(), 5, 15)
+        ctx.font = "10pt Verdana"
+        ctx.fillStyle = "blue"
+        ctx.fillText(new Date(), 5, 15)
 
-        this.ctx.save()
-        this.ctx.beginPath()
-            this.ctx.globalAlpha = 0.5
-            this.ctx.fillStyle = "blue"
-            this.ctx.fillRect(this.x0, this.y0, this.x*this.zoom, -this.x*this.zoom)
-            this.ctx.fillStyle = "red"
-            this.ctx.fillRect(this.x0 + this.x*this.zoom, this.y0, this.b*this.zoom, -this.x*this.zoom)
-            this.ctx.fillStyle = "green"
-            this.ctx.fillRect(this.x0, this.y0 - this.x*this.zoom, this.x*this.zoom, -this.c*this.zoom)
-            this.ctx.fillStyle = "orange"
-            this.ctx.fillRect(this.x0 + this.x*this.zoom, this.y0 - this.x*this.zoom, this.b*this.zoom, -this.c*this.zoom)
+        ctx.save()
+        ctx.beginPath()
+            ctx.globalAlpha = 0.5
+            ctx.fillStyle = "blue"
+            ctx.fillRect(x0, y0, x*zoom, -x*zoom)
+            ctx.fillStyle = "red"
+            ctx.fillRect(x0 + x*zoom, y0, b*zoom, -x*zoom)
+            ctx.fillStyle = "green"
+            ctx.fillRect(x0, y0 - x*zoom, x*zoom, -c*zoom)
+            ctx.fillStyle = "orange"
+            ctx.fillRect(x0 + x*zoom, y0 - x*zoom, b*zoom, -c*zoom)
 
-            console.log(this.x)
-            if (Math.abs((this.x+this.b)*(this.x+this.c)) > 0) {
-                this.ctx.globalAlpha = 1
-                this.ctx.lineWidth = 2
-                this.ctx.rect(this.x0, this.y0, this.x*this.zoom + this.b*this.zoom, -(this.x*this.zoom + this.c*this.zoom))
+            if (Math.abs((x+b)*(x+c)) > 0) {
+                ctx.globalAlpha = 1
+                ctx.lineWidth = 2
+                ctx.rect(x0, y0, x*zoom + b*zoom, -(x*zoom + c*zoom))
             }
-        this.ctx.stroke()
-        this.ctx.restore()
+        ctx.stroke()
+        ctx.restore()
  
-        if (this.animate) window.requestAnimationFrame(this.draw)
+        if (animate) window.requestAnimationFrame(draw)
     }
-    this.paint = () => {
-        if (!this.animate) window.requestAnimationFrame(this.draw)
+    let paint = () => {
+        if (!animate) window.requestAnimationFrame(draw)
     }
-    this.setX = x => {
-        this.x = x
-        this.paint()
+    this.setX = v => {
+        x = v
+        paint()
     }
-    this.setB = b => {
-        this.b = b
-        this.paint()
+    this.setB = v => {
+        b = v
+        paint()
     }
-    this.setC = c => {
-        this.c = c
-        this.paint()
+    this.setC = v => {
+        c = v
+        paint()
     }
-    this.setZoom = zoom => {
-        this.zoom = zoom
-        this.paint()
+    this.setZoom = v => {
+        zoom = v
+        paint()
     }
-    this.setOrigin = (x,y) => {
-        this.x0 = x
-        this.y0 = y
-        this.paint()
+    this.setOrigin = (vx,vy) => {
+        x0 = vx
+        y0 = vy
+        paint()
     }
-    this.setAnimate = checked => {
-        this.animate = checked
-        if (checked) window.requestAnimationFrame(this.draw)
+    this.setAnimate = v => {
+        animate = v
+        if (animate) window.requestAnimationFrame(draw)
     }
     this.setX(4)
 }
