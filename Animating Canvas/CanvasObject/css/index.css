@@ -1,17 +1,4 @@
-canvas#canvas {
-    background-color: #EEE;
-    cursor: pointer;
-}
-
-input {
+input[type="range"] {
     display: block;
     width: 1000px;
-}
-
-input.functie {
-    margin: 0;
-    padding: 0;
-    border: solid 1px black;
-    display: inline;
-    width: 500px;
 }
