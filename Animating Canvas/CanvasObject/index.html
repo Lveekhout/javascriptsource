@@ -12,9 +12,9 @@
     <body>
         <canvas id="vierkant" width="600px" height="800px"></canvas>
         <canvas id="parabool" width="600px" height="800px"></canvas>
-        <input type="range" min="-10" max="10" value="4" step="0.2" oninput="vierkant.setX(parseFloat(this.value))">
-        <input type="range" min="-10" max="10" value="2" step="0.2" oninput="vierkant.setB(parseFloat(this.value))">
-        <input type="range" min="-10" max="10" value="1" step="0.2" oninput="vierkant.setC(parseFloat(this.value))">
-        <input type="checkbox" onclick="vierkant.setAnimate(this.checked)">Animate
+        <input type="range" min="-10" max="10" value="2" step="0.2" oninput="vierkant.setB(parseFloat(this.value)); parabool.setP(parseFloat(this.value))">
+        <input type="range" min="-10" max="10" value="1" step="0.2" oninput="vierkant.setC(parseFloat(this.value)); parabool.setQ(parseFloat(this.value))">
+        <input type="checkbox" onclick="vierkant.setAnimate(this.checked)">Animate Vierkant
+        <input type="checkbox" onclick="parabool.setAnimate(this.checked)">Animate Parabool
     </body>
 </html>

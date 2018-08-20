@@ -13,11 +13,22 @@ function Parabool(canvas) {
     canvas.addEventListener("mouseleave", e => drag=false)
     canvas.addEventListener("mousemove", e => {
         if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
-        else if (e.ctrlKey) { if (this.onSetXPos) this.onSetXPos(parseFloat(((e.offsetX-x0)/zoom).toFixed(1))) }
+        else if (e.ctrlKey) {
+            if (this.onSetXPos) {
+                selectedOffsetX = parseFloat(((e.offsetX-x0)/zoom).toFixed(1))
+                this.onSetXPos(selectedOffsetX)
+            }
+        }
         else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
     })
 
     let ctx = canvas.getContext('2d')
+    ctx.strokeStyle = "deepskyblue"
+    ctx.lineWidth = 3
+    ctx.font = "10pt Verdana"
+//    ctx.fillStyle = "blue"
+    ctx.globalAlpha = 1
+
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
     let animate = false
@@ -25,6 +36,7 @@ function Parabool(canvas) {
     let p = 2
     let q = 1
     let zoom
+    let selectedOffsetX
 
     let raster = () => {
         ctx.save()
@@ -49,9 +61,24 @@ function Parabool(canvas) {
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()
-        ctx.font = "10pt Verdana"
-        ctx.fillStyle = "blue"
+
         ctx.fillText(new Date(), 5, 15)
+
+        ctx.beginPath()
+        for (let _x=0;_x<canvas.clientWidth+1;_x++) {
+            let x = (-x0+_x)/zoom
+            try { ctx.lineTo(_x, eval("(x+p)*(x+q)")*-zoom+y0) } catch(e) {}
+        }
+        ctx.stroke()
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.moveTo(selectedOffsetX*zoom+x0, 0)
+        ctx.lineTo(selectedOffsetX*zoom+x0, canvas.clientHeight)
+        ctx.strokeStyle = "green"
+        ctx.lineWidth = 1
+        ctx.stroke()
+        ctx.restore()
 
         if (animate) window.requestAnimationFrame(draw)
     }
