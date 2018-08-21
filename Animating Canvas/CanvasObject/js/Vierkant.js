@@ -1,6 +1,6 @@
 function Vierkant(canvas) {
     canvas.addEventListener("mousewheel", e => {
-        let _zoom = zoom - e.deltaY/100
+        let _zoom = zoom - e.deltaY/10
         if (_zoom<10) _zoom = 10
         if (_zoom>500) _zoom = 500
         this.setZoom(_zoom)
