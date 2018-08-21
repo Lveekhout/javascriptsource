@@ -6,7 +6,7 @@ function Parabool(canvas) {
         this.setZoom(_zoom)
     })
 
-    this.onSetXPos
+    let onSetXPos
     let drag = false
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
@@ -14,10 +14,10 @@ function Parabool(canvas) {
     canvas.addEventListener("mousemove", e => {
         if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
         else if (e.ctrlKey) {
-            if (this.onSetXPos) {
+            if (onSetXPos) {
                 selectedOffsetX = parseFloat(((e.offsetX-x0)/zoom).toFixed(1))
                 paint()
-                this.onSetXPos(selectedOffsetX)
+                onSetXPos(selectedOffsetX)
             }
         }
         else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
@@ -27,17 +27,17 @@ function Parabool(canvas) {
     ctx.strokeStyle = "deepskyblue"
     ctx.lineWidth = 3
     ctx.font = "10pt Verdana"
-//    ctx.fillStyle = "blue"
+    ctx.fillStyle = "blue"
     ctx.globalAlpha = 1
 
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
     let animate = false
 
-    let p = 2
-    let q = 1
-    let zoom
-    let selectedOffsetX
+    let p = 0
+    let q = 0
+    let zoom = 50
+    let selectedOffsetX = 0
 
     let raster = () => {
         ctx.save()
@@ -81,6 +81,20 @@ function Parabool(canvas) {
         ctx.stroke()
         ctx.restore()
 
+        if (p>0) {
+            if (q>0) ctx.fillText("(x+"+p+")(x+"+q+")", 5, 40)
+            else if (q==0) ctx.fillText("(x+"+p+")x", 5, 40)
+            else ctx.fillText("(x+"+p+")(x"+q+")", 5, 40)
+        } else if (p==0) {
+            if (q>0) ctx.fillText("x(x+"+q+")", 5, 40)
+            else if (q==0) ctx.fillText("x^2", 5, 40)
+            else ctx.fillText("x(x"+q+")", 5, 40)
+        } else {
+            if (q>0) ctx.fillText("(x"+p+")(x+"+q+")", 5, 40)
+            else if (q==0) ctx.fillText("x(x+"+q+")", 5, 40)
+            else ctx.fillText("(x"+p+")(x"+q+")", 5, 40)
+        }
+
         if (animate) window.requestAnimationFrame(draw)
     }
     let paint = () => {
@@ -107,5 +121,9 @@ function Parabool(canvas) {
         animate = v
         if (animate) window.requestAnimationFrame(draw)
     }
-    this.setZoom(50)
+    this.setOnSetXPos = v => {
+        onSetXPos = v
+        paint()
+        v(selectedOffsetX)
+    }
 }

@@ -20,9 +20,9 @@ function Vierkant(canvas) {
     let y0 = canvas.clientHeight / 2
     let animate = false
 
-    let x = 4
-    let b = 2
-    let c = 1
+    let x = 0
+    let b = 0
+    let c = 0
     let zoom = 50
 
     let raster = () => {
@@ -102,5 +102,4 @@ function Vierkant(canvas) {
         animate = v
         if (animate) window.requestAnimationFrame(draw)
     }
-    paint()
 }
