@@ -16,6 +16,7 @@ function Parabool(canvas) {
         else if (e.ctrlKey) {
             if (this.onSetXPos) {
                 selectedOffsetX = parseFloat(((e.offsetX-x0)/zoom).toFixed(1))
+                paint()
                 this.onSetXPos(selectedOffsetX)
             }
         }
