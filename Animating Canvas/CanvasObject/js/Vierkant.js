@@ -24,6 +24,7 @@ function Vierkant(canvas) {
     let b = 0
     let c = 0
     let zoom = 50
+    let lfo = new LFO(0.05)
 
     let raster = () => {
         ctx.save()
@@ -45,6 +46,8 @@ function Vierkant(canvas) {
         ctx.restore()
     }
     let draw = m => {
+        if (animate) { lfo.update(); zoom = 110 + lfo.value * 100 }
+
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()

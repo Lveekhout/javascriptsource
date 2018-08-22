@@ -38,6 +38,7 @@ function Parabool(canvas) {
     let q = 0
     let zoom = 50
     let selectedOffsetX = 0
+    let lfo = new LFO(0.08)
 
     let raster = () => {
         ctx.save()
@@ -59,6 +60,8 @@ function Parabool(canvas) {
         ctx.restore()
     }
     let draw = m => {
+        if (animate) { lfo.update(); zoom = 110 + lfo.value * 100 }
+
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()
