@@ -1,0 +1,5 @@
+canvas#pi {
+    border: solid 1px black;
+    background-color: #FFFFFA;
+    cursor: pointer;
+}
