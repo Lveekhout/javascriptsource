@@ -18,7 +18,6 @@ function Pi(canvas) {
     let ctx = canvas.getContext('2d')
     ctx.strokeStyle = "deepskyblue"
     ctx.lineWidth = 3
-    ctx.font = "10pt Verdana"
     ctx.fillStyle = "blue"
     ctx.globalAlpha = 1
 
@@ -58,6 +57,16 @@ function Pi(canvas) {
         raster()
 
         ctx.fillText(new Date(), 5, 15)
+
+        ctx.save()
+        ctx.fillStyle = "rgba(255,0,0,0.5)"
+        ctx.fillRect(0, 25, 200, 35)
+        ctx.restore()
+        ctx.save()
+        ctx.font = "10pt Verdana"
+        ctx.fillText("GRAD: " + angle, 5, 40)
+        ctx.fillText("RAD: " + angle/180*Math.PI, 5, 55)
+        ctx.restore()
 
         ctx.save()
         ctx.beginPath()
