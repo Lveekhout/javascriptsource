@@ -6,20 +6,12 @@ function Pi(canvas) {
         this.setZoom(_zoom)
     })
 
-    let onSetXPos
     let drag = false
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)
     canvas.addEventListener("mousemove", e => {
         if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
-        else if (e.ctrlKey) {
-            if (onSetXPos) {
-                selectedOffsetX = parseFloat(((e.offsetX-x0)/zoom).toFixed(1))
-                paint()
-                onSetXPos(selectedOffsetX)
-            }
-        }
         else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
     })
 
@@ -30,14 +22,14 @@ function Pi(canvas) {
     ctx.fillStyle = "blue"
     ctx.globalAlpha = 1
 
-    let x0 = canvas.clientWidth / 2
+    let x0 = canvas.clientWidth / 4
     let y0 = canvas.clientHeight / 2
     let animate = false
 
-    let r = 2
+    let r = 1
     let angle
-    let zoom = 300
-    let lfo = new LFO(0.08)
+    let zoom = 200
+    let lfo = new LFO(0.02)
 
     let raster = () => {
         ctx.save()
@@ -59,7 +51,7 @@ function Pi(canvas) {
         ctx.restore()
     }
     let draw = m => {
-        if (animate) { lfo.update(); zoom = 110 + lfo.value * 100 }
+        if (animate) { lfo.update(); angle = lfo.angle * 180 / Math.PI }
 
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
@@ -69,24 +61,40 @@ function Pi(canvas) {
 
         ctx.save()
         ctx.beginPath()
-        console.log(Math.cos(angle/180*Math.PI))
+        ctx.arc(x0, y0, r * zoom, 0, 2*Math.PI, false);
+        ctx.strokeStyle = "rgba(0,0,255,0.1)"
+        ctx.stroke()
+
+        ctx.beginPath()
         ctx.moveTo(x0 + r*zoom*Math.cos(angle/180*Math.PI), y0)
         ctx.lineTo(x0 + r*zoom*Math.cos(angle/180*Math.PI), y0 - r*zoom*Math.sin(angle/180*Math.PI))
         ctx.lineTo(x0, y0 - r*zoom*Math.sin(angle/180*Math.PI))
-        ctx.strokeStyle = "red"
-        ctx.setLineDash([20, 8]);
+        ctx.strokeStyle = "rgba(255,0,255,0.5)"
+        ctx.setLineDash([8, 4]);
         ctx.lineWidth = 1
         ctx.stroke()
+
         ctx.beginPath()
-        console.log(Math.cos(angle/180*Math.PI))
-        ctx.moveTo(x0, y0)
-        ctx.lineTo(x0 + r*zoom*Math.cos(angle/180*Math.PI), y0 - r*zoom*Math.sin(angle/180*Math.PI))
+        ctx.arc(x0, y0, r/10 * zoom, 0, -angle/180*Math.PI, true);
         ctx.strokeStyle = "blue"
         ctx.setLineDash([]);
         ctx.lineWidth = 3
         ctx.stroke()
+
         ctx.beginPath()
-        ctx.arc(x0, y0, r * zoom, 0, 2*Math.PI, false);
+        ctx.moveTo(x0 + 1.5*r*zoom, y0)
+        ctx.lineTo(x0, y0)
+        ctx.lineTo(x0 + 1.5*r*zoom*Math.cos(angle/180*Math.PI), y0 - 1.5*r*zoom*Math.sin(angle/180*Math.PI))
+        ctx.strokeStyle = "blue"
+        ctx.setLineDash([]);
+        ctx.lineWidth = 3
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(x0, y0)
+        for (let x=1;x<360;x++) {
+            ctx.lineTo(x0 + x, y0 - 100*Math.sin(x/180*Math.PI))
+        }
         ctx.stroke()
         ctx.restore()
 
