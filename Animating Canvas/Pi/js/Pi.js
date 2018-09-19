@@ -101,9 +101,7 @@ function Pi(canvas) {
 
         ctx.beginPath()
         ctx.moveTo(x0, y0)
-        for (let x=1;x<360;x++) {
-            ctx.lineTo(x0 + x, y0 - 100*Math.sin(x/180*Math.PI))
-        }
+        for (let x=1;x<2*Math.PI*zoom;x++) ctx.lineTo(x0 + x, y0 - zoom*Math.sin(x/zoom))
         ctx.stroke()
         ctx.restore()
 
