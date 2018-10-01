@@ -1,0 +1,17 @@
+div.sommetje {
+    transition: background-color 1200ms;
+}
+div.sommetje form {
+    font-size: 28pt;
+    font-family: Verdana;
+}
+div.sommetje form input {
+    text-align: center;
+    font-size: 28pt;
+    width: 64px;
+    border: 0;
+    border-bottom: solid 2px black;
+}
+.imageAnchor:focus img {
+    border: 2px solid blue;
+}

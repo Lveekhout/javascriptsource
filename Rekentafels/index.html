@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rekenen met tafels</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/Cookies.js"></script>
+        <script src="js/Producten.js"></script>
+        <script src="js/datum.js"></script>
+        <script src="js/index.js"></script>
+    </head>
+    <body style="margin: 0; padding: 0; border: 0;" onload="new Producten(6)">
+        <div style="position: absolute; left: 0; width: 10%; min-height: 100%; background-color: Azure;">
+            <div style="padding: 10%;">
+                <button id="but_start" style="margin: 0;" onclick="start(this);">
+                    <img width="100%" src="images/start.png">
+                </button>
+                <button id="but_stop" style="margin: 0; display: none;" onclick="stop(this);">
+                    <img width="100%" src="images/stop.png">
+                </button>
+                <div style="margin-top: 10px">
+                    <label>Tafels t/m</label>
+                    <input id="tafelinput" type="number" style="display: inline; border-box; width: 75px; margin:0; padding: 0;" value=10>
+                </div>
+            </div>
+        </div>
+        <div id="rekengedeelte" style="display: none; position: absolute; padding: 20px; left: 10%; right: 0; background-color: DodgerBlue ;">
+            <p id="statustekst" style="margin: 0; margin-bottom: 10px; padding: 10px; border: 3px solid white; color: white; font-weight: bold;">Status tekst</p>
+            <table id="sommetjestabel"></table>
+            <div style="margin-top: 10px;">
+                <a class="imageAnchor" href="javascript:volgende();">
+                    <img width="4%" style="cursor: pointer;" src="images/next.png">
+                </a>
+            </div>
+        </div>
+        <div id="resultaatgedeelte" style="display: none; position: absolute; padding: 20px; left: 10%; right: 0; background-color: #ccffe8;">
+            <p>Duur</p>
+            <p>Aantal fouten</p>
+        </div>
+        <div id="div0001" style="display: none;">
+            <div class="sommetje">
+                <form>
+                    <input type="text" maxlength=2 onkeypress="if (event.keyCode==13) submitSommetje(this.parentNode.parentNode); else this.parentNode.parentNode.style.backgroundColor='initial';">
+                    x
+                    <input type="text" maxlength=2 onkeypress="if (event.keyCode==13) submitSommetje(this.parentNode.parentNode); else this.parentNode.parentNode.style.backgroundColor='initial';">
+                    =
+                    <input tabindex=-1 type="text" readonly value="{product}">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
