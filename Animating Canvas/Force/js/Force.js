@@ -7,6 +7,7 @@ function Force(canvas) {
     let lfo = new LFO(0.02)
     let vector1 = [1,2]
     let vector2 = [2,-1]
+    let bolletje = new Bolletje()
 
     let resolve = v => {
         let result = [0,0]
@@ -52,6 +53,7 @@ function Force(canvas) {
     }
     let draw = m => {
         if (animate) { lfo.update(); vector1[0] = lfo.value }
+        if (animate) bolletje.update()
 
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
@@ -59,26 +61,30 @@ function Force(canvas) {
         ctx.fillText(new Date(), 5, 15)
 
         ctx.save()
-        ctx.beginPath()
+//        ctx.beginPath()
         ctx.strokeStyle = "blue"
         ctx.fillStyle = "blue"
         arrow(x0, y0, x0 + zoom * vector1[0], y0 - zoom * vector1[1])
         arrow(x0, y0, x0 + zoom * vector2[0], y0 - zoom * vector2[1])
-        ctx.stroke()
+//        ctx.stroke()
 
-        ctx.beginPath()
+//        ctx.beginPath()
         let vector = resolve([vector1, vector2])
         ctx.setLineDash([16,8])
         arrow(x0 + zoom * vector1[0], y0 - zoom * vector1[1], x0 + zoom * vector[0], y0 - zoom * vector[1])
         arrow(x0 + zoom * vector2[0], y0 - zoom * vector2[1], x0 + zoom * vector[0], y0 - zoom * vector[1])
-        ctx.stroke()
+//        ctx.stroke()
 
-        ctx.beginPath()
+//        ctx.beginPath()
         ctx.strokeStyle = "red"
         ctx.fillStyle = "red"
         ctx.setLineDash([])
         arrow(x0, y0, x0 + zoom * vector[0], y0 - zoom * vector[1])
-        ctx.stroke()
+//        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(x0+bolletje.position[0]*zoom, y0-bolletje.position[1]*zoom, bolletje.mass, 0, Math.PI*2)
+        ctx.fill()
         ctx.restore()
 
         if (animate) window.requestAnimationFrame(draw)
