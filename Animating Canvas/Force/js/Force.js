@@ -83,7 +83,7 @@ function Force(canvas) {
 //        ctx.stroke()
 
         ctx.beginPath()
-        ctx.arc(x0+bolletje.position[0]*zoom, y0-bolletje.position[1]*zoom, bolletje.mass, 0, Math.PI*2)
+        ctx.arc(x0+bolletje.position[0]*zoom, y0-bolletje.position[1]*zoom, bolletje.mass*zoom, 0, Math.PI*2)
         ctx.fill()
         ctx.restore()
 
