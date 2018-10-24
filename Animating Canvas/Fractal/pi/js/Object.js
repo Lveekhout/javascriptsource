@@ -57,7 +57,7 @@ function Object(canvas) {
 //
 //        ctx.save()
 //        ctx.beginPath()
-//        ctx.arc(x0+midden[0]*zoom, y0-midden[1]*zoom, 2, 0 , Math.PI*2)
+//        ctx.arc(x0+midden[0]*zoom, y0-midden[1]*zoom, 2, 0, Math.PI*2)
 //        ctx.strokeStyle = "red"
 //        ctx.stroke()
 //        ctx.restore()
@@ -73,7 +73,7 @@ function Object(canvas) {
         }
 //        ctx.save()
 //        ctx.beginPath()
-//        ctx.arc(x0+line[0][0]*zoom, y0-line[0][1]*zoom, 2, 0 , Math.PI*2)
+//        ctx.arc(x0+line[0][0]*zoom, y0-line[0][1]*zoom, 2, 0, Math.PI*2)
 //        ctx.strokeStyle = "red"
 //        ctx.stroke()
 //        ctx.restore()
