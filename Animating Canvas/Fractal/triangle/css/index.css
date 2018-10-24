@@ -1,0 +1,8 @@
+body {
+    background-color: #666;
+}
+
+input[type="range"] {
+    display: block;
+    width: 1000px;
+}
