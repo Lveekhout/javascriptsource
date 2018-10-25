@@ -1,5 +1,5 @@
 function Bolletje() {
-    this.mass = 10
+    this.mass = 0.1
     this.position = [1,1]
     this.speed = [-0.04,0.04]
     let force = 0.001
