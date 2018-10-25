@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Object</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/Cirkeloppervlak.css">
+        <script src="js/Cirkeloppervlak.js"></script>
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <canvas id="cirkeloppervlak" width="1000px" height="750px"></canvas>
+        <input oninput="cirkeloppervlak.setProgress(parseInt(this.value))" type="range" min="0" max="100" value="0">
+        <input type="checkbox" onclick="cirkeloppervlak.setAnimate(this.checked)">Animate
+    </body>
+</html>
