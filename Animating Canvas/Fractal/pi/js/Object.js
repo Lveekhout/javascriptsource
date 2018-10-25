@@ -2,7 +2,7 @@ function Object(canvas) {
     canvas.addEventListener("mousewheel", e => {
         let _zoom = zoom - e.deltaY/10
         if (_zoom<10) _zoom = 10
-        if (_zoom>500) _zoom = 500
+        if (_zoom>5000) _zoom = 5000
         this.setZoom(_zoom)
     })
 
@@ -16,6 +16,7 @@ function Object(canvas) {
     })
 
     let ctx = canvas.getContext('2d')
+    ctx.font = "9pt Verdana"
 
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
@@ -50,47 +51,20 @@ function Object(canvas) {
         let delta = [line[1][0]-line[0][0], line[1][1]-line[0][1]]
         let midden = [line[0][0]+delta[0]/2,line[0][1]+delta[1]/2]
         let factor = (straal-calcLength([midden,[0,0]]))/calcLength([delta, [0,0]])
-//        ctx.beginPath()
-//        ctx.moveTo(x0+midden[0]*zoom, y0-midden[1]*zoom)
-//        ctx.lineTo(x0+(midden[0]+delta[1]*factor)*zoom, y0-(midden[1]-delta[0]*factor)*zoom)
-//        ctx.stroke()
-//
-//        ctx.save()
-//        ctx.beginPath()
-//        ctx.arc(x0+midden[0]*zoom, y0-midden[1]*zoom, 2, 0, Math.PI*2)
-//        ctx.strokeStyle = "red"
-//        ctx.stroke()
-//        ctx.restore()
 
         if (level>0) {
-            fractal([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]], level-1)
-            fractal([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]], level-1)
+            return fractal([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]], level-1) +
+                   fractal([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]], level-1)
         } else {
             ctx.beginPath()
             ctx.moveTo(x0+line[0][0]*zoom, y0-line[0][1]*zoom)
+            ctx.lineTo(x0+(midden[0]+delta[1]*factor)*zoom, y0-(midden[1]-delta[0]*factor)*zoom)
             ctx.lineTo(x0+line[1][0]*zoom, y0-line[1][1]*zoom)
             ctx.stroke()
+
+            return calcLength([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]]) +
+                   calcLength([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]])
         }
-//        ctx.save()
-//        ctx.beginPath()
-//        ctx.arc(x0+line[0][0]*zoom, y0-line[0][1]*zoom, 2, 0, Math.PI*2)
-//        ctx.strokeStyle = "red"
-//        ctx.stroke()
-//        ctx.restore()
-
-//        ctx.save()
-//        ctx.beginPath()
-//        ctx.arc(x0+(midden[0]+delta[1]*factor)*zoom, y0-(midden[1]-delta[0]*factor)*zoom, 2, 0 , Math.PI*2)
-//        ctx.strokeStyle = "red"
-//        ctx.stroke()
-//        ctx.restore()
-
-//        ctx.save()
-//        ctx.beginPath()
-//        ctx.arc(x0+line[1][0]*zoom, y0-line[1][1]*zoom, 2, 0 , Math.PI*2)
-//        ctx.strokeStyle = "red"
-//        ctx.stroke()
-//        ctx.restore()
     }
     let draw = m => {
         if (animate) { lfo.update(); zoom = 110 + lfo.value * 100 }
@@ -99,8 +73,7 @@ function Object(canvas) {
 
         raster()
 
-        fractal([[straal,0],[-straal,0]], 3)
-        fractal([[-straal,0],[straal,0]], 3)
+        ctx.fillText(fractal([[straal,0],[-straal,0]], 6) + fractal([[-straal,0],[straal,0]], 6), 5, 35)
 
         ctx.fillText(new Date(), 5, 15)
 
