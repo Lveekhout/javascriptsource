@@ -21,7 +21,7 @@ function Cirkeloppervlak(canvas) {
     let y0 = canvas.clientHeight / 1.2
     let animate = false
     let zoom = 95
-    let progress = 0
+    let progress = 100
 
     let raster = () => {
         ctx.save()
