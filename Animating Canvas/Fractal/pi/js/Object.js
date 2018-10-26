@@ -53,8 +53,15 @@ function Object(canvas) {
         let factor = (straal-calcLength([midden,[0,0]]))/calcLength([delta, [0,0]])
 
         if (level>0) {
-            return fractal([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]], level-1) +
-                   fractal([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]], level-1)
+            //Omtrek
+//            return fractal([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]], level-1) +
+//                   fractal([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]], level-1)
+
+            //Oppervlak
+            return (calcLength(line)*calcLength([midden,[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]])/2) +
+                    fractal([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]], level-1) +
+                    fractal([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]], level-1)
+
         } else {
             ctx.beginPath()
             ctx.moveTo(x0+line[0][0]*zoom, y0-line[0][1]*zoom)
@@ -62,8 +69,12 @@ function Object(canvas) {
             ctx.lineTo(x0+line[1][0]*zoom, y0-line[1][1]*zoom)
             ctx.stroke()
 
-            return calcLength([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]]) +
-                   calcLength([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]])
+            //Omtrek
+//            return calcLength([[line[0][0],line[0][1]],[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]]) +
+//                   calcLength([[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor],[line[1][0],line[1][1]]])
+
+            //Oppervlak
+            return calcLength(line)*calcLength([midden,[midden[0]+delta[1]*factor,midden[1]-delta[0]*factor]])/2
         }
     }
     let draw = m => {
@@ -73,7 +84,7 @@ function Object(canvas) {
 
         raster()
 
-        ctx.fillText(fractal([[straal,0],[-straal,0]], 6) + fractal([[-straal,0],[straal,0]], 6), 5, 35)
+        ctx.fillText(fractal([[straal,0],[-straal,0]], 13) + fractal([[-straal,0],[straal,0]], 13), 5, 35)
 
         ctx.fillText(new Date(), 5, 15)
 
