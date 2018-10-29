@@ -62,61 +62,18 @@ function Cirkeloppervlak(canvas) {
         ctx.closePath()
         ctx.stroke()
 
-        _hoek = Math.PI/Math.pow(2,7)*(progress/100)
-        hoek = Math.PI/2 + _hoek/2
-        pos = [1/(4/3),0]
-        len = 0.024543076571439844/(4/3)
-        ctx.beginPath()
-        ctx.moveTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-        for (let i=0;i<Math.pow(2,8);i++) {
-            pos = [pos[0]+Math.cos(hoek)*len, pos[1]+Math.sin(hoek)*len]
-            ctx.lineTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-            hoek += _hoek
-        }
-//        ctx.closePath()
-        ctx.stroke()
-
-        _hoek = Math.PI/Math.pow(2,7)*(progress/100)
-        hoek = Math.PI/2 + _hoek/2
-        pos = [1/2,0]
-        len = 0.024543076571439844/2
-        ctx.beginPath()
-        ctx.moveTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-        for (let i=0;i<Math.pow(2,8);i++) {
-            pos = [pos[0]+Math.cos(hoek)*len, pos[1]+Math.sin(hoek)*len]
-            ctx.lineTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-            hoek += _hoek
-        }
-//        ctx.closePath()
-        ctx.stroke()
-
-        _hoek = Math.PI/Math.pow(2,7)*(progress/100)
-        hoek = Math.PI/2 + _hoek/2
-        pos = [1/3,0]
-        len = 0.024543076571439844/3
-        ctx.beginPath()
-        ctx.moveTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-        for (let i=0;i<Math.pow(2,8);i++) {
-            pos = [pos[0]+Math.cos(hoek)*len, pos[1]+Math.sin(hoek)*len]
-            ctx.lineTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-            hoek += _hoek
-        }
-//        ctx.closePath()
-        ctx.stroke()
-
-        _hoek = Math.PI/Math.pow(2,7)*(progress/100)
-        hoek = Math.PI/2 + _hoek/2
-        pos = [1/4,0]
-        len = 0.024543076571439844/4
-        ctx.beginPath()
-        ctx.moveTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-        for (let i=0;i<Math.pow(2,8);i++) {
-            pos = [pos[0]+Math.cos(hoek)*len, pos[1]+Math.sin(hoek)*len]
-            ctx.lineTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
-            hoek += _hoek
-        }
-//        ctx.closePath()
-        ctx.stroke()
+//        _hoek = Math.PI/Math.pow(2,7)*(progress/100)
+//        hoek = Math.PI/2 + _hoek/2
+//        pos = [1/2,0]
+//        len = 0.024543076571439844/2
+//        ctx.beginPath()
+//        ctx.moveTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
+//        for (let i=0;i<Math.pow(2,8);i++) {
+//            pos = [pos[0]+Math.cos(hoek)*len, pos[1]+Math.sin(hoek)*len]
+//            ctx.lineTo(x0+(pos[0])*zoom, y0-(pos[1])*zoom)
+//            hoek += _hoek
+//        }
+//        ctx.stroke()
 
         ctx.fillText(new Date(), 5, 15)
 
