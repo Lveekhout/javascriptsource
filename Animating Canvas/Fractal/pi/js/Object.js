@@ -85,7 +85,6 @@ function Object(canvas) {
         raster()
 
         ctx.fillText(fractal([[straal,0],[-straal,0]], 13) + fractal([[-straal,0],[straal,0]], 13), 5, 35)
-
         ctx.fillText(new Date(), 5, 15)
 
         if (animate) window.requestAnimationFrame(draw)
