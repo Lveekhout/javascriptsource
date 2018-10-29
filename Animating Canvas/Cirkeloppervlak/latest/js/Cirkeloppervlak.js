@@ -21,6 +21,7 @@ function Cirkeloppervlak(canvas) {
     let y0 = canvas.clientHeight / 1.2
     let animate = false
     let zoom = 95
+    let straal = 1
     let progress = 0
 
     let raster = () => {
@@ -47,11 +48,11 @@ function Cirkeloppervlak(canvas) {
 
         raster()
 
-        let x = Math.PI*2*(progress/1000)
+        let x = straal*Math.PI*2*(progress/1000)
         ctx.beginPath()
         ctx.moveTo(x0, y0)
-        ctx.arc(x0+x*zoom, y0-zoom, zoom, Math.PI/2, Math.PI/2-Math.PI*2*((1000-progress)/1000), true)
-        ctx.lineTo(x0+x*zoom, y0-zoom)
+        ctx.arc(x0+x*zoom, y0-straal*zoom, straal*zoom, Math.PI/2, Math.PI/2-Math.PI*2*((1000-progress)/1000), true)
+        ctx.lineTo(x0+x*zoom, y0-straal*zoom)
         ctx.closePath()
         ctx.fill()
 
