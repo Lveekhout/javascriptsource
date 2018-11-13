@@ -1,0 +1,1 @@
+var exampleSocket = new WebSocket("ws://w7vm39:8080", "protocolOne")
