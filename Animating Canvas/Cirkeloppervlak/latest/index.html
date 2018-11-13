@@ -9,8 +9,7 @@
     </head>
     <body>
         <canvas id="cirkeloppervlak" width="1000px" height="750px"></canvas>
-        <input id="stage1" oninput="cirkeloppervlak.setProgress(parseInt(this.value)); checkStage()" type="range" min="0" max="1000" value="0">
-        <input id="stage2" oninput="checkStage()" type="range" min="0" max="1000" value="1000" disabled>
-        <input type="checkbox" onclick="cirkeloppervlak.setAnimate(this.checked)">Animate
+        <input id="stage1" oninput="cirkeloppervlak.setprogressStage1(parseInt(this.value)); checkStage()" type="range" min="0" max="1000" value="0">
+        <input id="stage2" oninput="cirkeloppervlak.setprogressStage2(parseInt(this.value)); checkStage()" type="range" min="0" max="1000" value="1000">
     </body>
 </html>

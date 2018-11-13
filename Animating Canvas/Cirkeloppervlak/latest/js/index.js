@@ -1,5 +1,6 @@
 window.onload = () => {
     cirkeloppervlak = new Cirkeloppervlak(document.getElementById('cirkeloppervlak'))
+    stage1.oninput(stage1.value)
 }
 
 let checkStage = () => {

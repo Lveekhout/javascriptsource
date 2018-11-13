@@ -16,13 +16,14 @@ function Cirkeloppervlak(canvas) {
     })
 
     let ctx = canvas.getContext('2d')
+    ctx.fillStyle = "rgba(0,0,0,0.5)"
 
     let x0 = canvas.clientWidth / 5
     let y0 = canvas.clientHeight / 1.2
-    let animate = false
     let zoom = 95
     let straal = 1
-    let progress = 0
+    let progressStage1 = 0
+    let progressStage2
 
     let raster = () => {
         ctx.save()
@@ -43,42 +44,72 @@ function Cirkeloppervlak(canvas) {
         ctx.stroke()
         ctx.restore()
     }
-    let draw = m => {
+    let drawStage1 = m => {
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()
 
-        let x = straal*Math.PI*2*(progress/1000)
+        let x = straal*Math.PI*2*(progressStage1/1000)
         ctx.beginPath()
         ctx.moveTo(x0, y0)
-        ctx.arc(x0+x*zoom, y0-straal*zoom, straal*zoom, Math.PI/2, Math.PI/2-Math.PI*2*((1000-progress)/1000), true)
+        ctx.arc(x0+x*zoom, y0-straal*zoom, straal*zoom, Math.PI/2, Math.PI/2-Math.PI*2*((1000-progressStage1)/1000), true)
         ctx.lineTo(x0+x*zoom, y0-straal*zoom)
         ctx.closePath()
         ctx.fill()
 
-        ctx.fillText(new Date(), 5, 15)
+//        ctx.beginPath()
+//        ctx.strokeStyle = "red"
+//        ctx.arc(x0+x*zoom, y0-straal*zoom, straal*zoom, 0, Math.PI*2, true)
+//        ctx.stroke()
 
-        if (animate) window.requestAnimationFrame(draw)
+        ctx.fillText(new Date(), 5, 15)
     }
-    let paint = () => {
-        if (!animate) window.requestAnimationFrame(draw)
+    let drawStage2 = m => {
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
+
+        raster()
+
+        ctx.beginPath()
+        ctx.moveTo(x0, y0)
+        ctx.lineTo(x0+Math.PI*straal*zoom, y0)
+        ctx.lineTo(x0+Math.PI*straal*zoom, y0-0.5*straal*zoom)
+        ctx.closePath()
+        ctx.fill()
+
+        ctx.save()
+        ctx.translate(x0+Math.PI*straal*zoom, y0-0.5*straal*zoom)
+        ctx.rotate(Math.PI+Math.PI*progressStage2/1000)
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, 0.5*straal*zoom)
+        ctx.lineTo(Math.PI*straal*zoom, 0.5*straal*zoom)
+        ctx.lineTo(Math.PI*straal*zoom, -0.5*straal*zoom)
+        ctx.fill()
+        ctx.restore()
+        
+        ctx.fillText(new Date(), 5, 15)
+    }
+    let paintStage1 = () => {
+        window.requestAnimationFrame(drawStage1)
+    }
+    let paintStage2 = () => {
+        window.requestAnimationFrame(drawStage2)
     }
     this.setZoom = v => {
         zoom = v
-        paint()
+        paintStage1()
     }
     this.setOrigin = (vx,vy) => {
         x0 = vx
         y0 = vy
-        paint()
+        paintStage1()
     }
-    this.setAnimate = v => {
-        animate = v
-        if (animate) window.requestAnimationFrame(draw)
+    this.setprogressStage1 = v => {
+        progressStage1 = v
+        paintStage1()
     }
-    this.setProgress = v => {
-        progress = v
-        if (!animate) window.requestAnimationFrame(draw)
+    this.setprogressStage2 = v => {
+        progressStage2 = v
+        paintStage2()
     }
-    paint()
 }
