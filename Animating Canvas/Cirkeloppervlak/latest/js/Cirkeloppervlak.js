@@ -21,7 +21,8 @@ function Cirkeloppervlak(canvas) {
     let x0 = canvas.clientWidth / 5
     let y0 = canvas.clientHeight / 1.2
     let zoom = 95
-    let straal = 1
+    let straal
+    let currentStage
     let progressStage1 = 0
     let progressStage2
 
@@ -89,27 +90,30 @@ function Cirkeloppervlak(canvas) {
         
         ctx.fillText(new Date(), 5, 15)
     }
-    let paintStage1 = () => {
-        window.requestAnimationFrame(drawStage1)
-    }
-    let paintStage2 = () => {
-        window.requestAnimationFrame(drawStage2)
+    let paint = () => {
+        window.requestAnimationFrame(currentStage)
     }
     this.setZoom = v => {
         zoom = v
-        paintStage1()
+        paint()
     }
     this.setOrigin = (vx,vy) => {
         x0 = vx
         y0 = vy
-        paintStage1()
+        paint()
+    }
+    this.setStraal = v => {
+        straal = v
+        paint()
     }
     this.setprogressStage1 = v => {
         progressStage1 = v
-        paintStage1()
+        currentStage = drawStage1
+        paint()
     }
     this.setprogressStage2 = v => {
         progressStage2 = v
-        paintStage2()
+        currentStage = drawStage2
+        paint()
     }
 }
