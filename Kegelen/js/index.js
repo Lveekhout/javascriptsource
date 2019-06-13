@@ -31,16 +31,22 @@ window.onload = () => {
         timer.push(setTimeout(stoppen, i+5000))
     }
 
-    for (i=60000;i<540000;i+=120000) {
+    for (i=60000;i<420000;i+=120000) {
         timer.push(setTimeout(starten, i))
         timer.push(setTimeout(stoppen, i+60000))
     }
 
+    for (i=420000;i<480000;i+=2000) {
+        timer.push(setTimeout(() => blok.style.backgroundColor="green", i))
+        timer.push(setTimeout(() => blok.style.backgroundColor="red", i+1000))
+    }
     for (i=540000;i<600000;i+=2000) {
         timer.push(setTimeout(() => blok.style.backgroundColor="green", i))
         timer.push(setTimeout(() => blok.style.backgroundColor="red", i+1000))
     }
 
+    timer.push(setTimeout(() => window.speechSynthesis.speak(snel), 420000))
+    timer.push(setTimeout(() => window.speechSynthesis.speak(stop), 480000))
     timer.push(setTimeout(() => window.speechSynthesis.speak(snel), 540000))
     timer.push(setTimeout(beeindigen, 600000))
 
