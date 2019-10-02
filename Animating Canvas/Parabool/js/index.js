@@ -27,22 +27,27 @@ function raster() {
     ctx.restore()
 }
 function draw() {
+    let y
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
     raster()
 
     ctx.beginPath()
+    y = NaN
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
         let x = (-ox+_x)/zoom
-        try { ctx.lineTo(_x, eval(functie1.value)*-zoom+oy) } catch(e) {}
+        if (isNaN(y)) { y = eval(functie1.value); if (!isNaN(y)) ctx.moveTo(_x, y*-zoom+oy) }
+        else          { y = eval(functie1.value); if (!isNaN(y)) ctx.lineTo(_x, y*-zoom+oy) }
     }
     ctx.strokeStyle = "deepskyblue"
     ctx.stroke()
 
     ctx.beginPath()
+    y = NaN
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
         let x = (-ox+_x)/zoom
-        try { ctx.lineTo(_x, eval(functie2.value)*-zoom+oy) } catch(e) {}
+        if (isNaN(y)) { y = eval(functie2.value); if (!isNaN(y)) ctx.moveTo(_x, y*-zoom+oy) }
+        else          { y = eval(functie2.value); if (!isNaN(y)) ctx.lineTo(_x, y*-zoom+oy) }
     }
     ctx.strokeStyle = "brown"
     ctx.stroke()
@@ -62,7 +67,7 @@ window.onload = () => {
     canvas.addEventListener("mouseleave", e => drag=false)
     canvas.addEventListener("mousemove", e => { if (drag) { ox += e.movementX;  oy += e.movementY; window.requestAnimationFrame(draw) } })
     canvas.addEventListener("dblclick", e => console.log(e))
-
+    
     ctx = canvas.getContext('2d')
 //    ctx.globalCompositeOperation = 'source-over'
     ctx.font = "10pt Verdana"
