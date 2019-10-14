@@ -8,7 +8,7 @@ let thisXML
 
 let statement = "insert into pas_basisgegeven_depot_fondsen values (null, '{NavPrice}', to_date('{NavDate}', 'yyyy-mm-dd'), null, {BSB}, '{PrrCode}', {BSD}, '{Type}');"
 let mapping = [
-    ["DivBndVv",    "S40",       "P1798", "pas_beleggingsfondsen"],
+    ["DivBnd2Vv",   "S40",       "P1798", "pas_beleggingsfondsen"],
     ["DivEq3Vv",    "S41",       "P1798", "pas_beleggingsfondsen"],
     ["LiMaVv",      "S42",       "P1798", "pas_beleggingsfondsen"],
     ["WXEqBVv",     "S43",       "P1798", "pas_beleggingsfondsen"],
