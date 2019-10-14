@@ -1,13 +1,7 @@
 function Bolletje() {
-<<<<<<< Updated upstream
-    this.mass = 0.1
-    this.position = [1,1]
-    this.speed = [-0.04,0.04]
-=======
     this.mass = 0.05
     this.position = [1,1]
     this.speed = [0,0]
->>>>>>> Stashed changes
     let force = 0.001
 
     this.update = () => {
