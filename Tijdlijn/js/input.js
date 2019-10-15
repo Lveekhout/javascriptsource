@@ -6,14 +6,15 @@ let periodes =
       periodes: [
         {
           ingangsdatum: "2010-01-01",
-          einddatum: "2010-12-31"
+          einddatum: "2010-01-01 02:00"
         },
         {
-          ingangsdatum: "2011-01-01",
-          einddatum: "2014-12-31"
+          ingangsdatum: "2010-01-01 02:00",
+          einddatum: "2010-01-01 05:00"
         },
         {
-          ingangsdatum: "2015-01-01"
+          ingangsdatum: "2010-01-01 05:00",
+          einddatum: "2010-01-01 06:00"
         }
       ]
     },
@@ -22,15 +23,16 @@ let periodes =
       kleur: "#CDEFAB",
       periodes: [
         {
-          ingangsdatum: "2010-01-01",
-          einddatum: "2010-12-31"
+          ingangsdatum: "2010-01-01 00:00",
+          einddatum: "2010-01-01 02:00"
         },
         {
-          ingangsdatum: "2011-01-01",
-          einddatum: "2014-12-31"
+          ingangsdatum: "2010-01-01 02:00",
+          einddatum: "2010-01-01 08:00"
         },
         {
-          ingangsdatum: "2015-01-01"
+          ingangsdatum: "2010-01-01 08:00",
+          einddatum: "2010-01-01 18:00"
         }
       ]
     },
@@ -39,15 +41,16 @@ let periodes =
       kleur: "#EFABCD",
       periodes: [
         {
-          ingangsdatum: "2010-01-01",
-          einddatum: "2010-12-31"
+          ingangsdatum: "2010-01-01 03:00",
+          einddatum: "2010-01-01 06:00"
         },
         {
-          ingangsdatum: "2011-01-01",
-          einddatum: "2014-12-31"
+          ingangsdatum: "2010-01-01 06:00",
+          einddatum: "2010-01-01 10:00"
         },
         {
-          ingangsdatum: "2015-01-01"
+          ingangsdatum: "2010-01-01 10:00",
+          einddatum: "2010-01-01 19:00"
         }
       ]
     }
