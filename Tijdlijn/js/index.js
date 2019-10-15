@@ -1,42 +1,17 @@
 window.onload = event => {
-    let subdiv = document.createElement('div')
-    subdiv.classList.add('subdiv')
-    subdiv.style.position = 'absolute'
-    subdiv.style.left = 0;
-    subdiv.style.right = 0;
-    subdiv.style.top = 0;
-    subdiv.style.bottom = 0;
-//    subdiv.style.height = '100%'
-    subdiv.style.backgroundColor = 'yellow'
-    subdiv.innerHTML = '123'
+    let start = new Date().getTime()
+    let canvas = document.getElementById("main-canvas")
+    let ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let div = document.createElement('div')
-    div.classList.add('divs')
-    document.body.appendChild(div)
-    div.appendChild(subdiv)
-    div.style.position = 'absolute'
-    div.style.width = '100px'
-    div.style.height = '132px'
-//    div.style.backgroundColor = 'cyan'
+    periodes.forEach((v, i) => {
+        ctx.fillStyle = v.kleur;
+        v.periodes.forEach(v => {
+            let duur = new Date(v.einddatum).getTime() - new Date(v.ingangsdatum).getTime()
+            console.log(duur)
+        })
+        ctx.fillRect(20, 20 + i*18, 120, 16)
+    })
 
-    div = document.createElement('div')
-    div.classList.add('divs')
-    document.body.appendChild(div)
-    div.appendChild(subdiv)
-    div.style.position = 'absolute'
-    div.style.width = '200px'
-    div.style.height = '132px'
-//    div.style.backgroundColor = 'red'
-    div.style.left = '100px'
-    console.dir(div)
-
-    div = document.createElement('div')
-    div.classList.add('divs')
-    document.body.appendChild(div)
-//    div.appendChild(subdiv)
-    div.style.position = 'absolute'
-    div.style.width = '500px'
-    div.style.height = '132px'
-//    div.style.backgroundColor = 'blue'
-    div.style.left = '300px'
+    console.log("duur: " + (new Date().getTime()-start))
 }

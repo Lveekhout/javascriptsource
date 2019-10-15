@@ -1,20 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-div.divs {
-    margin: 0;
-    padding: 0;
-    border: 0;
-/*    border-radius: 5px;*/
-}
-
-div.subdiv {
-    margin: 0;
-    padding: 0;
-    border: solid 10px black;
-    border-radius: 15px;
-    overflow: hidden;
+canvas#main-canvas {
+    background-color: #F8F8F8;
 }
