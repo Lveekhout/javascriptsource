@@ -1,6 +1,16 @@
 function Tijdlijn(canvas) {
+    let now// = new Date("1993-08-15 00:00:00").getTime()
+    periodes.forEach((v, i) => {
+        v.periodes.forEach(x => {
+            let ingangsdatumtijd = new Date(x.ingangsdatum).getTime()
+            if (now) {if (ingangsdatumtijd<now) now = ingangsdatumtijd}
+            else now = ingangsdatumtijd
+        })
+    })
+    console.log(new Date(now))
+
     let zoom = 60000
-    let now = new Date("1993-08-15 00:00:00").getTime()
+    let animating = false
     let ctx = canvas.getContext('2d')
 
     let x0 = 0 //canvas.width / 12
@@ -20,9 +30,14 @@ function Tijdlijn(canvas) {
             })
             y += 5
         })
-        now += 1000
-        window.requestAnimationFrame(this.draw)
+        if (animating) {
+            now += 1000
+            window.requestAnimationFrame(this.draw)
+        }
     }
 
-    this.setZoom = v => zoom = v
+    this.setZoom = v => {
+        zoom = v
+        if (!animating) window.requestAnimationFrame(this.draw)
+    }
 }
