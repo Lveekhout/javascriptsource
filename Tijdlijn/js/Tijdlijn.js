@@ -1,10 +1,10 @@
 function Tijdlijn(canvas) {
     let zoom = 60000
-    let now = new Date("2010-01-01").getTime()
+    let now = new Date("1993-08-15 00:00:00").getTime()
     let ctx = canvas.getContext('2d')
 
-    let x0 = canvas.width / 12
-    let y0 = canvas.height / 2
+    let x0 = 0 //canvas.width / 12
+    // let y0 = canvas.height / 2
 
     this.draw = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
