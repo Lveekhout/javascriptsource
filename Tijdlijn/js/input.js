@@ -6,7 +6,7 @@
 let periodes = 
 [
     {
-      naam: "DIENSTVERBAND_CONTRACT",
+      naam: "WERKGEVER_CONTRACT",
       kleur: "#3D2480",
       periodes: [
         {
@@ -21,7 +21,7 @@ let periodes =
       ]
     },
     {
-      naam: "KENMERKEN - 1",
+      naam: "Geboortedatum",
       kleur: "green",
       periodes: [
         {
@@ -31,7 +31,7 @@ let periodes =
       ]
     },
     {
-      naam: "KENMERKEN - 2",
+      naam: "Pensioenleeftijd",
       kleur: "red",
       periodes: [
         {
@@ -57,7 +57,7 @@ let periodes =
       ]
     },
     {
-      naam: "KENMERKEN - 3",
+      naam: "Dooddatum",
       kleur: "cyan",
       periodes: [
         {
@@ -74,7 +74,7 @@ let periodes =
       ]
     },
     {
-      naam: "KENMERKEN - 4",
+      naam: "Geboortedatum2",
       kleur: "yellow",
       periodes: [
         {
@@ -84,7 +84,7 @@ let periodes =
       ]
     },
     {
-      naam: "KENMERKEN - 5",
+      naam: "Geslacht",
       kleur: "orange",
       periodes: [
         {

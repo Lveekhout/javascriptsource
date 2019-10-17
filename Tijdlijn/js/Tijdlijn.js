@@ -55,19 +55,16 @@ function Tijdlijn(canvas, input, _periodes) {
             let y = 0
             periodes.forEach((v, i) => {
                 v.periodes.forEach(p => {
+                    ctx.fillStyle = v.kleur
                     if (p.einddatum) {
                         let duur = p._einddatum - p._ingangsdatum
-                        ctx.fillStyle = v.kleur
                         ctx.fillRect(x0+(p._ingangsdatum-_min)/zoom, 50+y, duur/zoom, 16)
-                        ctx.fillStyle = "black"
-                        ctx.fillText(p.registratiedatum, 10, 62+y)
                     } else {
                         let x = x0+(p._ingangsdatum-_min)/zoom
-                        ctx.fillStyle = v.kleur
                         ctx.fillRect(x, 50+y, canvas.width-x, 16)
-                        ctx.fillStyle = "black"
-                        ctx.fillText(p.registratiedatum, 10, 62+y)
                     }
+                    ctx.fillStyle = "black"
+                    ctx.fillText(p.registratiedatum + " (" + v.naam + ")" , 10, 62+y)
                     y += 18
                 })
                 y += 5
