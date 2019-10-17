@@ -30,7 +30,7 @@ begin
       dbms_output.put_line('periodes: [');
 
       l_first_detail := true;
-      for y in ( select * from kenmerken_jn a join kenmerk_beschrijvingen b on b.id = a.new_kbg_id where b.variabele = 'Geslacht' order by jn_date_time asc, new_id asc ) loop
+      for y in ( select * from kenmerken_jn a join kenmerk_beschrijvingen b on b.id = a.new_kbg_id where b.variabele = x.naam order by jn_date_time asc, new_id asc ) loop
          if l_first_detail then dbms_output.put_line('{'); l_first_detail := false; else dbms_output.put_line(',{'); end if;
          dbms_output.put_line('registratiedatum: "' || to_char(y.jn_date_time, 'yyyy-mm-dd hh24:mi:ss') || '",');
          dbms_output.put_line('ingangsdatum: "' || to_char(y.new_ingangsdatum, 'yyyy-mm-dd hh24:mi:ss') || '"');

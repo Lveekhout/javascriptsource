@@ -1,20 +1,25 @@
-function Tijdlijn(canvas, input) {
+function Tijdlijn(canvas, input, _periodes) {
+    let periodes = JSON.parse(_periodes)
+
     let _min, _max
     periodes.forEach((v, i) => {
-        v.periodes.forEach(x => {
-            let _ingangsdatumtijd = new Date(x.ingangsdatum).getTime()
-            if (_min) {if (_ingangsdatumtijd<_min) _min = _ingangsdatumtijd}
-            else _min = _ingangsdatumtijd
+        v.periodes.forEach(p => {
+            if (p.ingangsdatum) {
+                p._ingangsdatum = new Date(p.ingangsdatum).getTime()
+                if (_min) {if (p._ingangsdatum<_min) _min = p._ingangsdatum} else _min = p._ingangsdatum
+                if (_max) {if (p._ingangsdatum>_max) _max = p._ingangsdatum} else _max = p._ingangsdatum
+            }
 
-            let _einddatumtijd = new Date(x.einddatum).getTime()
-            if (_einddatumtijd) {
-                if (_max) {if (_einddatumtijd>_max) _max = _einddatumtijd}
-                else _max = _einddatumtijd
+            if (p.einddatum) {
+                p._einddatum = new Date(p.einddatum).getTime()
+                if (_max) {if (p._einddatum>_max) _max = p._einddatum} else _max = p._einddatum
             }
         })
     })
+    _min=new Date((new Date(_min).getFullYear()-1).toString()).getTime()
     if (!_max) _max = new Date().getTime()
-
+    _max=new Date((new Date(_max).getFullYear()+1).toString()).getTime()
+    
     let zoom = (_max-_min)/canvas.width
     input.value = zoom
     let animating = false
@@ -49,15 +54,19 @@ function Tijdlijn(canvas, input) {
         {
             let y = 0
             periodes.forEach((v, i) => {
-                ctx.fillStyle = v.kleur
-                v.periodes.forEach(x => {
-                    let _ingangsdatumtijd = new Date(x.ingangsdatum).getTime()
-                    if (x.einddatum) {
-                        let duur = new Date(x.einddatum).getTime() - _ingangsdatumtijd
-                        ctx.fillRect(x0+(_ingangsdatumtijd-_min)/zoom, 50+y, duur/zoom, 16)
+                v.periodes.forEach(p => {
+                    if (p.einddatum) {
+                        let duur = p._einddatum - p._ingangsdatum
+                        ctx.fillStyle = v.kleur
+                        ctx.fillRect(x0+(p._ingangsdatum-_min)/zoom, 50+y, duur/zoom, 16)
+                        ctx.fillStyle = "black"
+                        ctx.fillText(p.registratiedatum, 10, 62+y)
                     } else {
-                        let x = x0+(_ingangsdatumtijd-_min)/zoom
+                        let x = x0+(p._ingangsdatum-_min)/zoom
+                        ctx.fillStyle = v.kleur
                         ctx.fillRect(x, 50+y, canvas.width-x, 16)
+                        ctx.fillStyle = "black"
+                        ctx.fillText(p.registratiedatum, 10, 62+y)
                     }
                     y += 18
                 })
