@@ -64,7 +64,7 @@ function Tijdlijn(canvas, input, _periodes) {
                         ctx.fillRect(x, 50+y, canvas.width-x, 16)
                     }
                     ctx.fillStyle = "black"
-                    ctx.fillText(p.registratiedatum + " (" + v.naam + ")" , 10, 62+y)
+                    ctx.fillText(p.registratiedatum + " " + v.naam + " (" + p.omschrijving + ")" , 10, 62+y)
                     y += 18
                 })
                 y += 5
