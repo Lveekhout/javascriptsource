@@ -52,27 +52,42 @@ function Tijdlijn(canvas, input, _periodes) {
         }
 
         {
-            let y = 0
+            let y = 50
             periodes.forEach((v, i) => {
                 v.periodes.forEach(p => {
-                    ctx.fillStyle = v.kleur
-                    if (p.einddatum) {
-                        let duur = p._einddatum - p._ingangsdatum
-                        ctx.fillRect(x0+(p._ingangsdatum-_min)/zoom, 50+y, duur/zoom, 16)
-                    } else {
-                        let x = x0+(p._ingangsdatum-_min)/zoom
-                        ctx.fillRect(x, 50+y, canvas.width-x, 16)
+                    let x = x0+(p._ingangsdatum-_min)/zoom
+                    if (x<canvas.width) {
+                        ctx.fillStyle = v.kleur
+                        if (p.einddatum) {
+                            let duur = p._einddatum - p._ingangsdatum
+                            ctx.fillRect(x, y, duur/zoom, 16)
+                        } else {
+                            if (x+25<canvas.width) {
+                                ctx.fillRect(x, y, canvas.width-x-25, 16)
+                                ctx.beginPath()
+                                ctx.moveTo(canvas.width, y+8)
+                                ctx.lineTo(canvas.width-25, y+16)
+                                ctx.lineTo(canvas.width-25, y)
+                                ctx.fill()
+                            } else {
+                                ctx.beginPath()
+                                ctx.moveTo(x+25, y+8)
+                                ctx.lineTo(x, y+16)
+                                ctx.lineTo(x, y)
+                                ctx.fill()
+                            }
+                        }
                     }
                     ctx.fillStyle = "black"
-                    ctx.fillText(p.registratiedatum + " " + v.naam + " (" + p.omschrijving + ")" , 10, 62+y)
+                    ctx.fillText(p.registratiedatum + " " + v.naam + " (" + p.omschrijving + ")" , 10, 12+y)
                     y += 18
                 })
-                y += 5
+                y += 8
             })
         }
 
         if (animating) {
-            _min += 200000000
+            _min += 100000000
             window.requestAnimationFrame(this.draw)
         }
     }
@@ -82,11 +97,17 @@ function Tijdlijn(canvas, input, _periodes) {
         if (!animating) window.requestAnimationFrame(this.draw)
     }
 
-//    canvas.addEventListener("mousewheel", e => console.log("mousewheel"))
+    canvas.addEventListener("mousewheel", e => console.log(e))
     canvas.addEventListener("mousedown", e => drag = true)
     canvas.addEventListener("mouseup", e => drag = false)
 //    canvas.addEventListener("mouseleave", e => console.log("mouseleave"))
     canvas.addEventListener("mouseenter", e => drag = drag&&(e.buttons&1==1))
     canvas.addEventListener("mousemove", e => {if (drag) {_min-=e.movementX*zoom;if (!animating) window.requestAnimationFrame(this.draw)}})
-    canvas.addEventListener("dblclick", e => console.log(zoom))
+    canvas.addEventListener("dblclick", e => {
+        ctx.beginPath();
+        ctx.moveTo(375, 50);
+        ctx.lineTo(350, 58);
+        ctx.lineTo(350, 42);
+        ctx.fill();
+    })
 }
