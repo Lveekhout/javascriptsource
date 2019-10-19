@@ -20,9 +20,9 @@ function Tijdlijn(canvas, input, _periodes) {
     if (!_max) _max = new Date().getTime()
     _max=new Date((new Date(_max).getFullYear()+1).toString()).getTime()
     
-    let zoom = (_max-_min)/canvas.width
-    input.value = zoom
+    let zoom = (_max-_min)/canvas.width; input.value = zoom
     let animating = false
+    let drag = 0
     let ctx = canvas.getContext('2d')
 
     let x0 = 0 //canvas.width / 12
@@ -72,7 +72,7 @@ function Tijdlijn(canvas, input, _periodes) {
         }
 
         if (animating) {
-            _min += 100000000
+            _min += 200000000
             window.requestAnimationFrame(this.draw)
         }
     }
@@ -81,5 +81,12 @@ function Tijdlijn(canvas, input, _periodes) {
         zoom = v
         if (!animating) window.requestAnimationFrame(this.draw)
     }
-    canvas.addEventListener("click", e => console.log(zoom))
+
+//    canvas.addEventListener("mousewheel", e => console.log("mousewheel"))
+    canvas.addEventListener("mousedown", e => drag = true)
+    canvas.addEventListener("mouseup", e => drag = false)
+//    canvas.addEventListener("mouseleave", e => console.log("mouseleave"))
+    canvas.addEventListener("mouseenter", e => drag = drag&&(e.buttons&1==1))
+    canvas.addEventListener("mousemove", e => {if (drag) {_min-=e.movementX*zoom;if (!animating) window.requestAnimationFrame(this.draw)}})
+    canvas.addEventListener("dblclick", e => console.log(zoom))
 }
