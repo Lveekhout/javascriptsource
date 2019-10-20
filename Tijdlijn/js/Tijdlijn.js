@@ -86,10 +86,7 @@ function Tijdlijn(canvas, input, _periodes) {
             })
         }
 
-        if (animating) {
-            _min += 100000000
-            window.requestAnimationFrame(this.draw)
-        }
+        if (animating) { _min += 100000000; window.requestAnimationFrame(this.draw) }
     }
 
     this.setZoom = v => {
@@ -97,17 +94,19 @@ function Tijdlijn(canvas, input, _periodes) {
         if (!animating) window.requestAnimationFrame(this.draw)
     }
 
-    canvas.addEventListener("mousewheel", e => console.log(e))
+//    canvas.addEventListener("mousewheel", e => console.log(e))
+    canvas.addEventListener("mousewheel", e => {
+        let _zoom = zoom
+        zoom += e.deltaY*200000
+        if (zoom<1) zoom = _zoom
+        input.value = zoom
+        _min = (_min+e.layerX*_zoom)-e.layerX*zoom
+        window.requestAnimationFrame(this.draw)
+    })
     canvas.addEventListener("mousedown", e => drag = true)
     canvas.addEventListener("mouseup", e => drag = false)
 //    canvas.addEventListener("mouseleave", e => console.log("mouseleave"))
     canvas.addEventListener("mouseenter", e => drag = drag&&(e.buttons&1==1))
     canvas.addEventListener("mousemove", e => {if (drag) {_min-=e.movementX*zoom;if (!animating) window.requestAnimationFrame(this.draw)}})
-    canvas.addEventListener("dblclick", e => {
-        ctx.beginPath();
-        ctx.moveTo(375, 50);
-        ctx.lineTo(350, 58);
-        ctx.lineTo(350, 42);
-        ctx.fill();
-    })
+    canvas.addEventListener("dblclick", e => console.log(new Date(_min+e.layerX*zoom)))
 }
