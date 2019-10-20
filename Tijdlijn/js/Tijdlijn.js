@@ -23,11 +23,12 @@ function Tijdlijn(canvas, input, _periodes) {
     let zoom = (_max-_min)/canvas.width; input.value = zoom
     let animating = false
     let drag = 0
+    let pointerX
+
+//    let x0 = canvas.width / 12
+//    let y0 = canvas.height / 2
+
     let ctx = canvas.getContext('2d')
-
-    let x0 = 0 //canvas.width / 12
-    // let y0 = canvas.height / 2
-
     this.draw = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -55,7 +56,7 @@ function Tijdlijn(canvas, input, _periodes) {
             let y = 50
             periodes.forEach((v, i) => {
                 v.periodes.forEach(p => {
-                    let x = x0+(p._ingangsdatum-_min)/zoom
+                    let x = (p._ingangsdatum-_min)/zoom
                     if (x<canvas.width) {
                         ctx.fillStyle = v.kleur
                         if (p.einddatum) {
@@ -85,6 +86,16 @@ function Tijdlijn(canvas, input, _periodes) {
                 y += 8
             })
         }
+        
+        {
+            if (pointerX) {
+                ctx.beginPath()
+                ctx.moveTo(pointerX, 0)
+                ctx.lineTo(pointerX, canvas.height)
+                ctx.strokeStyle = "#2B42E3"
+                ctx.stroke()
+            }
+        }
 
         if (animating) { _min += 100000000; window.requestAnimationFrame(this.draw) }
     }
@@ -94,19 +105,25 @@ function Tijdlijn(canvas, input, _periodes) {
         if (!animating) window.requestAnimationFrame(this.draw)
     }
 
-//    canvas.addEventListener("mousewheel", e => console.log(e))
     canvas.addEventListener("mousewheel", e => {
         let _zoom = zoom
         zoom += e.deltaY*200000
         if (zoom<1) zoom = _zoom
         input.value = zoom
         _min = (_min+e.layerX*_zoom)-e.layerX*zoom
-        window.requestAnimationFrame(this.draw)
+        if (!animating) window.requestAnimationFrame(this.draw)
     })
     canvas.addEventListener("mousedown", e => drag = true)
     canvas.addEventListener("mouseup", e => drag = false)
-//    canvas.addEventListener("mouseleave", e => console.log("mouseleave"))
+    canvas.addEventListener("mouseleave", e => {
+        pointerX=undefined
+        if (!animating) window.requestAnimationFrame(this.draw)
+    })
     canvas.addEventListener("mouseenter", e => drag = drag&&(e.buttons&1==1))
-    canvas.addEventListener("mousemove", e => {if (drag) {_min-=e.movementX*zoom;if (!animating) window.requestAnimationFrame(this.draw)}})
+    canvas.addEventListener("mousemove", e => {
+        pointerX = e.layerX
+        if (drag) _min-=e.movementX*zoom
+        if (!animating) window.requestAnimationFrame(this.draw)
+    })
     canvas.addEventListener("dblclick", e => console.log(new Date(_min+e.layerX*zoom)))
 }
