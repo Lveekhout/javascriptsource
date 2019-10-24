@@ -1,4 +1,4 @@
-function Tijdlijn(canvas, input, _periodes) {
+function Tijdlijn(canvas, input, _periodes, datumoutput) {
     let periodes = JSON.parse(_periodes)
 
     let _min, _max
@@ -38,16 +38,20 @@ function Tijdlijn(canvas, input, _periodes) {
         ctx.font = "9pt Verdana"
 
         {
+            let textPos
             let year = new Date(_min).getFullYear()
             let _year = new Date((year).toString()).getTime()
             while (_year<_min+canvas.width*zoom) {
-                ctx.fillRect((_year-_min)/zoom, 30, 1, -10)
-                ctx.fillText(year, (_year-_min)/zoom, 12)
-                if (zoom<400000000)
-                    for (let i=2;i<=12;i++) {
-                        let _month = new Date(year.toString() + "-" + i.toString()).getTime()
-                        ctx.fillRect((_month-_min)/zoom, 30, 1, -5)
-                    }
+                if (textPos==undefined||(_year-_min)/zoom>textPos) {
+                    textPos = (_year-_min)/zoom + ctx.measureText(year).width
+                    ctx.fillRect((_year-_min)/zoom, 30, 1, -10)
+                    ctx.fillText(year, (_year-_min)/zoom, 12)
+                    if (zoom<400000000)
+                        for (let i=2;i<=12;i++) {
+                            let _month = new Date(year.toString() + "-" + i.toString()).getTime()
+                            ctx.fillRect((_month-_min)/zoom, 30, 1, -5)
+                        }
+                }
                 _year = new Date((++year).toString()).getTime()
             }
         }
@@ -55,6 +59,7 @@ function Tijdlijn(canvas, input, _periodes) {
         {
             let y = 50
             periodes.forEach((v, i) => {
+                if (v.margin_top) y += v.margin_top
                 v.periodes.forEach(p => {
                     let x = (p._ingangsdatum-_min)/zoom
                     if (x<canvas.width) {
@@ -80,7 +85,7 @@ function Tijdlijn(canvas, input, _periodes) {
                         }
                     }
                     ctx.fillStyle = "black"
-                    ctx.fillText(p.registratiedatum + " " + v.naam + " (" + p.omschrijving + ")" , 10, 12+y)
+                    ctx.fillText(v.naam + " (" + p.label + ")" , 10, 12+y)
                     y += 18
                 })
                 y += 8
@@ -106,6 +111,7 @@ function Tijdlijn(canvas, input, _periodes) {
     }
 
     canvas.addEventListener("mousewheel", e => {
+        e.preventDefault()
         let _zoom = zoom
         zoom += e.deltaY*200000
         if (zoom<1) zoom = _zoom
@@ -117,10 +123,12 @@ function Tijdlijn(canvas, input, _periodes) {
     canvas.addEventListener("mouseup", e => drag = false)
     canvas.addEventListener("mouseleave", e => {
         pointerX=undefined
+        datumoutput.value = ""
         if (!animating) window.requestAnimationFrame(this.draw)
     })
     canvas.addEventListener("mouseenter", e => drag = drag&&(e.buttons&1==1))
     canvas.addEventListener("mousemove", e => {
+        datumoutput.value = new Date(_min+e.layerX*zoom).toString()
         pointerX = e.layerX
         if (drag) _min-=e.movementX*zoom
         if (!animating) window.requestAnimationFrame(this.draw)
