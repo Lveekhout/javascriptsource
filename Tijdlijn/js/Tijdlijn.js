@@ -44,6 +44,10 @@ function Tijdlijn(canvas, input, _periodes, datumoutput) {
             while (_year<_min+canvas.width*zoom) {
                 if (textPos==undefined||(_year-_min)/zoom>textPos) {
                     textPos = (_year-_min)/zoom + ctx.measureText(year).width
+                    ctx.save()
+                    ctx.fillStyle = "#dddddd"
+                    ctx.fillRect((_year-_min)/zoom, 31, 1, canvas.height-31)
+                    ctx.restore()
                     ctx.fillRect((_year-_min)/zoom, 30, 1, -10)
                     ctx.fillText(year, (_year-_min)/zoom, 12)
                     if (zoom<400000000)
@@ -86,7 +90,7 @@ function Tijdlijn(canvas, input, _periodes, datumoutput) {
                     }
                     ctx.fillStyle = "black"
                     ctx.fillText(v.naam + " (" + p.label + ")" , 10, 12+y)
-                    y += 18
+                    y += 16
                 })
                 y += 8
             })
@@ -119,8 +123,8 @@ function Tijdlijn(canvas, input, _periodes, datumoutput) {
         _min = (_min+e.layerX*_zoom)-e.layerX*zoom
         if (!animating) window.requestAnimationFrame(this.draw)
     })
-    canvas.addEventListener("mousedown", e => drag = true)
-    canvas.addEventListener("mouseup", e => drag = false)
+    canvas.addEventListener("mousedown", e => drag = e.buttons&1==1)
+    canvas.addEventListener("mouseup", e => drag = e.buttons&1==1)
     canvas.addEventListener("mouseleave", e => {
         pointerX=undefined
         datumoutput.value = ""
