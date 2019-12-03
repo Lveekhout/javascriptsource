@@ -11,8 +11,8 @@ function makeVector(src, length) {
 }
 
 function Thing2D(bound) {
-    this.pos = [200, canvas[0].height/2]
-    this.speed = [0, 0.1]
+    this.pos = [canvas[0].width/2-100, canvas[0].height/2]
+    this.speed = [0, 2]
     this.bound = bound
     this.step = 0.4
 
@@ -33,8 +33,7 @@ function draw(m) {
     display.innerHTML = "speed: " + Math.floor(Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2)))
     ctx[0].drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/10, iBall.height/10)
 
-//    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.3)
-//    console.log(Math.sqrt(Math.pow(vect[0],2+Math.pow(vect[1],2))))
+    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.3)
     thing.apply_acc(vect)
 
     ctx[1].clearRect(0, 0, canvas[1].clientWidth, canvas[1].clientHeight)
@@ -48,12 +47,30 @@ function draw(m) {
     ctx[1].stroke()
     ctx[1].beginPath()
     for (x=0;x<canvas[1].width;x++) {
-        ctx[1].lineTo(x, canvas[1].height/2-(vect[1] * Math.pow(_x, 2) + thing.speed[1]*_x))
+        ctx[1].lineTo(x, canvas[1].height/2-(vect[0] * Math.pow(_x, 2) + thing.speed[0]*_x))
         _x += 1
     }
     ctx[1].lineWidth = 3
     ctx[1].strokeStyle = "red"
     ctx[1].stroke()
+
+    ctx[2].clearRect(0, 0, canvas[2].clientWidth, canvas[2].clientHeight)
+    ctx[2].fillText(new Date(), 10, 10)
+    _x=-canvas[1].width/2
+    ctx[2].beginPath()
+    ctx[2].moveTo(0, canvas[2].height/2); ctx[2].lineTo(canvas[2].width, canvas[2].height/2)
+    ctx[2].moveTo(canvas[2].height/2, 0); ctx[2].lineTo(canvas[2].width/2, canvas[2].height)
+    ctx[2].lineWidth = 1
+    ctx[2].strokeStyle = "#ffffff"
+    ctx[2].stroke()
+    ctx[2].beginPath()
+    for (x=0;x<canvas[2].width;x++) {
+        ctx[2].lineTo(x, canvas[2].height/2-(vect[1] * Math.pow(_x, 2) + thing.speed[1]*_x))
+        _x += 1
+    }
+    ctx[2].lineWidth = 3
+    ctx[2].strokeStyle = "red"
+    ctx[2].stroke()
 }
 
 window.onload = () => {
