@@ -1,6 +1,6 @@
 let display
-let canvas
-let ctx
+let canvas = []
+let ctx = []
 let iBall
 let thing
 let vect = [0, 1]
@@ -11,8 +11,8 @@ function makeVector(src, length) {
 }
 
 function Thing2D(bound) {
-    this.pos = [200, canvas.height/2]
-    this.speed = [0, 0]
+    this.pos = [200, canvas[0].height/2]
+    this.speed = [0, 0.1]
     this.bound = bound
     this.step = 0.4
 
@@ -26,32 +26,49 @@ function Thing2D(bound) {
 }
 
 function draw(m) {
-    if (thing.pos[1]<canvas.height-iBall.height/20) window.requestAnimationFrame(draw)
+    if (thing.pos[1]<canvas[0].height-iBall.height/10) window.requestAnimationFrame(draw)
 
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+    ctx[0].clearRect(0, 0, canvas[0].clientWidth, canvas[0].clientHeight)
 
     display.innerHTML = "speed: " + Math.floor(Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2)))
-    ctx.drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/20, iBall.height/20)
+    ctx[0].drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/10, iBall.height/10)
 
-//    vect = makeVector([canvas.width/2-thing.pos[0], canvas.height/2-thing.pos[1]], 0.3)
+//    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.3)
 //    console.log(Math.sqrt(Math.pow(vect[0],2+Math.pow(vect[1],2))))
-//    thing.apply_acc(vect)
     thing.apply_acc(vect)
+
+    ctx[1].clearRect(0, 0, canvas[1].clientWidth, canvas[1].clientHeight)
+    ctx[1].fillText(new Date(), 10, 10)
+    let _x=-canvas[1].width/2
+    ctx[1].beginPath()
+    ctx[1].moveTo(0, canvas[1].height/2); ctx[1].lineTo(canvas[1].width, canvas[1].height/2)
+    ctx[1].moveTo(canvas[1].height/2, 0); ctx[1].lineTo(canvas[1].width/2, canvas[1].height)
+    ctx[1].lineWidth = 1
+    ctx[1].strokeStyle = "#ffffff"
+    ctx[1].stroke()
+    ctx[1].beginPath()
+    for (x=0;x<canvas[1].width;x++) {
+        ctx[1].lineTo(x, canvas[1].height/2-(vect[1] * Math.pow(_x, 2) + thing.speed[1]*_x))
+        _x += 1
+    }
+    ctx[1].lineWidth = 3
+    ctx[1].strokeStyle = "red"
+    ctx[1].stroke()
 }
 
 window.onload = () => {
     display = document.getElementById('display')
-    canvas = document.getElementById('canvas001')
-    ctx = canvas.getContext('2d')
-    ctx.font = "12pt Courrier new"
+    canvas = [document.getElementById('canvas001'), document.getElementById('canvas002'), document.getElementById('canvas003')]
+    canvas[0].addEventListener("mouseup", e => vect = [0, 1])
+    canvas[0].addEventListener("mousedown", e => vect = [0, -1])
+
+    ctx = [canvas[0].getContext('2d'), canvas[1].getContext('2d'), canvas[2].getContext('2d')]
+    ctx[1].font = "10pt Arial"
 
     iBall = new Image()
     iBall.src = "image/football.png"
     iBall.onload = () => {
-        thing = new Thing2D([canvas.width-iBall.width/20, canvas.height-iBall.height/20])
+        thing = new Thing2D([canvas[0].width-iBall.width/10, canvas[0].height-iBall.height/10])
         window.requestAnimationFrame(draw)
     }
-
-    canvas.addEventListener("mouseup", e => vect = [0, 1])
-    canvas.addEventListener("mousedown", e => vect = [0, -1])
 }

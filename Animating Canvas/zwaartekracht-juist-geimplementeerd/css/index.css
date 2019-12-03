@@ -1,3 +1,13 @@
 canvas#canvas001 {
-    background-color: azure;
+    background-color: #f0f0f0;
+}
+
+canvas#canvas002 {
+    margin-left: 10px;
+    background-color: #d0d0d0;
+}
+
+canvas#canvas003 {
+    margin-left: 10px;
+    background-color: #d0d0d0;
 }
