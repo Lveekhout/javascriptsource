@@ -12,7 +12,7 @@ function makeVector(src, length) {
 
 function Thing2D(bound) {
     this.pos = [canvas[0].width/2-100, canvas[0].height/2]
-    this.speed = [0, 2]
+    this.speed = [0, -8]
     this.bound = bound
     this.step = 0.4
 
@@ -29,12 +29,12 @@ function draw(m) {
     if (thing.pos[1]<canvas[0].height-iBall.height/10) window.requestAnimationFrame(draw)
 
     // ctx[0].clearRect(0, 0, canvas[0].clientWidth, canvas[0].clientHeight)
-    ctx[0].drawImage(iField, 0, 0, iField.width, iField.height, 0, 0, canvas[0].width, canvas[0].height)
-
+    ctx[0].drawImage(iField, 0, 0, canvas[0].width, canvas[0].height)
+    
     display.innerHTML = "speed: " + Math.floor(Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2)))
     ctx[0].drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/10, iBall.height/10)
 
-    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.3)
+    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.01)
     thing.apply_acc(vect)
 
     ctx[1].clearRect(0, 0, canvas[1].clientWidth, canvas[1].clientHeight)
