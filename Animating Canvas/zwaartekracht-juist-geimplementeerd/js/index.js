@@ -3,7 +3,36 @@ let canvas = []
 let ctx = []
 let iBall, iField
 let thing
-let vect = [0, 1]
+let vect = [0, 0]
+
+function drawSpeed(canvas, ctx, acc, speed) {
+    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+    ctx.fillText(new Date(), 10, 10)
+    let _x=-canvas.width/2
+    ctx.beginPath()
+    ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2)
+    ctx.moveTo(canvas.height/2, 0); ctx.lineTo(canvas.width/2, canvas.height)
+    ctx.lineWidth = 1
+    ctx.strokeStyle = "#ffffff"
+    ctx.stroke()
+    ctx.beginPath()
+    for (x=0;x<canvas.width;x++) {
+        ctx.lineTo(x, canvas.height/2-(acc * Math.pow(_x, 2) + speed*_x))
+        _x += 1
+    }
+    ctx.lineWidth = 3
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+    _x=-canvas.width/2
+    ctx.beginPath()
+    for (x=0;x<canvas.width;x++) {
+        ctx.lineTo(x, canvas.height/2-(speed*_x))
+        _x += 1
+    }
+    ctx.lineWidth = 3
+    ctx.strokeStyle = "yellow"
+    ctx.stroke()
+}
 
 function makeVector(src, length) {
     let l = Math.sqrt(Math.pow(src[0], 2) + Math.pow(src[1], 2))
@@ -12,9 +41,9 @@ function makeVector(src, length) {
 
 function Thing2D(bound) {
     this.pos = [canvas[0].width/2-100, canvas[0].height/2]
-    this.speed = [0, -8]
+    this.speed = [0, 0]
     this.bound = bound
-    this.step = 0.4
+    this.step = 0.9
 
     this.apply_acc = (acc) => {
         for (i=0;i<2;i++) {
@@ -26,70 +55,19 @@ function Thing2D(bound) {
 }
 
 function draw(m) {
-    if (thing.pos[1]<canvas[0].height-iBall.height/10) window.requestAnimationFrame(draw)
+    if (thing.pos[1]<canvas[0].height-iBall.height/2) window.requestAnimationFrame(draw)
 
-    // ctx[0].clearRect(0, 0, canvas[0].clientWidth, canvas[0].clientHeight)
     ctx[0].drawImage(iField, 0, 0, canvas[0].width, canvas[0].height)
     
-    display.innerHTML = "speed: " + Math.floor(Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2)))
-    ctx[0].drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/10, iBall.height/10)
+//    display.innerHTML = "speed: " + Math.floor(Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2)))
+    display.innerHTML = "speed: " + Math.sqrt(Math.pow(thing.speed[0],2)+Math.pow(thing.speed[1],2))
+    ctx[0].drawImage(iBall, thing.pos[0], thing.pos[1], iBall.width/2, iBall.height/2)
 
-    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.01)
+//    vect = makeVector([canvas[0].width/2-thing.pos[0], canvas[0].height/2-thing.pos[1]], 0.01)
     thing.apply_acc(vect)
 
-    ctx[1].clearRect(0, 0, canvas[1].clientWidth, canvas[1].clientHeight)
-    ctx[1].fillText(new Date(), 10, 10)
-    let _x=-canvas[1].width/2
-    ctx[1].beginPath()
-    for (x=0;x<canvas[1].width;x++) {
-        ctx[1].lineTo(x, canvas[1].height/2-(thing.speed[0]*_x))
-        _x += 1
-    }
-    ctx[1].lineWidth = 3
-    ctx[1].strokeStyle = "yellow"
-    ctx[1].stroke()
-    _x=-canvas[1].width/2
-    ctx[1].beginPath()
-    ctx[1].moveTo(0, canvas[1].height/2); ctx[1].lineTo(canvas[1].width, canvas[1].height/2)
-    ctx[1].moveTo(canvas[1].height/2, 0); ctx[1].lineTo(canvas[1].width/2, canvas[1].height)
-    ctx[1].lineWidth = 1
-    ctx[1].strokeStyle = "#ffffff"
-    ctx[1].stroke()
-    ctx[1].beginPath()
-    for (x=0;x<canvas[1].width;x++) {
-        ctx[1].lineTo(x, canvas[1].height/2-(vect[0] * Math.pow(_x, 2) + thing.speed[0]*_x))
-        _x += 1
-    }
-    ctx[1].lineWidth = 3
-    ctx[1].strokeStyle = "red"
-    ctx[1].stroke()
-    
-    ctx[2].clearRect(0, 0, canvas[2].clientWidth, canvas[2].clientHeight)
-    ctx[2].fillText(new Date(), 10, 10)
-    _x=-canvas[1].width/2
-    ctx[2].beginPath()
-    for (x=0;x<canvas[2].width;x++) {
-        ctx[2].lineTo(x, canvas[2].height/2-(thing.speed[1]*_x))
-        _x += 1
-    }
-    ctx[2].lineWidth = 3
-    ctx[2].strokeStyle = "yellow"
-    ctx[2].stroke()
-    _x=-canvas[1].width/2
-    ctx[2].beginPath()
-    ctx[2].moveTo(0, canvas[2].height/2); ctx[2].lineTo(canvas[2].width, canvas[2].height/2)
-    ctx[2].moveTo(canvas[2].height/2, 0); ctx[2].lineTo(canvas[2].width/2, canvas[2].height)
-    ctx[2].lineWidth = 1
-    ctx[2].strokeStyle = "#ffffff"
-    ctx[2].stroke()
-    ctx[2].beginPath()
-    for (x=0;x<canvas[2].width;x++) {
-        ctx[2].lineTo(x, canvas[2].height/2-(vect[1] * Math.pow(_x, 2) + thing.speed[1]*_x))
-        _x += 1
-    }
-    ctx[2].lineWidth = 3
-    ctx[2].strokeStyle = "red"
-    ctx[2].stroke()
+    drawSpeed(canvas[1], ctx[1], vect[0], thing.speed[0])
+    drawSpeed(canvas[2], ctx[2], vect[1], thing.speed[1])
 }
 
 window.onload = () => {
@@ -101,7 +79,7 @@ window.onload = () => {
     ctx = [canvas[0].getContext('2d'), canvas[1].getContext('2d'), canvas[2].getContext('2d')]
 
     iBall = new Image()
-    iBall.src = "image/football.png"
+    iBall.src = "image/helicopter-256-modified.png"
     iBall.onload = () => {
         iField = new Image()
         iField.src="image/voetbalveld.jpg"
@@ -110,4 +88,17 @@ window.onload = () => {
             window.requestAnimationFrame(draw)
         }
     }
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 37) {
+            alert('Left was pressed');
+        }
+        else if(event.keyCode == 39) {
+            alert('Right was pressed');
+        }
+    });
+
+    document.getElementById('canvas004').addEventListener("mousedown", e => vect = [(e.offsetX-e.target.width/2)/e.target.width/5, (e.offsetY-e.target.height/2)/e.target.height/5])
+    document.getElementById('canvas004').addEventListener("mousemove", e => {
+        if (e.buttons&1===1) vect = [(e.offsetX-e.target.width/2)/e.target.width/5, (e.offsetY-e.target.height/2)/e.target.height/5]
+    })
 }
