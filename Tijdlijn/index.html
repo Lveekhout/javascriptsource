@@ -9,7 +9,9 @@
     </head>
     <body>
         <input id="main-input" oninput="tijdlijn.setZoom(parseInt(value))" type="range" min="1000" max="700000000" style="width: 1500px">
-        <canvas id="main-canvas" width="1600" height="6768">Does not support</canvas>
+        <div style="width: 100%; height: 768px; overflow-y: scroll;">
+            <canvas id="main-canvas" width="1600" height="6768">Does not support</canvas>
+        </div>
         <input id="datumoutput" readonly style="width: 600px">
     </body>
 </html>
