@@ -1,8 +1,8 @@
 console.dir(window.speechSynthesis)
 var msg = new SpeechSynthesisUtterance('start')
 msg.lang = "nl"
-let success = new Audio("sound/success.wav"); success.playbackspeed = -1.0
-let enya = new Audio("sound/enya.mp3")
+let success = new Audio("sound/success.wav"); success.playbackRate = 12
+let enya = new Audio("sound/enya.mp3"); enya.playbackRate = 0.7
 enya.onabort = () => console.log("onabort")
 enya.onauxclick = () => console.log("onauxclick")
 enya.onbeforecopy = () => console.log("onbeforecopy")
