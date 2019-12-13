@@ -7,14 +7,12 @@ let tijden = []
 
 function draw(m) {
     let start = new Date().getTime()
+    if (m<30000) window.requestAnimationFrame(draw)
     p.innerHTML = m
     ctx.drawImage(map, map.width/2+300*Math.cos(r), map.width/2-100*Math.sin(r), canvas.width, canvas.height, 0, 0, canvas.width, canvas.height)
     ctx.drawImage(cloud, 300*Math.cos(r/3), 100*Math.sin(r/3))
     r+=0.05
-    let afterdraw = new Date().getTime()
-    if (m>10000) tijden.push({start:start,afterdraw:afterdraw})
-    // if (m<30000) window.requestAnimationFrame(draw)
-    if (m<30000) setTimeout(()=>draw(m+10),16)
+    if (m>10000) tijden.push({start:start,afterdraw:new Date().getTime()})
     else {
         console.log(JSON.stringify(tijden))
         // console.log(tijden.length)
@@ -31,6 +29,10 @@ window.onload = () => {
     canvas = document.getElementById('canvas001')
     ctx =  canvas.getContext('2d')
     ctx.font = "12pt Courrier new"
+
+    canvas.addEventListener("mousemove", e => {
+        console.log(e)
+    })
 
     cloud = new Image()
     cloud.onload = () => {
