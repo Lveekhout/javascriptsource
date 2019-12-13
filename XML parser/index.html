@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Archetype</title>
+        <title>AAM koersbestanden inlezen</title>
         <link rel="stylesheet" href="css/index.css">
         <script src="js/index.js"></script>
         <script src="js\medewerkerauthenticatie-svc.js"></script>
@@ -10,6 +10,7 @@
     </head>
     <body>
         <label>Selecteer bestand</label><select id="selectFilename" oninput="handleSelectFilename(value)"></select><br>
+        <label>Selecteer bestand</label><input onchange="readSingleFile(event);" type="file" id="file-input"/><br>
         <label>overrideDatum</label><input id="overrideDatum" type="text" oninput="handleOnInput()"><br>
         <pre id="statements_bsb"></pre>
         <pre id="statements_bsd"></pre>

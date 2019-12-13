@@ -93,6 +93,17 @@ function handleSelectFilename(filename) {
     })
 }
 
+function readSingleFile(e) {
+    var file = e.target.files[0]
+    if (!file) return
+    var reader = new FileReader()
+    reader.onload = e => {
+        thisXML = e.target.result
+        handleXML(thisXML)
+    }
+    reader.readAsText(file)
+}
+
 window.onload = () => {
     elementSelectFilename = document.getElementById("selectFilename")
     elementStatements_bsb = document.getElementById("statements_bsb")
