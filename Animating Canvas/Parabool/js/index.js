@@ -52,6 +52,16 @@ function draw() {
     ctx.strokeStyle = "brown"
     ctx.stroke()
 
+    ctx.beginPath()
+    y = NaN
+    for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
+        let x = (-ox+_x)/zoom
+        if (isNaN(y)) { y = eval("(" + functie1.value + ")-(" + functie2.value + ")"); if (!isNaN(y)) ctx.moveTo(_x, y*-zoom+oy) }
+        else          { y = eval("(" + functie1.value + ")-(" + functie2.value + ")"); if (!isNaN(y)) ctx.lineTo(_x, y*-zoom+oy) }
+    }
+    ctx.strokeStyle = "purple"
+    ctx.stroke()
+
     let datum = new Date()
     ctx.fillText(datum, 5, 15)
 }
