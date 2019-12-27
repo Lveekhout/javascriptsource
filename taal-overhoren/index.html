@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Overhoring</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <div id="file-selectie">
+            <input id="input001" type="file" oninput="laden(event)">
+        </div>
+        <div id="methode-selectie" style="display: none">
+            <input id="input-optie1" type="checkbox" oninput="onMethodeSelectie(event)"><br>
+            <input id="input-optie2" type="checkbox" oninput="onMethodeSelectie(event)"><br><br>
+            <button id="input-button" onclick="startenToets(event)" disabled>Start</button>
+        </div>
+        <div id="uitvoeren-toets" style="display: none">
+            <h3 id="gevraagd-woord">init...</h3>
+            <input id="input-antwoord" type="text" onkeypress="if (event.keyCode==13) volgendeWoord()">
+            <button id="check-volgende" onclick="volgendeWoord()">Ok</button>
+        </div>
+        <div id="toets-einde" style="display: none">
+            <h2>Einde</h2>
+        </div>
+    </body>
+</html>

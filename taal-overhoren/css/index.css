@@ -1,0 +1,18 @@
+div#methode-selectie {
+    margin: 0;
+    padding: 10px;
+    background-color: #DDDDDD;
+}
+
+div#uitvoeren-toets {
+    margin: 0;
+    padding: 10px;
+    background-color: #CCDDEE;
+}
+
+div#toets-einde {
+    margin: 0;
+    padding: 10px;
+    background-color: green;
+    color: white;
+}
