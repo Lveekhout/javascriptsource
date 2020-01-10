@@ -3,13 +3,23 @@
     <head>
         <title>Rekenen met tafels</title>
         <link rel="stylesheet" href="css/index.css">
-        <script src="js/Cookies.js"></script>
-        <script src="js/Producten.js"></script>
-        <script src="js/datum.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/Producten.js"></script>
+        <script src="js/Vermenigvuldigen.js"></script>
+        <script src="js/datum.js"></script>
+        <script src="js/Cookies.js"></script>
     </head>
-    <body style="margin: 0; padding: 0; border: 0;" onload="new Producten(6)">
-        <div style="position: absolute; left: 0; width: 10%; min-height: 100%; background-color: Azure;">
+    <body style="margin: 0; padding: 0; border: 0;">
+        <div id="vermenigvuldigen" style="background-color: aquamarine;">
+            <pre class="message"></pre>
+            <pre class="vermenigvuldigen"></pre>
+            <pre class="vermenigvuldigen">x</pre>
+            <pre class="vermenigvuldigen"></pre>
+            <pre class="vermenigvuldigen">=</pre>
+            <input class="vermenigvuldigen" onkeypress="if (event.keyCode==13) if (toets.check()) toets.volgende()">
+            <button onclick="toets.volgende()">Volgende</button>
+        </div>
+        <div style="display: none; position: absolute; left: 0; width: 10%; min-height: 100%; background-color: Azure;">
             <div style="padding: 10%;">
                 <button id="but_start" style="margin: 0;" onclick="start(this);">
                     <img width="100%" src="images/start.png">
@@ -19,7 +29,7 @@
                 </button>
                 <div style="margin-top: 10px">
                     <label>Tafels t/m</label>
-                    <input id="tafelinput" type="number" style="display: inline; border-box; width: 75px; margin:0; padding: 0;" value=10>
+                    <input id="tafelinput" type="number" style="box-sizing: border-box; width: 75px; margin:0; padding: 0;" value=10>
                 </div>
             </div>
         </div>
