@@ -1,13 +1,15 @@
 let canvas
 let ctx
-let origin
+let origin = []
 let autoos = []
-let marge = 0.2//1124901351309333
 let status = {animate:true,error:""}
 let animate = true
 
+const MARGE = 0.2//1124901351309333
+const STEP = 1
+
 function botsing(a) {
-    if (a.position>a.next.cc+a.next.position-marge) status.error = "botsing"
+    if (a.position>a.next.cc+a.next.position-MARGE) status.error = "botsing"
 }
 
 function beslis(a) {
@@ -17,13 +19,13 @@ function beslis(a) {
 
 function draw(millisec) {
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    ctx.fillText(millisec, 5, 15)
+    ctx.fillText("autoos[0].speed="+autoos[0].speed, 5, 15)
 
     ctx.save() // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save
     ctx.translate(origin[0], origin[1])
     autoos.forEach(v => {
-        v.position += v.speed
-        v.speed += v.force
+        v.position += v.acceleration*Math.pow(STEP, 2) + v.speed*STEP
+        v.speed += 2*v.acceleration*STEP
         ctx.save()
         ctx.rotate(-v.position)
         ctx.fillStyle = v.color
@@ -31,19 +33,18 @@ function draw(millisec) {
         ctx.restore()
 
         v.botsing(v)
-        //if (v.position>Math.PI*2) v.position -= Math.PI*2
     })
     ctx.restore()
 
     if (status.error) throw status.error
 
-    let now = new Date().getTime()
-    autoos.forEach(v => {
-        if (now-v.time>100) {
-            v.time = now
-            if (v.beslis) beslis(v)
-        }
-    })
+    // let now = new Date().getTime()
+    // autoos.forEach((v, i) => {
+    //     if (now-v.time>100) {
+    //         v.time = now
+    //         if (v.beslis) beslis(v)
+    //     }
+    // })
 
     if (status.animate) window.requestAnimationFrame(draw)
 }
@@ -51,20 +52,12 @@ function draw(millisec) {
 window.onload = () => {
     canvas = document.getElementById('canvas001')
     ctx = canvas.getContext('2d')
-    ctx.font = "12pt Courrier new"
+    ctx.font = "10pt Courrier new"
 
     origin = [canvas.clientWidth/2, canvas.clientHeight/2]
-    for (i=0;i<Math.PI*2;i+=0.5+Math.random()) autoos.push(
-        {
-            color: 0,
-            position: i,
-            cc: 0,
-            speed: 0.01,
-            force: 0,
-            time: 0,
-            botsing: botsing,
-            beslis: beslis
-        })
+    // for (i=0;i<Math.PI*2;i+=0.5+Math.random()) autoos.push({color: 0,position: i,cc: 0,speed: 0.01,acceleration: 0,time: 0,botsing: botsing,beslis: beslis})
+    autoos.push({color: 0,position: 0,      cc: 0,speed: 0.01,acceleration: 0,time: 0,botsing: botsing})
+    autoos.push({color: 0,position: Math.PI,cc: 0,speed: 0.01,acceleration: 0,time: 0,botsing: botsing})
     for (i=0;i<autoos.length-1;i++) autoos[i].next = autoos[i+1]
     autoos[0].color = "red"
     autoos[0].cc = Math.PI*2
