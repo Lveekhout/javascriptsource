@@ -110,7 +110,6 @@ function insertSommetje(el, product, focus) {
 
 function start(el) {
     setMaxFactor(Number(tafelinput.value))
-<<<<<<< HEAD
     current = 0;
     fouten = [];
     factoren = randomFactoren();
@@ -118,15 +117,6 @@ function start(el) {
     but_stop.style.display='';
     rekengedeelte.style.display='';
     resultaatgedeelte.style.display='none';
-=======
-    current = 0
-    fouten = []
-    factoren = randomFactoren()
-    el.style.display='none'
-    but_stop.style.display='initial'
-    rekengedeelte.style.display='initial'
-    resultaatgedeelte.style.display='none'
->>>>>>> 06af65a5a693964bf3dc2f50d49652cb0ab5e9c7
     tafelinput.disabled = true
 
     toonSommetje()
@@ -136,17 +126,10 @@ function stop(el) {
     resultaatgedeelte.children[0].innerHTML = "Duur: " + getYoutubeLikeToDisplay(Date.now()-start_tijd)
     resultaatgedeelte.children[1].innerHTML = "Aantal fouten: " + fouten.length
 
-<<<<<<< HEAD
     el.style.display='none';
     but_start.style.display='block';
     rekengedeelte.style.display='none';
     resultaatgedeelte.style.display='';
-=======
-    el.style.display='none'
-    but_start.style.display='block'
-    rekengedeelte.style.display='none'
-    resultaatgedeelte.style.display='initial'
->>>>>>> 06af65a5a693964bf3dc2f50d49652cb0ab5e9c7
     tafelinput.disabled = false
 }
 function toonSommetje() {
