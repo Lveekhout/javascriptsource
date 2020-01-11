@@ -41,10 +41,6 @@ window.onload = () => {
     ctx.font = "12pt Courrier new"
     ctx.fillStyle = "black"
 
-    canvas.addEventListener("mousemove", e => {
-        console.log(e)
-    })
-
     cloud = new Image()
     cloud.onload = () => {
         map = new Image()
