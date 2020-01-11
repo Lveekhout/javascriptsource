@@ -3,32 +3,43 @@ let canvas
 let ctx
 let map, cloud
 let r
-let tijden = []
+
+function mouseMove(e) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillText(e.offsetX + "/" + canvas.width, 10, 50)
+
+    let cx = e.offsetX / (canvas.width-1)
+    let cy = e.offsetY / (canvas.height-1)
+    let maxx = map.width - canvas.width
+    let maxy = map.height - canvas.height
+
+    ctx.drawImage(map, cx*maxx, cy*maxy, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height)
+}
 
 function draw(m) {
-    let start = new Date().getTime()
     if (m<30000) window.requestAnimationFrame(draw)
+
     p.innerHTML = m
-    ctx.drawImage(map, map.width/2+300*Math.cos(r), map.width/2-100*Math.sin(r), canvas.width, canvas.height, 0, 0, canvas.width, canvas.height)
-    ctx.drawImage(cloud, 300*Math.cos(r/3), 100*Math.sin(r/3))
+    let depth = 850
+    let view = [depth+depth*Math.sin(r), depth+depth*Math.sin(r), map.width-2*(depth+depth*Math.sin(r)), map.height-2*(depth+depth*Math.sin(r))]
+    ctx.drawImage(map, view[0], view[1], view[2], view[3], 0, 0, canvas.width, canvas.height)
+//    ctx.drawImage(map, map.width/2+300*Math.cos(r), map.height/2-100*Math.sin(r), canvas.width, canvas.height, 0, 0, canvas.width, canvas.height)
+    ctx.save()
+    ctx.globalAlpha = 0.6;
+    ctx.drawImage(cloud, canvas.width/3+300*Math.cos(r/3), canvas.height/3+100*Math.sin(r/3))
+    ctx.restore()
     r+=0.05
-    if (m>10000) tijden.push({start:start,afterdraw:new Date().getTime()})
-    else {
-        console.log(JSON.stringify(tijden))
-        // console.log(tijden.length)
-        // let sum=0
-        // for (i=1;i<tijden.length;i++) sum+=tijden[i]-tijden[i-1]
-        // console.log(sum)
-        // console.log(sum/tijden.length)
-        // p.innerHTML = 'KLAAR!'
-    }
 }
 
 window.onload = () => {
     p = document.getElementById('p001')
     canvas = document.getElementById('canvas001')
+    canvas.width = document.getElementsByTagName("body")[0].clientWidth
+    canvas.addEventListener("mousemove", e => window.requestAnimationFrame(() => mouseMove(e)))
+
     ctx =  canvas.getContext('2d')
     ctx.font = "12pt Courrier new"
+    ctx.fillStyle = "black"
 
     canvas.addEventListener("mousemove", e => {
         console.log(e)

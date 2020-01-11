@@ -1,5 +1,5 @@
 function Producten(tafel) {
-    let randomizedProducten = () => {
+    const randomizedProducten = () => {
         let result = []
         for (let x=2;x<=tafel;x++) for (let y=x;y<=tafel;y++) {
             let gevonden = result.find(v => v.product == x*y)

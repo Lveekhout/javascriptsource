@@ -115,8 +115,8 @@ function start(el) {
     fouten = [];
     factoren = randomFactoren();
     el.style.display='none';
-    but_stop.style.display='initial';
-    rekengedeelte.style.display='initial';
+    but_stop.style.display='';
+    rekengedeelte.style.display='';
     resultaatgedeelte.style.display='none';
     tafelinput.disabled = true
 
@@ -130,7 +130,7 @@ function stop(el) {
     el.style.display='none';
     but_start.style.display='block';
     rekengedeelte.style.display='none';
-    resultaatgedeelte.style.display='initial';
+    resultaatgedeelte.style.display='';
     tafelinput.disabled = false
 }
 function toonSommetje() {

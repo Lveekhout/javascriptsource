@@ -3,7 +3,7 @@ let ctx
 let origin
 let autoos = []
 let marge = 0.2//1124901351309333
-let status = {animate:true,error:""}
+let status = { animate:true }
 let animate = true
 
 function botsing(a) {
@@ -17,20 +17,23 @@ function beslis(a) {
 
 function draw(millisec) {
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    ctx.fillText(millisec, 5, 15)
+    ctx.fillText(millisec, 0, 8)
 
     ctx.save() // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save
     ctx.translate(origin[0], origin[1])
     autoos.forEach(v => {
         v.position += v.speed
         v.speed += v.force
+        if (v.speed<0) { v.speed=0; v.force=0 }
+        if (v.speed>v.maxspeed) { v.speed=v.maxspeed; v.force=0 }
+        if (v.botsing) v.botsing(v)
+
         ctx.save()
         ctx.rotate(-v.position)
         ctx.fillStyle = v.color
         ctx.fillRect(100, -10, 10, 20)
         ctx.restore()
 
-        v.botsing(v)
         //if (v.position>Math.PI*2) v.position -= Math.PI*2
     })
     ctx.restore()
@@ -39,7 +42,7 @@ function draw(millisec) {
 
     let now = new Date().getTime()
     autoos.forEach(v => {
-        if (now-v.time>100) {
+        if (now-v.time>2000) {
             v.time = now
             if (v.beslis) beslis(v)
         }
@@ -51,25 +54,9 @@ function draw(millisec) {
 window.onload = () => {
     canvas = document.getElementById('canvas001')
     ctx = canvas.getContext('2d')
-    ctx.font = "12pt Courrier new"
+    ctx.font = "8pt Courier New"
 
     origin = [canvas.clientWidth/2, canvas.clientHeight/2]
-    for (i=0;i<Math.PI*2;i+=0.5+Math.random()) autoos.push(
-        {
-            color: 0,
-            position: i,
-            cc: 0,
-            speed: 0.01,
-            force: 0,
-            time: 0,
-            botsing: botsing,
-            beslis: beslis
-        })
-    for (i=0;i<autoos.length-1;i++) autoos[i].next = autoos[i+1]
-    autoos[0].color = "red"
-    autoos[0].cc = Math.PI*2
-    autoos[0].beslis = undefined
-    autoos[autoos.length-1].next = autoos[0]
-
+    createAutoos(autoos)
     window.requestAnimationFrame(draw)
 }

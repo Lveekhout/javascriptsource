@@ -8,7 +8,7 @@
         <script src="js/datum.js"></script>
         <script src="js/index.js"></script>
     </head>
-    <body style="margin: 0; padding: 0; border: 0;" onload="new Producten(6)">
+    <body style="margin: 0; padding: 0; border: 0;">
         <div style="position: absolute; left: 0; width: 10%; min-height: 100%; background-color: Azure;">
             <div style="padding: 10%;">
                 <button id="but_start" style="margin: 0;" onclick="start(this);">
@@ -19,11 +19,13 @@
                 </button>
                 <div style="margin-top: 10px">
                     <label>Tafels t/m</label>
-                    <input id="tafelinput" type="number" style="display: inline; border-box; width: 75px; margin:0; padding: 0;" value=10>
+                    <input id="tafelinput" type="number" style="box-sizing: border-box; width: 75px; margin: 0; padding: 0;" value="10">
                 </div>
+                <input name="methode" type="radio" value="0" checked><label>Vermenigvuldigen</label><br>
+                <input name="methode" type="radio" value="1" ><label>Ontbinden in factoren</label>
             </div>
         </div>
-        <div id="rekengedeelte" style="display: none; position: absolute; padding: 20px; left: 10%; right: 0; background-color: DodgerBlue ;">
+        <div id="rekengedeelte" style="display: none; position: absolute; padding: 20px; left: 10%; right: 0; background-color: DodgerBlue;">
             <p id="statustekst" style="margin: 0; margin-bottom: 10px; padding: 10px; border: 3px solid white; color: white; font-weight: bold;">Status tekst</p>
             <table id="sommetjestabel"></table>
             <div style="margin-top: 10px;">

@@ -1,8 +1,13 @@
+body {
+    margin: 0;
+    padding; 0;
+}
+
 p#p001 {
     font-size: 8pt;
 }
 
 canvas#canvas001 {
     background-color: azure;
-    /* border: solid 10px black; */
+    border: 0;
 }
