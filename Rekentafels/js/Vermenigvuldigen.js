@@ -1,4 +1,5 @@
 function Vermenigvuldigen(tafel, div) {
+    let start_tijd
     this.result = []
     this.randomResult = []
 
@@ -22,6 +23,18 @@ function Vermenigvuldigen(tafel, div) {
         div.getElementsByTagName("pre")[0].innerHTML = (current+1) + " / " + this.randomResult.length
         div.getElementsByTagName("pre")[1].innerHTML = this.randomResult[current].factor1
         div.getElementsByTagName("pre")[3].innerHTML = this.randomResult[current].factor2
+        start_tijd = Date.now()
+    }
+
+    this.stop = () => {
+        document.getElementById("resultaatgedeelte").children[0].innerHTML = "Duur: " + getYoutubeLikeToDisplay(Date.now()-start_tijd)
+        document.getElementById("resultaatgedeelte").children[1].innerHTML = "Aantal fouten: " + fouten.length
+    
+        but_stop.style.display='none';
+        but_start.style.display='block';
+        rekengedeelte.style.display='none';
+        resultaatgedeelte.style.display='';
+        tafelinput.disabled = false
     }
 
     this.check = () => {
@@ -42,7 +55,7 @@ function Vermenigvuldigen(tafel, div) {
             div.getElementsByTagName("pre")[1].innerHTML = this.randomResult[current].factor1
             div.getElementsByTagName("pre")[3].innerHTML = this.randomResult[current].factor2
         } else {
-            alert("EINDE")
+            this.stop()
         }
     }
 }

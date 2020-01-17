@@ -155,7 +155,18 @@ function volgende() {
 }
 
 window.onload = e => {
-    toets = new Vermenigvuldigen(10, document.getElementById("vermenigvuldigen"))
+    // toets = new Vermenigvuldigen(document.getElementById("tafelinput").value, document.getElementById("vermenigvuldigen"))
+    toets = new Vermenigvuldigen(3, document.getElementById("vermenigvuldigen"))
     toets.start()
     console.log(toets)
+}
+
+let timer
+function onInputFields(e) {
+    document.getElementById("pre.field001").innerHTML = ""
+    window.clearTimeout(timer)
+    timer = window.setTimeout(() => {
+        let json = {input001: document.getElementById("input.field001").value, input002: document.getElementById("input.field002").value}
+        document.getElementById("pre.field001").innerHTML = JSON.stringify(json, null, 3)
+    }, 1000)
 }

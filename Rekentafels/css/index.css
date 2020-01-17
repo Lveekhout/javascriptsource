@@ -1,3 +1,6 @@
+.kleine-letter {
+    font-size: 11pt;
+}
 div.sommetje {
     transition: background-color 1200ms;
 }
@@ -17,10 +20,12 @@ div.sommetje form input {
 }
 .vermenigvuldigen {
     display: inline;
-    font-size: 8pt;
+    font-size: 28pt;
     margin-left: 25px;
+    width: 100px;
 }
 .message {
-    font-size: 8pt;
+    font-size: 18pt;
+    margin-top: 0;
     margin-left: 125px;
 }

@@ -1,4 +1,4 @@
-function Producten(tafel) {
+function Ontbinden(tafel) {
     const randomizedProducten = () => {
         let result = []
         for (let x=2;x<=tafel;x++) for (let y=x;y<=tafel;y++) {
