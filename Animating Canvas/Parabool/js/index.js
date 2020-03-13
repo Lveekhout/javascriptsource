@@ -26,6 +26,22 @@ function raster() {
     ctx.stroke()
     ctx.restore()
 }
+function calcIntersectTime(src) {
+    if (src[0]==0) { // Lineair oplossen
+        if (src[1]==0) return
+        else {
+            const x = src[2]/-src[1]
+            if (x<0) return; else return x
+        }
+    } else {
+        const d = src[1]*src[1]-4*src[0]*src[2]
+        if (d<0) return;
+        else {
+            const x = (-src[1]-Math.sqrt(d))/(2*src[0])
+            if (x<0) return (-src[1]+Math.sqrt(d))/(2*src[0]); else return x
+        }
+    }
+}
 function draw() {
     let y
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
@@ -63,7 +79,8 @@ function draw() {
     ctx.stroke()
 
     let datum = new Date()
-    ctx.fillText(datum, 5, 15)
+    // ctx.fillText(datum, 5, 15)
+    ctx.fillText("a = " + a, 5, 15)
 }
 
 window.onload = () => {
