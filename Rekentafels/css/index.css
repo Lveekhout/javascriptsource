@@ -20,12 +20,11 @@ div.sommetje form input {
 }
 .vermenigvuldigen {
     display: inline;
-    font-size: 28pt;
+    font-size: 24pt;
     margin-left: 25px;
     width: 100px;
 }
 .message {
-    font-size: 18pt;
-    margin-top: 0;
+    font-size: 24pt;
     margin-left: 125px;
 }

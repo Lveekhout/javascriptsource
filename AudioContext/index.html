@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Archetype</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <pre>https://developer.mozilla.org/en-US/docs/Web/API/AudioContext</pre>
+        <pre>https://github.com/mdn/webaudio-examples.git</pre>
+        <pre>https://www.youtube.com/watch?v=oaemcUfcYcg</pre>
+        <input type="range" min="30" max="440" oninput="setFreq(this.value)" style="width: 100%">
+        <button onclick="audioContext.resume()">Start</button>
+        <button onclick="audioContext.suspend()">Stop</button>
+    </body>
+</html>

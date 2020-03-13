@@ -80,7 +80,7 @@ function draw() {
 
     let datum = new Date()
     // ctx.fillText(datum, 5, 15)
-    ctx.fillText("a = " + a, 5, 15)
+    ctx.fillText("a = " + a.toFixed(2), 5, 15)
 }
 
 window.onload = () => {
