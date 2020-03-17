@@ -21,7 +21,6 @@ function CarManager(canvas, tracklength) {
 
     this.setZoom = value => zoom = value
 
-
     const setInitialLastUpdate = milli => {
         lastUpdate = milli
         window.requestAnimationFrame(animate)
@@ -44,10 +43,23 @@ function CarManager(canvas, tracklength) {
             ctx.rotate(-angle)
             ctx.fillStyle = car.color
             ctx.fillRect(zoom*tracklength/(2*Math.PI), -zoom, zoom, 2*zoom)
+            // {
+            //     let idx
+            //     if (index==0) idx = this.cars.length-1; else idx = index-1
+            //     if (car.goal(this.cars[idx])) ctx.fillRect(zoom*tracklength/(2*Math.PI)-zoom*2, -zoom, zoom, 2*zoom)
+            // }
             {
-                let idx
-                if (index==0) idx = this.cars.length-1; else idx = index-1
-                if (car.goal(this.cars[idx])) ctx.fillRect(zoom*tracklength/(2*Math.PI)-zoom*2, -zoom, zoom, 2*zoom)
+                ctx.save()
+                if (car.alpha>0) {
+                    ctx.globalAlpha = car.alpha
+                    car.alpha -= 0.05
+                } else {
+                    car.alpha = 0
+                    ctx.globalAlpha = car.alpha
+                }
+                ctx.fillStyle = "yellow"
+                ctx.fillRect(zoom*tracklength/(2*Math.PI), -zoom, zoom, 2*zoom)
+                ctx.restore()
             }
             ctx.restore()
         })

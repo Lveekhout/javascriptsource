@@ -49,6 +49,7 @@
 //     if (status.animate) window.requestAnimationFrame(draw)
 // }
 
+const max = 1000
 let cm
 window.onload = () => {
     // canvas = document.getElementById('canvas001')
@@ -68,15 +69,15 @@ window.onload = () => {
     // window.requestAnimationFrame(draw)
 
     cm = new CarManager(document.getElementById('canvas001'), 100)
-    cm.addCar(new Car(90, 5, "red"))
-    cm.addCar(new Car(80, 5, "blue"))
-    cm.addCar(new Car(70, 5, "blue"))
-    cm.addCar(new Car(60, 5, "blue"))
-    cm.addCar(new Car(50, 5, "blue"))
-    cm.addCar(new Car(40, 5, "blue"))
-    cm.addCar(new Car(30, 5, "blue"))
-    cm.addCar(new Car(20, 5, "blue"))
-    cm.addCar(new Car(10, 5, "blue"))
-    cm.addCar(new Car( 0, 5, "blue"))
+    cm.addCar(new Car(90, 10, "red", 500 + random(max)))
+    cm.addCar(new Car(80, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(70, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(60, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(50, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(40, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(30, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(20, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car(10, 10, "blue", 500 + random(max)))
+    cm.addCar(new Car( 0, 10, "blue", 500 + random(max)))
     cm.startAnimation()
 }
