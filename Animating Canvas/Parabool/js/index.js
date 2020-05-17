@@ -83,6 +83,17 @@ function draw() {
     ctx.fillText("a = " + a.toFixed(2), 5, 15)
 }
 
+const f = x => {
+    if (x<1) return x*x
+    else return -x*x + 4*x - 2
+}
+
+const at = (b, distance, speed) => {
+    const t = 2*distance/(speed+b)
+    const a = (speed-b)/(2*t)
+    return [a, t]
+}
+
 window.onload = () => {
     canvas = document.getElementById('canvas')
     ox = Math.trunc(canvas.clientWidth/2)

@@ -1,29 +1,46 @@
-function CarManager(canvas, tracklength) {
+function CarManager(canvas, tracklength, xbox) {
     const ctx = canvas.getContext("2d")
 
     let animating = true
-    let zoom = 10
+    let zoom = 6
     let lastUpdate = 0
+    let crashSituation = false
+    const intervals = []
 
     this.cars = []
 
     this.addCar = car => {
-        this.cars.push(car)
+        const length = this.cars.push(car)
     }
 
+    const nextCarArray = (index) => {
+        if (this.cars.length>1) {
+            if (index==0) return [this.cars[this.cars.length-1], tracklength]
+            else return [this.cars[index-1], 0]
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    this.setZoom = value => zoom = value
+
+    //////////////////////////////////////////////////////////////////////
     this.startAnimation = () => {
         animating = true
-        lastUpdate = new Date()
+        // lastUpdate = new Date()
         window.requestAnimationFrame(setInitialLastUpdate)
+        this.cars.forEach((car, idx) => {
+            if (car.interval) intervals.push(setInterval(() => car.decide(nextCarArray(idx)), car.interval))
+        })
     }
-
-    this.stopAnimation = () => animating = false
-
-    this.setZoom = value => zoom = value
 
     const setInitialLastUpdate = milli => {
         lastUpdate = milli
         window.requestAnimationFrame(animate)
+    }
+
+    this.stopAnimation = () => {
+        animating = false
+        while (intervals.length>0) clearInterval(intervals.pop())
     }
 
     const animate = milli => {
@@ -35,6 +52,15 @@ function CarManager(canvas, tracklength) {
 
     const draw = milli => {
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+        if (navigator.getGamepads()[0]) {
+            ctx.save()
+            ctx.scale(1/20, 1/20)
+            ctx.drawImage(xbox, 0, 0)
+            ctx.restore()
+        }
+
+        drawSnelheidsmeter(ctx, canvas.clientWidth/2, canvas.clientHeight/2, zoom, -Math.PI+(Math.PI*(this.cars[0].speed/25)))
+
         ctx.save()
         ctx.translate(canvas.clientWidth/2, canvas.clientHeight/2)
         this.cars.forEach((car, index) => {
@@ -43,20 +69,14 @@ function CarManager(canvas, tracklength) {
             ctx.rotate(-angle)
             ctx.fillStyle = car.color
             ctx.fillRect(zoom*tracklength/(2*Math.PI), -zoom, zoom, 2*zoom)
-            // {
-            //     let idx
-            //     if (index==0) idx = this.cars.length-1; else idx = index-1
-            //     if (car.goal(this.cars[idx])) ctx.fillRect(zoom*tracklength/(2*Math.PI)-zoom*2, -zoom, zoom, 2*zoom)
-            // }
+            {
+                const nca = nextCarArray(index)
+                if (nca&&!crashSituation) crashSituation = car.crash(nca)
+            }
             {
                 ctx.save()
-                if (car.alpha>0) {
-                    ctx.globalAlpha = car.alpha
-                    car.alpha -= 0.05
-                } else {
-                    car.alpha = 0
-                    ctx.globalAlpha = car.alpha
-                }
+                if (car.alpha>0) { ctx.globalAlpha = car.alpha; car.alpha -= 0.05}
+                else { car.alpha = 0; ctx.globalAlpha = car.alpha }
                 ctx.fillStyle = "yellow"
                 ctx.fillRect(zoom*tracklength/(2*Math.PI), -zoom, zoom, 2*zoom)
                 ctx.restore()
@@ -64,11 +84,27 @@ function CarManager(canvas, tracklength) {
             ctx.restore()
         })
         ctx.restore()
+
+        if (crashSituation) {
+            this.stopAnimation()
+            throw "CRASH!!!"
+        }
     }
 
     const update = milli => {
         const t = (milli - lastUpdate) / 1000
         lastUpdate = milli
+
+        if (navigator.getGamepads()[0]) {
+            if (navigator.getGamepads()[0].buttons[6].touched) {
+                cm.cars[0].setAcceleration(-5 * navigator.getGamepads()[0].buttons[6].value)
+            } else if (navigator.getGamepads()[0].buttons[7].touched) {
+                cm.cars[0].setAcceleration( 5 * navigator.getGamepads()[0].buttons[7].value)
+            } else {
+                cm.cars[0].setAcceleration(0)
+            }
+        }
+
         this.cars.forEach(car => car.update(t))
     }
 }

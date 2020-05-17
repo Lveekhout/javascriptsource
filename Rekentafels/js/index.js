@@ -156,7 +156,7 @@ function volgende() {
 
 window.onload = e => {
     // toets = new Vermenigvuldigen(document.getElementById("tafelinput").value, document.getElementById("vermenigvuldigen"))
-    toets = new Vermenigvuldigen(3, document.getElementById("vermenigvuldigen"))
+    toets = new Vermenigvuldigen(10, document.getElementById("vermenigvuldigen"))
     toets.start()
     console.log(toets)
 }
