@@ -7,4 +7,5 @@ function LFO(speed) {
         if (this.angle>Math.PI*2) this.angle -= Math.PI*2
         this.value = Math.sin(this.angle)
     }
+    this.setSpeed = v => this.speed = v
 }

@@ -7,6 +7,7 @@
         <script src="js/LFO.js"></script>
         <script src="js/Object.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/shapes.js"></script>
     </head>
     <body>
         <div style="position: fixed; background-color: aliceblue; margin: 0; padding: 10px; right: 0; top: 0">
@@ -15,6 +16,8 @@
             <a href="https://www.youtube.com/watch?v=l6RYFdvEA30" style="display: block">https://www.youtube.com/watch?v=l6RYFdvEA30</a>
         </div>
         <canvas id="object" width="1000px" height="750px"></canvas>
-        <input type="checkbox" onclick="object.setAnimate(this.checked)">Animate
+        <input type="checkbox" checked onclick="object.setAnimate(this.checked)">Animate
+        <input type="checkbox" onclick="object.setRotating(this.checked)">Rotating
+        <input type="range" min="0" max="0.01" step="0.001" oninput="object.lfo.setSpeed(parseFloat(this.value))">
     </body>
 </html>

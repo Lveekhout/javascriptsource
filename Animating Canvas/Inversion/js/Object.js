@@ -13,16 +13,17 @@ function Object(canvas) {
     canvas.addEventListener("mousemove", e => {
         if (e.altKey) this.setOrigin(e.offsetX, e.offsetY)
         else if (drag) this.setOrigin(x0+e.movementX, y0+e.movementY)
-        inverse([(e.offsetX-x0)/zoom, (e.offsetY-y0)/-zoom])
+        // inverse([(e.offsetX-x0)/zoom, (e.offsetY-y0)/-zoom])
     })
 
     let ctx = canvas.getContext('2d')
 
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
-    let animate = false
+    let animate = true
+    let rotating = false
     let zoom = 200
-    let lfo = new LFO(0.02)
+    this.lfo = new LFO(0.002)
 
     const inversion = () => {
         ctx.save()
@@ -36,47 +37,62 @@ function Object(canvas) {
         ctx.arc(0, 0, zoom, 0, 2*Math.PI)
         ctx.stroke()
 
-        ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(2*zoom, -zoom)
-        ctx.stroke()
+        // ctx.beginPath()
+        // ctx.moveTo(0, 0)
+        // ctx.lineTo(2*zoom, -zoom)
+        // ctx.stroke()
 
-        ctx.translate(0, -zoom)
-        ctx.save()
-        ctx.rotate(-Math.atan(1/2))
-        ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, Math.sqrt(5)*zoom)
-        ctx.stroke()
-        ctx.restore()
+        // ctx.translate(0, -zoom)
+        // ctx.save()
+        // ctx.rotate(-Math.atan(1/2))
+        // ctx.beginPath()
+        // ctx.moveTo(0, 0)
+        // ctx.lineTo(0, Math.sqrt(5)*zoom)
+        // ctx.stroke()
+        // ctx.restore()
 
-        ctx.beginPath()
-        ctx.moveTo(-2*zoom, 0)
-        ctx.lineTo(3*zoom, 0)
-        ctx.setLineDash([zoom/25, zoom/50])
-        ctx.stroke()
+        // ctx.beginPath()
+        // ctx.moveTo(-2*zoom, 0)
+        // ctx.lineTo(3*zoom, 0)
+        // ctx.setLineDash([zoom/25, zoom/50])
+        // ctx.stroke()
 
-        ctx.translate(2*zoom, 0)
-        ctx.rotate(Math.atan(2)-Math.atan(1/2))
-        ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo( 0, 3*zoom)
-        ctx.setLineDash([zoom/25, zoom/50])
-        ctx.stroke()
+        // ctx.translate(2*zoom, 0)
+        // ctx.rotate(Math.atan(2)-Math.atan(1/2))
+        // ctx.beginPath()
+        // ctx.moveTo(0, 0)
+        // ctx.lineTo( 0, 3*zoom)
+        // ctx.setLineDash([zoom/25, zoom/50])
+        // ctx.stroke()
 
         ctx.restore()
     }
 
-    const inverse = p => {
-        let len = Math.sqrt(Math.pow(p[0], 2) +Math.pow(p[1], 2))
-        let len_ = 1/len
-        let fraction = len_/len
+    const inverse = ps => {
         ctx.save()
         ctx.translate(x0, y0)
-        ctx.fillStyle = "#F00"
+ 
         ctx.beginPath()
-        ctx.arc(p[0]*zoom*fraction, -p[1]*zoom*fraction, zoom/50, 0, 2*Math.PI)
-        ctx.fill()
+        ps.forEach((p, idx) => {
+            if (idx===0) ctx.moveTo(p[0]*zoom, -p[1]*zoom)
+            else ctx.lineTo(p[0]*zoom, -p[1]*zoom)
+        })
+        ctx.closePath()
+        ctx.strokeStyle = "#0F0"
+        ctx.stroke()
+
+        ctx.beginPath()
+        ps.forEach((p, idx) => {
+            let len = Math.sqrt(Math.pow(p[0], 2) +Math.pow(p[1], 2))
+            let len_ = 1/len
+            let fraction = len_/len
+            if (idx===0) ctx.moveTo(p[0]*zoom*fraction, -p[1]*zoom*fraction)
+            else ctx.lineTo(p[0]*zoom*fraction, -p[1]*zoom*fraction)
+        })
+        // ctx.closePath()
+        ctx.strokeStyle = "#F00"
+        ctx.stroke()
+ 
         ctx.restore()
     }
 
@@ -100,8 +116,6 @@ function Object(canvas) {
         ctx.restore()
     }
     let draw = m => {
-        if (animate) { lfo.update(); zoom = 110 + lfo.value * 100 }
-
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
         raster()
@@ -109,7 +123,9 @@ function Object(canvas) {
         ctx.fillText(new Date(), 5, 15)
 
         inversion()
-        inverse([1, 1])
+        if (rotating) this.lfo.update();
+        let rotated = rotate(points[0], this.lfo.angle)
+        inverse(rotated)
 
         if (animate) window.requestAnimationFrame(draw)
     }
@@ -129,5 +145,8 @@ function Object(canvas) {
         animate = v
         if (animate) window.requestAnimationFrame(draw)
     }
-    paint()
+    this.setRotating = v => {
+        rotating = v
+    }
+    draw()
 }
