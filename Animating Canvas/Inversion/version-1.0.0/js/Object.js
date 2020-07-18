@@ -1,5 +1,5 @@
 function Object(canvas) {
-    canvas.addEventListener("mousewheel", e => {
+    canvas.addEventListener("DOMMouseScroll mousewheel wheel", e => {
         let _zoom = zoom - e.deltaY/10
         if (_zoom<10) _zoom = 10
         if (_zoom>500) _zoom = 500
@@ -23,6 +23,7 @@ function Object(canvas) {
     let animate = true
     let rotating = false
     let zoom = 200
+    let or = [0, 0]
     this.lfo = new LFO(0.002)
 
     const inversion = () => {
@@ -84,8 +85,7 @@ function Object(canvas) {
         ctx.beginPath()
         ps.forEach((p, idx) => {
             let len = Math.sqrt(Math.pow(p[0], 2) +Math.pow(p[1], 2))
-            let len_ = 1/len
-            let fraction = len_/len
+            let fraction = 1 / Math.pow(len, 2)
             if (idx===0) ctx.moveTo(p[0]*zoom*fraction, -p[1]*zoom*fraction)
             else ctx.lineTo(p[0]*zoom*fraction, -p[1]*zoom*fraction)
         })
@@ -124,7 +124,7 @@ function Object(canvas) {
 
         inversion()
         if (rotating) this.lfo.update();
-        let rotated = rotate(points[0], this.lfo.angle)
+        let rotated = rotate(or, this.lfo.angle)
         inverse(rotated)
 
         if (animate) window.requestAnimationFrame(draw)
@@ -147,6 +147,9 @@ function Object(canvas) {
     }
     this.setRotating = v => {
         rotating = v
+    }
+    this.setOriginRotation = v => {
+        or = v
     }
     draw()
 }
