@@ -1,0 +1,22 @@
+canvas#canvas001 {
+    background-color: #f0f0f0;
+}
+
+canvas#canvas002 {
+    position: absolute;
+    opacity: 0.7;
+    top: 0px;
+    left: 0px;
+    background-color: #d0d0d0;
+}
+
+canvas#canvas003 {
+    position: absolute;
+    opacity: 0.7;
+    top: 0px;
+    right: 0;
+    background-color: #d0d0d0;
+}
+canvas#canvas004 {
+    background-color: #d0d0d0;
+}
