@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="73e9fc7d-d013-4a33-a810-6aa27c220f4f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/version-2.0.0.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Inversion/version-2.0.0/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Inversion/version-2.0.0/js/shapes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/js/shapes.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1gPnrNGgBRg4aM2BpFsgTZryDTo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="73e9fc7d-d013-4a33-a810-6aa27c220f4f" name="Default Changelist" comment="" />
+      <created>1598025292604</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598025292604</updated>
+      <workItem from="1598025294191" duration="46000" />
+      <workItem from="1598025367544" duration="4462000" />
+      <workItem from="1598359764644" duration="1704000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1262" y="329" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598359775318">
+      <screen x="-1920" y="-80" width="1920" height="1200" />
+    </state>
+    <state x="-1262" y="329" key="#com.intellij.fileTypes.FileTypeChooser/-1920.-80.1920.1200/0.0.1792.1120@-1920.-80.1920.1200" timestamp="1598359775318" />
+  </component>
+</project>
