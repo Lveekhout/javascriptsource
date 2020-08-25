@@ -61,6 +61,10 @@ const translate = t => {
     return points.map(p => [p[0]+t[0], p[1]+t[1]])
 }
 
+const translate_ = (p,t) => {
+    return p.map(p => [p[0]+t[0], p[1]+t[1]])
+}
+
 const rotate = (t, a) => {
     let result = translate([-t[0], -t[1]])
     result = result.map(p => [p[0]*Math.cos(a)-p[1]*Math.sin(a), p[0]*Math.sin(a)+p[1]*Math.cos(a)])
