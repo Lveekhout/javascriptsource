@@ -5,11 +5,14 @@
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/Object.css">
         <script src="js/LFO.js"></script>
-        <script src="js/Object.js"></script>
+<!--        <script src="js/Object.js"></script>-->
+        <script src="js/Render3D.js"></script>
+        <script src="js/World.js"></script>
         <script src="js/index.js"></script>
     </head>
     <body>
         <canvas id="object" width="1000px" height="750px"></canvas>
-        <input type="checkbox" onclick="object.setAnimate(this.checked)">Animate
+        <input type="checkbox" checked onclick="render3D.setAnimate(this.checked)">Animate
+        <input type="range" min="2" max="12" step="0.01" value="7" oninput="render3D.setDepth(this.value)" style="width: 600px">Depth
     </body>
 </html>

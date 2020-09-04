@@ -22,7 +22,7 @@ function Object(canvas) {
     let x0 = canvas.clientWidth / 2
     let y0 = canvas.clientHeight / 2
     let animate = false
-    let zoom = 100
+    let zoom = 50
     let lfo = new LFO(0.02)
 
     let raster = () => {
@@ -52,20 +52,21 @@ function Object(canvas) {
         raster()
 
         ctx.beginPath()
-        for (let n=0;n<2*Math.PI;n+=1/zoom) {
-            let x = fromOrigin(n, lfo.angle)
-            if (x===0) ctx.moveTo(x0+x*zoom, y0-n*zoom)
-            else ctx.lineTo(x0+x*zoom, y0-n*zoom)
-        }
-        ctx.stroke()
-
-        // let e = Math.PI/3
-        // ctx.beginPath()
-        // ctx.moveTo(x0+calc(0, e)*100, y0)
-        // for (let y=1;y<150;y++) {
-        //     ctx.lineTo(x0+calc(y/100, e)*100, y0-y)
+        // for (let n=-2*Math.PI;n<2*Math.PI;n+=1/zoom) {
+        //     let x = distanceFromOrigin(n, lfo.angle)
+        //     if (n===0) ctx.moveTo(x0+x*zoom, y0-n*zoom)
+        //     else ctx.lineTo(x0+x*zoom, y0-n*zoom)
         // }
-        // ctx.stroke()
+        let n = -2*Math.PI
+        let x = distanceFromOrigin(n, lfo.angle)
+        ctx.moveTo(x0+x*zoom, y0-n*zoom)
+        n += 1/zoom
+        do {
+            x = distanceFromOrigin(n, lfo.angle)
+            ctx.lineTo(x0+x*zoom, y0-n*zoom)
+            n += 1/zoom
+        } while (n<2*Math.PI)
+        ctx.stroke()
 
         ctx.fillText(new Date(), 5, 15)
 
