@@ -62,14 +62,14 @@ function Render3D(canvas) {
 
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
 
-        // raster()
+        raster()
 
-        ctx.save()
-        ctx.beginPath()
-        ctx.arc(x0, y0, zoom, 0, 2*Math.PI)
-        ctx.fillStyle = "#FF000020"
-        ctx.fill()
-        ctx.restore()
+//        ctx.save()
+//        ctx.beginPath()
+//        ctx.arc(x0, y0, zoom, 0, 2*Math.PI)
+//        ctx.fillStyle = "#FF000020"
+//        ctx.fill()
+//        ctx.restore()
 
         let lines = []
         lines.push([[ 0, 0, 0], [ 1, 0, 0]])  // straal

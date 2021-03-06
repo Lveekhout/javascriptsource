@@ -48,6 +48,10 @@ function draw() {
 
     raster()
 
+    ctx.fillText("a = " + a.toFixed(2), 5, 15)
+    ctx.fillText("b = " + b.toFixed(2), 5, 35)
+    ctx.fillText("c = " + c.toFixed(2), 5, 55)
+
     ctx.beginPath()
     y = NaN
     for (let _x=0;_x<canvas.clientWidth+step;_x+=step) {
@@ -80,7 +84,6 @@ function draw() {
 
     let datum = new Date()
     // ctx.fillText(datum, 5, 15)
-    ctx.fillText("a = " + a.toFixed(2), 5, 15)
 }
 
 const f = x => {
