@@ -3,15 +3,69 @@
     <head>
         <title>Parabool</title>
         <link rel="stylesheet" href="css/index.css">
+        <script src="js/Grafiek.js"></script>
         <script src="js/index.js"></script>
     </head>
-    <body>
-        <input id="functie1" class="functie" oninput="window.requestAnimationFrame(draw)" value="Math.sin(x/a)*b">
-        <input id="functie2" class="functie" oninput="window.requestAnimationFrame(draw)" value="a*x*x + b*x + c">
-        <input id="zoominput" oninput="zoom=parseInt(this.value); window.requestAnimationFrame(draw)" type="range" min="10" max="500">
-        <input oninput="a=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-2" max="2" value="1">
-        <input oninput="b=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-5" max="5" value="0">
-        <input oninput="c=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-5" max="5" value="0">
-        <canvas id="canvas" width="1000px" height="780px"></canvas>
+<!--    <body>-->
+<!--        <input id="functie1" class="functie" oninput="window.requestAnimationFrame(draw)" value="Math.sin(x/a)*b">-->
+<!--        <input id="functie2" class="functie" oninput="window.requestAnimationFrame(draw)" value="a*x*x + b*x + c">-->
+<!--        <input id="zoominput" oninput="zoom=parseInt(this.value); window.requestAnimationFrame(draw)" type="range" min="10" max="500">-->
+<!--        <input oninput="a=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-2" max="2" value="1">-->
+<!--        <input oninput="b=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-5" max="5" value="0">-->
+<!--        <input oninput="c=parseFloat(this.value); window.requestAnimationFrame(draw)" type="range" step="0.01" min="-5" max="5" value="0">-->
+<!--        <canvas id="canvas" width="1000px" height="780px"></canvas>-->
+<!--    </body>-->
+    <body onresize="handleEvent(event)">
+        <div class="top">
+            <div>
+                <label style="color: white">expressie 1:</label>
+                <input id="expressie1" type="text" width="100%" value="stop(x, d)">
+            </div>
+            <div>
+                <label style="color: white">expressie 2:</label>
+                <input id="expressie2" type="text" width="100%" value="0.5*x*x">
+            </div>
+            <div>
+                <label style="color: white">expressie 3:</label>
+                <input id="expressie3" type="text" width="100%" value="(stop(x, d)) -  (0.5*x*x)">
+            </div>
+        </div>
+        <div class="left">
+            <div class="listitem">
+                <label>naam</label><input type="text" value="a">
+                <label>min</label><input type="text">
+                <label>max</label><input type="text">
+                <label>step</label><input type="text">
+                <label>value</label><input type="text" disabled value="1.00">
+                <input type="range" oninput="handleEvent(event )" value="1" min="-5" max="5" step="0.01">
+            </div>
+            <div class="listitem">
+                <label>naam</label><input type="text" value="b">
+                <label>min</label><input type="text">
+                <label>max</label><input type="text">
+                <label>step</label><input type="text">
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+            </div>
+            <div class="listitem">
+                <label>naam</label><input type="text" value="c">
+                <label>min</label><input type="text">
+                <label>max</label><input type="text">
+                <label>step</label><input type="text">
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+            </div>
+            <div class="listitem">
+                <label>naam</label><input type="text" value="d">
+                <label>min</label><input type="text">
+                <label>max</label><input type="text">
+                <label>step</label><input type="text">
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+            </div>
+        </div>
+        <div class="right">
+            <canvas id="canvas"></canvas>
+        </div>
     </body>
 </html>

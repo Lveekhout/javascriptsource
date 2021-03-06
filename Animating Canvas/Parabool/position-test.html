@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Position Testing</title>
+    <style>
+        div.test {
+            display: inline-block;
+            position: relative;
+            margin: 0 10px 10px 0;
+            width: 100px;
+            height: 50px;
+            background-color: #9bb7d4;
+        }
+        div.test div.content {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    <div class="content" style="top: 10px;">123</div>
+    <div class="content" style="right: 0;">123</div>
+</div>
+<div class="test">
+    <div class="content" style="top: 10px;">123</div>
+    <div class="content" style="right: 0;">123</div>
+</div>
+<div class="test">
+    <div class="content" style="top: 10px;">123</div>
+    <div class="content" style="right: 0;">123</div>
+</div>
+<div class="test">
+    <div class="content" style="top: 10px;">123</div>
+    <div class="content" style="right: 0;">123</div>
+</div>
+</body>
+</html>

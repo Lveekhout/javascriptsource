@@ -1,4 +1,4 @@
-function World(depth) {
+function World3D(depth) {
     this.paths = [[[1, 1, 1],[1, 1, 2]],[[1, 1, 3],[1, 1, 4]]]
     this.points = [[1, 2, 3],[4, 5, 6]]
 

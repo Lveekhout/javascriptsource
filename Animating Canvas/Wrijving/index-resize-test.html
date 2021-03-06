@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Resize</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script>
+            function showSize() {
+                let top = document.getElementsByClassName('top')[0]
+                top.innerHTML = top.clientWidth + " x " + top.clientHeight
+                let left = document.getElementsByClassName('left')[0]
+                left.innerHTML = left.clientWidth + " x " + left.clientHeight
+                let right = document.getElementsByClassName('right')[0]
+                right.innerHTML = right.clientWidth + " x " + right.clientHeight
+            }
+        </script>
+    </head>
+    <body onresize="showSize()">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right">
+        </div>
+    </body>
+</html>

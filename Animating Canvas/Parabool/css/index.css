@@ -3,15 +3,78 @@ canvas#canvas {
     cursor: pointer;
 }
 
-input {
-    display: block;
-    width: 1000px;
-}
+/*input {*/
+/*    display: block;*/
+/*    width: 1000px;*/
+/*}*/
 
-input.functie {
+/*input.functie {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    border: solid 1px black;*/
+/*    display: inline;*/
+/*    width: 500px;*/
+/*}*/
+body {
     margin: 0;
-    padding: 0;
-    border: solid 1px black;
-    display: inline;
-    width: 500px;
+}
+div.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 27px;
+    padding: 15px 15px 15px 15px;
+    background-color: #3183C1;
+}
+div.top div {
+    padding-right: 10px;
+    display: inline-block;
+    min-width: 300px;
+}
+div.top div input {
+    width: 300px;
+}
+div.left {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    width: 399px;
+    bottom: 0;
+    background-color: #9bb7d4;
+    overflow-y: auto;
+}
+div.right {
+    position: fixed;
+    top: 58px;
+    left: 400px;
+    right: 0;
+    bottom: 0;
+    background-color: #E0E0E0;
+}
+div.listitem {
+    position: relative;
+    margin: 5px 5px 0 5px;
+    padding: 10px 10px 10px 10px;
+    list-style-type: none;
+    min-height: 56px;
+    border-radius: 5px;
+    background-color: azure;
+}
+div.listitem input {
+    width: 50px;
+}
+div.listitem input[type=range] {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 99%;
+    opacity: 50%;
+}
+div.listitem input[type=range]:hover {
+    opacity: 100%;
+}
+div.right canvas {
+    width: 100%;
+    height: 100%;
 }

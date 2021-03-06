@@ -2,7 +2,7 @@ function CarManager(canvas, tracklength, xbox) {
     const ctx = canvas.getContext("2d")
 
     let animating = true
-    let zoom = 6
+    let zoom = 12
     let lastUpdate = 0
     let crashSituation = false
     const intervals = []
@@ -26,7 +26,6 @@ function CarManager(canvas, tracklength, xbox) {
     //////////////////////////////////////////////////////////////////////
     this.startAnimation = () => {
         animating = true
-        // lastUpdate = new Date()
         window.requestAnimationFrame(setInitialLastUpdate)
         this.cars.forEach((car, idx) => {
             if (car.interval) intervals.push(setInterval(() => car.decide(nextCarArray(idx)), car.interval))
@@ -106,5 +105,17 @@ function CarManager(canvas, tracklength, xbox) {
         }
 
         this.cars.forEach(car => car.update(t))
+    }
+
+    this.getIntervals = () => {
+        return intervals;
+    }
+
+    this.doAutopilot = () => {
+        const car = this.cars[0]
+        // car.color = 'blue'
+        car.interval = base + random(variantie)
+        // window.removeEventListener('keydown')
+        intervals.push(setInterval(() => car.decide(nextCarArray(0)), car.interval))
     }
 }

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>abc-formule</title>
+        <style>
+            canvas#canvas {
+                background-color: #EEE;
+                cursor: pointer;
+            }
+            body {
+                margin: 0;
+            }
+            div.top {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 27px;
+                padding: 15px 15px 15px 15px;
+                background-color: #3183C1;
+            }
+            div.top input {
+                width: 650px;
+            }
+            div.left {
+                position: fixed;
+                top: 58px;
+                left: 0;
+                width: 399px;
+                bottom: 0;
+                background-color: #9bb7d4;
+                overflow-y: auto;
+            }
+            div.right {
+                position: fixed;
+                top: 58px;
+                left: 400px;
+                right: 0;
+                bottom: 0;
+                background-color: #E0E0E0;
+            }
+            div.listitem {
+                position: relative;
+                margin: 5px 5px 0 5px;
+                padding: 10px 10px 10px 10px;
+                list-style-type: none;
+                min-height: 56px;
+                border-radius: 5px;
+                background-color: azure;
+            }
+            div.listitem input {
+                width: 50px;
+            }
+            div.listitem input[type=range] {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 99%;
+                opacity: 50%;
+            }
+            div.listitem input[type=range]:hover {
+                opacity: 100%;
+            }
+            div.right canvas {
+                width: 100%;
+                height: 100%;
+            }
+            div.top h1 {
+                margin: 0;
+                padding: 0;
+                color: white;
+            }
+            div.left p {
+                position: relative;
+                margin: 0;
+                padding: 0px 20px;
+                color: white;
+                font-size: 21pt;
+            }
+        </style>
+        <script>
+            const ggd = (t, n) => {
+                if (n==0) return t
+                else return ggd(n, t%n)
+            }
+            const kgv = (t, n) => {
+                return t * n / ggd(t, n)
+            }
+            const fraqvereenvoudigen = p => {
+                const ggd_ = ggd(p[0], p[1])
+                return [p[0]/ggd_, p[1]/ggd_]
+            }
+            const fraqsqr = p => {
+                const q = [p[0]*p[0], p[1]*p[1]]
+                const ggd_ = ggd(q[0], q[1])
+                return fraqvereenvoudigen([q[0]/ggd_, q[1]/ggd_])
+            }
+            const fraqkeer = (p, q) => {
+                return fraqvereenvoudigen([p[0]*q[0],p[1]*q[1]])
+            }
+            const fraqsqrt = p => {
+                const approach = [Math.sqrt(p[0]/p[1]), Math.sqrt(p[0]), Math.sqrt(p[1])]
+                if (Number.isInteger(approach[0])) return approach[0]
+                if (Number.isInteger(approach[1]) && Number.isInteger(approach[2])) return fraqvereenvoudigen([approach[1], approach[2]])
+                if (Number.isInteger(approach[1])) return approach[1] + "/w(" + p[1] + ")"
+                if (Number.isInteger(approach[2])) return "w(" + p[0] + ")/" + approach[2]
+                return "w(" + p[0] + "/" + p[1] + ")"
+            }
+            const fraqplus = (p, q) => {
+                const kgv_ = kgv(p[1], q[1])
+                const p_ = p[0]*(kgv_/p[1])
+                const q_ = q[0]*(kgv_/q[1])
+                const som = [p_+q_, kgv_]
+                return fraqvereenvoudigen(som)
+            }
+            const fraqmin = (p, q) => {
+                const kgv_ = kgv(p[1], q[1])
+                const p_ = p[0]*(kgv_/p[1])
+                const q_ = q[0]*(kgv_/q[1])
+                const som = [p_-q_, kgv_]
+                return fraqvereenvoudigen(som)
+            }
+            const aantalDecimalen = p => {
+                if (Math.floor(p) !== p) return p.toString().split(".")[1].length || 0
+                return 0
+            }
+            const dec2fraq = p => {
+                const ad = aantalDecimalen(p)
+                const n = Math.pow(10, ad)
+                return fraqvereenvoudigen([Math.round(p*n), n])
+            }
+            const fraq2string = p => {
+                if (p[0] / p[1] < 0) {
+                    if (p[0]%p[1]===0) return (p[0]/p[1]).toString()
+                    else return "(-" + Math.abs(p[0]) + "/" + Math.abs(p[1]) + ")"
+                } else {
+                    if (p[0]%p[1]===0) return (p[0]/p[1]).toString()
+                    else return "(" + Math.abs(p[0]) + "/" + Math.abs(p[1]) + ")"
+                }
+            }
+        </script>
+        <script>
+            function Grafiek(canvas) {
+                canvas.width = canvas.parentNode.clientWidth
+                canvas.height = canvas.parentNode.clientHeight
+
+                const ctx = canvas.getContext('2d')
+                ctx.font = "10pt Verdana"
+                ctx.fillStyle = "gray"
+                ctx.lineWidth = 3
+
+                origin = [Math.trunc(canvas.clientWidth/2), Math.trunc(canvas.clientHeight/2)]
+                zoom = 100
+
+                const raster = () => {
+                    ctx.save()
+                    ctx.lineWidth = 1
+                    ctx.beginPath()
+                    for (let x = origin[0] + zoom; x < canvas.clientWidth; x += zoom) {
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, canvas.clientHeight)
+                    }
+                    for (let y = origin[1] + zoom; y < canvas.clientHeight; y += zoom) {
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(canvas.clientWidth, y)
+                    }
+                    for (let x = origin[0] - zoom; x > 0; x -= zoom) {
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, canvas.clientHeight)
+                    }
+                    for (let y = origin[1] - zoom; y > 0; y -= zoom) {
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(canvas.clientWidth, y)
+                    }
+                    ctx.strokeStyle = "#CCC"
+                    ctx.stroke()
+                    ctx.beginPath()
+                    ctx.moveTo(origin[0], 0)
+                    ctx.lineTo(origin[0], canvas.clientHeight)
+                    ctx.moveTo(0, origin[1])
+                    ctx.lineTo(canvas.clientWidth, origin[1])
+                    ctx.strokeStyle = "#F88"
+                    ctx.stroke()
+                    ctx.restore()
+                }
+                const draw = m => {
+                    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight) // clear canvas
+
+                    let datum = new Date()
+                    ctx.fillText(datum, 5, 15)
+
+                    raster()
+
+                    ctx.beginPath()
+                    let y = NaN
+                    for (let _x = 0; _x < canvas.clientWidth; _x++) {
+                        let x = (-origin[0] + _x) / zoom
+                        if (isNaN(y)) {
+                            y = eval('a*x*x + b*x + c');
+                            if (!isNaN(y)) ctx.moveTo(_x, y * -zoom + origin[1])
+                        } else {
+                            y = eval('a*x*x + b*x + c');
+                            if (!isNaN(y)) ctx.lineTo(_x, y * -zoom + origin[1])
+                        }
+                    }
+                    ctx.strokeStyle = "deepskyblue"
+                    ctx.stroke()
+
+                    // window.requestAnimationFrame(draw)
+                }
+                this.draw = () => {
+                    window.requestAnimationFrame(draw)
+                    const a_ = dec2fraq(a)
+                    const b_ = dec2fraq(b)
+                    const c_ = dec2fraq(c)
+                    const c__ = [4*a_[0]*c_[0], a_[1]*c_[1]]
+                    document.getElementById('formula').innerHTML =
+                        fraq2string(a_) + 'x<sup>2</sup> + ' +
+                        fraq2string(b_) + 'x + ' +
+                        fraq2string(c_)
+                    document.getElementById('discriminant1').innerHTML =
+                        'D = ' + fraq2string(b_) + '<sup>2</sup> - 4*' + fraq2string(a_) + '*' + fraq2string(c_)
+                    document.getElementById('discriminant2').innerHTML =
+                        '&nbsp;&nbsp;&nbsp;  = ' + fraq2string(fraqsqr(b_)) + ' - ' + fraq2string(c__)
+                    document.getElementById('discriminant3').innerHTML =
+                        '&nbsp;&nbsp;&nbsp;  = ' + fraq2string(fraqmin(fraqsqr(b_), c__))
+                        // (b*b-4*a*c).toFixed(4)
+
+                    // const wortel = fraqsqrt(fraqmin(fraqsqr(b_), c__))
+                    document.getElementById('x1').innerHTML =
+                        'x1 = ' + ((-b - Math.sqrt(b*b-4*a*c))/(2*a)).toFixed(18)
+                    document.getElementById('x2').innerHTML =
+                        'x2 = ' + ((-b + Math.sqrt(b*b-4*a*c))/(2*a)).toFixed(18)
+                }
+            }
+        </script>
+        <script>
+            let a = 1
+            let b = 0
+            let c = 0
+
+            const handleEvent = e => {
+                switch (e.type) {
+                    case "resize":
+                        document.getElementById('canvas').width = document.getElementsByClassName('right')[0].clientWidth
+                        document.getElementById('canvas').height = document.getElementsByClassName('right')[0].clientHeight
+                        break;
+                    case "input":
+                        eval(e.target.parentNode.children[1].value + '=' + e.target.value)
+                        e.target.parentNode.children[3].value = parseFloat(e.target.value).toFixed(2)
+                        grafiek.draw()
+                        break;
+                }
+            }
+
+            window.onload = e => {
+                grafiek = new Grafiek(document.getElementById('canvas'))
+                grafiek.draw()
+            }
+        </script>
+        <script>
+            let x=8
+            input = {
+                add: [
+                    {
+                        multiply: [1, {
+                            sqr: {
+                                multiply: [2, 4]
+                            }
+                        }]
+                    },
+                    {
+                        multiply: [6, x]
+                    },
+                    -16]
+            }
+        </script>
+        <script>
+            const add = i => {
+                let result = 0
+                for (let q=0;q<i.length;q++) {
+                    if (Number.isInteger(i[q])) result += i[q]
+                    else result += parseObject(i[q])
+                }
+                return result
+            }
+            const multiply = i => {
+                let result = i[0]
+                for (let q=1;q<i.length;q++) {
+                    if (Number.isInteger(i[q])) result *= i[q]
+                    else result *= parseObject(i[q])
+                }
+                return result
+            }
+            const sqr = i => {
+                if (Number.isInteger(i)) return i*i
+                else {
+                    result = parseObject(i)
+                    return result*result
+                }
+            }
+            const parseObject = i => {
+                const key = Object.keys(i)[0]
+                switch (key) {
+                    case "add":
+                        return add(i[key])
+                    case "multiply":
+                        return multiply(i[key])
+                    case "sqr":
+                        return sqr(i[key])
+                }
+            }
+        </script>
+        <script>
+            const staart = (t, n) => {
+                const result = []
+                const rests = []
+                let d = Math.trunc(t/n)
+                let r = t%n
+                // console.log(t + "\t" + d + "\t" + r)
+                result.push(d)
+                while (r>0 && !rests.find(e => e===r)) {
+                    rests.push(r)
+                    const t_ = r*10
+                    d = Math.trunc(t_/n)
+                    r = t_%n
+                    // console.log(t_ + "\t" + d + "\t" + r)
+                    result.push(d)
+                }
+                if (r===0) {
+                    if (result.length==1) return result[0]
+                    else return result[0] + "." + result.slice(1).join("")
+                } else {
+                    const s = rests.findIndex(e => e===r)
+                    return result[0] + "." + result.slice(1, s+1).join("") + "(" + result.slice(s+1).join("") + ")"
+                }
+            }
+        </script>
+        <script>
+            const change = p => {
+                p.add = {naam:"Laurens"}
+            }
+        </script>
+    </head>
+    <body onresize="handleEvent(event)">
+        <div class="top">
+            <h1>abc-formule: ax<sup>2</sup> + bx + c</h1>
+        </div>
+        <div class="left">
+            <div class="listitem">
+                <label>naam</label><input type="text" value="a" disabled>
+                <label>value</label><input type="text" disabled value="1.00">
+                <input type="range" oninput="handleEvent(event )" value="1" min="-5" max="5" step="0.01">
+            </div>
+            <div class="listitem">
+                <label>naam</label><input type="text" value="b" disabled>
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+            </div>
+            <div class="listitem">
+                <label>naam</label><input type="text" value="c" disabled>
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+            </div>
+            <p>&nbsp;</p>
+            <p id="formula"></p>
+            <p>&nbsp;</p>
+            <p id="discriminant1"></p>
+            <p id="discriminant2"></p>
+            <p id="discriminant3"></p>
+            <p>&nbsp;</p>
+            <p id="x1"></p>
+            <p id="x2"></p>
+        </div>
+        <div class="right">
+            <canvas id="canvas"></canvas>
+        </div>
+    </body>
+</html>

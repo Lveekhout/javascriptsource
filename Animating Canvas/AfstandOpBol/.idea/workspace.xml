@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73e9fc7d-d013-4a33-a810-6aa27c220f4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/Render3D.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/World.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webgl/cube/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webgl/triangle/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../webgl/triangle/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Object.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Object.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Render3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Render3D.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/World.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/World3D.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Inversion/version-2.0.0/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Parabool/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Parabool/js/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -61,6 +63,15 @@
       <workItem from="1598855883567" duration="24887000" />
       <workItem from="1599040177705" duration="725000" />
       <workItem from="1599205636411" duration="3192000" />
+      <workItem from="1599456946596" duration="22000" />
+      <workItem from="1599486920605" duration="2426000" />
+      <workItem from="1599652732445" duration="6919000" />
+      <workItem from="1599766465512" duration="569000" />
+      <workItem from="1601393300905" duration="2203000" />
+      <workItem from="1601668562560" duration="191000" />
+      <workItem from="1601668972074" duration="24000" />
+      <workItem from="1601876724304" duration="20000" />
+      <workItem from="1602095595832" duration="4136000" />
     </task>
     <servers />
   </component>

@@ -10,3 +10,8 @@ a.linkje {
     padding: 10px;
     background-color: aqua;
 }
+
+button {
+    vertical-align: top;
+    min-height: 50px;
+}
