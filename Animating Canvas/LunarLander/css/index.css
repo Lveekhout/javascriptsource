@@ -2,8 +2,8 @@ body {
     background-color: bisque;
 }
 
-canvas {
-    background-color: white;
+#canvas {
+    background-color: grey;
 }
 
 #textarea {

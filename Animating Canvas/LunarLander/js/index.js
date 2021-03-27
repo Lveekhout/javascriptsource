@@ -4,16 +4,16 @@ let ctx
 let current
 let frameReq
 
-const gravity = 9.81 / 2 / 6
+const gravity = 0//9.81 / 2 / 6
 
 let scale = 15
 let lander = new Image()
 let rotate = [0, 1, 0]                 // [acc, speed, angle]
-let landerAltitude = [-gravity, 0, 50] // [acc, speed, altitude in meters]
-let landerLatitude = [0, 3, -20]         // [acc, speed, latitude in meters]
+let landerAltitude = [-gravity, 0, 40] // [acc, speed, altitude in meters]
+let landerLatitude = [0, 0, 0]       // [acc, speed, latitude in meters]
 let mainThruster = 0
 
-const draw = dt => {
+const draw = dtm => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     ctx.save()
@@ -38,6 +38,9 @@ const draw = dt => {
         impact: {
             D: prediction()[0].toFixed(4),
             t: prediction()[1].toFixed(4)
+        },
+        framerate: {
+            milliseconds: dtm.toFixed(4)
         }
     }
     document.getElementById("textarea").value = JSON.stringify(info, null, 2)
@@ -60,6 +63,8 @@ const animate = milli => {
     const dts = dtm / 1000      // DeltaTimeSeconds
     current = milli
 
+    draw(dtm)
+
     frameReq = window.requestAnimationFrame(animate)
 
     rotate[2] += rotate[0] * Math.pow(dts, 2) + rotate[1] * dts
@@ -74,7 +79,6 @@ const animate = milli => {
     landerLatitude[1] += 2 * accLatitude * dts
 
     if (landerAltitude[2] < 0) stopAnimation()
-    draw(dtm)
 }
 
 const initAnimate = milli => {
@@ -90,11 +94,12 @@ const startAnimation = () => {
 const stopAnimation = () => {
     console.log('duur = ' + (performance.now() - duur))
     window.cancelAnimationFrame(frameReq)
+    document.getElementById("textarea").value = null
 }
 
 const thrust = () => {
-    landerAltitude[0] += 2
-    setTimeout(() => landerAltitude[0] -= 2, 1000)
+    mainThruster = 2
+    setTimeout(() => mainThruster = 0, 1000)
 }
 
 const prediction = () => {
