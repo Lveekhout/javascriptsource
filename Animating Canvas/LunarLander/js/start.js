@@ -13,10 +13,10 @@ window.addEventListener("keydown", e => {
             lander.activateMainThruster()
             break
         case 'ControlLeft':
-            lander.activateLeftThruster()
+            lander.manualOverrideLeftThruster()
             break
         case 'MetaLeft':
-            lander.activateRightThruster()
+            lander.manualOverrideRightThruster()
             break
         default:
             console.log(e.code)
@@ -29,10 +29,10 @@ window.addEventListener("keyup", e => {
             lander.deactivateMainThruster()
             break
         case 'ControlLeft':
-            lander.deactivateLeftThruster()
+            lander.manualStopLeftThruster()
             break
         case 'MetaLeft':
-            lander.deactivateRightThruster()
+            lander.manualStopRightThruster()
             break
     }
 })
