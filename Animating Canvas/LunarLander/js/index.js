@@ -1,9 +1,13 @@
 let lander
+let world
+let lc
 
 window.onload = e => {
     lander = new Lander(document.getElementById('canvas'), document.getElementById('textarea'))
     lander.ready = e => {
-        lander.startAnimation()
+        lc = new LanderController(lander)
+        world = new World(lander)
+        world.startAnimation()
     }
 }
 
@@ -13,10 +17,10 @@ window.addEventListener("keydown", e => {
             lander.activateMainThruster()
             break
         case 'ControlLeft':
-            lander.manualOverrideLeftThruster()
+            lc.manualOverrideLeftThruster()
             break
         case 'MetaLeft':
-            lander.manualOverrideRightThruster()
+            lc.manualOverrideRightThruster()
             break
         default:
             console.log(e.code)
@@ -29,10 +33,10 @@ window.addEventListener("keyup", e => {
             lander.deactivateMainThruster()
             break
         case 'ControlLeft':
-            lander.manualStopLeftThruster()
+            lc.manualStopLeftThruster()
             break
         case 'MetaLeft':
-            lander.manualStopRightThruster()
+            lc.manualStopRightThruster()
             break
     }
 })
