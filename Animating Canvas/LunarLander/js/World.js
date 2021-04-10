@@ -33,7 +33,7 @@ function World(lander) {
         // document.getElementById("textarea").value = null
     }
 
-    // lander.setGravity(gravity)
+    lander.setGravity(gravity)
 
     lander.belowSurface = () => this.stopAnimation()
 }

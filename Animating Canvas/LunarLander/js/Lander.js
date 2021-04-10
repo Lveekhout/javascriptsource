@@ -4,9 +4,10 @@ function Lander(canvas, textarea) {
     let gravity = 0
     let scale = 20
     let lander = new Image()
-    this.rotate = [.1, 5]                    // [speed, angle]
+    let cm = [291, 150]                    // center of mass
+    this.rotate = [0, 0]                   // [speed, angle]
     let landerAltitude = [-gravity, 0, 30] // [acc, speed, altitude in meters]
-    let landerLatitude = [0, 0, 0]       // [acc, speed, latitude in meters]
+    let landerLatitude = [0, 0, 0]         // [acc, speed, latitude in meters]
     let lunarscale
 
     let mainThruster = 0
@@ -47,26 +48,26 @@ function Lander(canvas, textarea) {
             ctx.scale(scale, scale)
             ctx.translate(landerLatitude[2], -landerAltitude[2])
             ctx.rotate(-this.rotate[1])
-            if (mainThruster!=0) {
+            if (mainThruster != 0) {
                 ctx.beginPath()
-                ctx.ellipse(0, 0, 30 * lunarscale, 100 * lunarscale, 0, 0, Math.PI*2)
+                ctx.ellipse(0, cm[1] * lunarscale, 30 * lunarscale, 100 * lunarscale, 0, 0, Math.PI * 2)
                 ctx.fillStyle = "red"
                 ctx.fill()
             }
-            if (leftThruster!=0) {
+            if (leftThruster != 0) {
                 ctx.beginPath()
-                ctx.ellipse(-150 * lunarscale, -300 * lunarscale, 50 * lunarscale, 20 * lunarscale, 0, 0, Math.PI*2)
+                ctx.ellipse(-150 * lunarscale, (-300 + cm[1]) * lunarscale, 50 * lunarscale, 20 * lunarscale, 0, 0, Math.PI * 2)
                 ctx.fillStyle = "red"
                 ctx.fill()
             }
-            if (rightThruster!=0) {
+            if (rightThruster != 0) {
                 ctx.beginPath()
-                ctx.ellipse(150 * lunarscale, -300 * lunarscale, 50 * lunarscale, 20 * lunarscale, 0, 0, Math.PI*2)
+                ctx.ellipse(150 * lunarscale, (-300 + cm[1]) * lunarscale, 50 * lunarscale, 20 * lunarscale, 0, 0, Math.PI * 2)
                 ctx.fillStyle = "red"
                 ctx.fill()
             }
             ctx.scale(lunarscale, lunarscale)
-            ctx.drawImage(lander, -lander.width / 2, -lander.height)
+            ctx.drawImage(lander, -cm[0], -lander.height+cm[1])
             ctx.restore()
         }
 
@@ -118,6 +119,6 @@ function Lander(canvas, textarea) {
     lander.onload = l => {
         lunarscale = 7.04 / lander.height
         console.log(`lunarscale: ${lunarscale}`)
-        if (!undefined) this.ready(new Event("ready"))
+        if (this.ready) this.ready(new Event("ready"))
     }
 }
