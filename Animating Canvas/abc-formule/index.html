@@ -75,7 +75,7 @@
                 margin: 0;
                 padding: 0px 20px;
                 color: white;
-                font-size: 21pt;
+                font-size: 18pt;
             }
         </style>
         <script>
@@ -191,20 +191,53 @@
 
                     raster()
 
-                    ctx.beginPath()
-                    let y = NaN
-                    for (let _x = 0; _x < canvas.clientWidth; _x++) {
-                        let x = (-origin[0] + _x) / zoom
-                        if (isNaN(y)) {
-                            y = eval('a*x*x + b*x + c');
-                            if (!isNaN(y)) ctx.moveTo(_x, y * -zoom + origin[1])
-                        } else {
-                            y = eval('a*x*x + b*x + c');
-                            if (!isNaN(y)) ctx.lineTo(_x, y * -zoom + origin[1])
+                    {
+                        const b_ = b / a
+                        const c_ = c / a
+                        ctx.beginPath()
+                        let y = NaN
+                        for (let _x = 0; _x < canvas.clientWidth; _x++) {
+                            let x = (-origin[0] + _x) / zoom
+                            if (isNaN(y)) {
+                                y = x*x + b_*x + c_
+                                if (!isNaN(y)) ctx.moveTo(_x, y * -zoom + origin[1])
+                            } else {
+                                y = x*x + b_*x + c_
+                                if (!isNaN(y)) ctx.lineTo(_x, y * -zoom + origin[1])
+                            }
                         }
+                        ctx.save()
+                        ctx.globalAlpha = 0.1
+                        ctx.strokeStyle = "red"
+                        ctx.stroke()
+                        ctx.restore()
                     }
-                    ctx.strokeStyle = "deepskyblue"
-                    ctx.stroke()
+
+                    {
+                        ctx.beginPath()
+                        let y = NaN
+                        for (let _x = 0; _x < canvas.clientWidth; _x++) {
+                            let x = (-origin[0] + _x) / zoom
+                            if (isNaN(y)) {
+                                y = a*x*x + b*x + c
+                                if (!isNaN(y)) ctx.moveTo(_x, y * -zoom + origin[1])
+                            } else {
+                                y = a*x*x + b*x + c
+                                if (!isNaN(y)) ctx.lineTo(_x, y * -zoom + origin[1])
+                            }
+                        }
+                        ctx.strokeStyle = "deepskyblue"
+                        ctx.stroke()
+                    }
+
+                    {
+                        solveRoot(a, b, c).filter(v => isFinite(v)).forEach(v => {
+                            ctx.beginPath()
+                            ctx.arc(v * zoom + origin[0], origin[1], 3, 0, Math.PI * 2)
+                            ctx.fillStyle = "red"
+                            ctx.fill()
+                        })
+                    }
 
                     // window.requestAnimationFrame(draw)
                 }
@@ -337,8 +370,16 @@
             }
         </script>
         <script>
-            const change = p => {
-                p.add = {naam:"Laurens"}
+            // https://www.youtube.com/watch?v=WRl0SRSF3BU&t=6s
+            const solveRoot = (a, b, c) => {
+                if (a != 0) {
+                    const b_ = b / a, c_ = c / a, D = b_ * b_ - 4 * c_
+                    if (D == 0) return [-b_ / 2]
+                    else if (D > 0) return [(-b_ - Math.sqrt(D)) / 2, (-b_ + Math.sqrt(D)) / 2]
+                    else return []
+                } else {
+                    return [-c / b]
+                }
             }
         </script>
     </head>
