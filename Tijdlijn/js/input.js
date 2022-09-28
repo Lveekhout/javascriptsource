@@ -1,33 +1,32 @@
 let periodes =
     [
         {
-            naam: "Uitvoeringsovereenkomst"
-            , kleur: "#725374"
-            , periodes: [
+            naam: "UOT's",
+            kleur: "#8BB6F2",
+            periodes: [
                 {
-                    label: "DTL"
-                    , ingangsdatum: "2000-01-01"
-                    , einddatum: "2019-01-01"
+                    label: "1f809ba8"
+                    , ingangsdatum: "1988-01-01"
+                    , einddatum: "2021-10-31"
                 },
                 {
-                    label: "BPL"
-                    , ingangsdatum: "2018-02-01"
+                    label: "8c7b492f"
+                    , ingangsdatum: "1988-01-01"
                 }
             ]
         },
         {
-            naam: "Tijdvak"
-            , kleur: "#83c258"
-            , periodes: [
+            naam: "UOT's",
+            kleur: "#B6F28B",
+            periodes: [
                 {
-                    label: "Januari"
-                    , ingangsdatum: "2020-01-01"
-                    , einddatum: "2020-02-01"
+                    label: "1f809ba8"
+                    , ingangsdatum: "2015-01-01"
+                    , einddatum: "2021-10-31"
                 },
                 {
-                    label: "Februari"
-                    , ingangsdatum: "2020-02-01"
-                    , einddatum: "2020-03-01"
+                    label: "8c7b492f"
+                    , ingangsdatum: "1988-01-01"
                 }
             ]
         }

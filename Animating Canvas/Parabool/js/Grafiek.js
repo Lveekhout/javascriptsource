@@ -4,7 +4,7 @@ function Grafiek(canvas) {
 
     let drag
 
-    canvas.addEventListener("mousewheel", e => { zoom -= e.deltaY/10; window.requestAnimationFrame(draw); })//if (zoom<zoominput.min) zoom = parseInt(zoominput.min); if (zoom>zoominput.max) zoom = parseInt(zoominput.max); zoominput.value = zoom; })
+    canvas.addEventListener("mousewheel", e => { e.preventDefault(); zoom -= e.deltaY/10; window.requestAnimationFrame(draw); })//if (zoom<zoominput.min) zoom = parseInt(zoominput.min); if (zoom>zoominput.max) zoom = parseInt(zoominput.max); zoominput.value = zoom; })
     canvas.addEventListener("mousedown", e => drag=true)
     canvas.addEventListener("mouseup", e => drag=false)
     canvas.addEventListener("mouseleave", e => drag=false)

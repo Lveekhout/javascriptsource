@@ -1,5 +1,22 @@
 #drop_zone {
     border: 5px solid blue;
-    width:  200px;
+    width: 200px;
     height: 100px;
-  }
+}
+span {
+    background-color: #3d7489;
+    margin-right: 3px;
+    padding: 10px;
+    border-radius: 5px;
+}
+div.regel {
+    display: flex;
+    margin-top: 10px;
+}
+div.flex-column {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    background-color: #88cc33;
+    margin-top: 10px;
+}

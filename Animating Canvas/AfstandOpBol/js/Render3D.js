@@ -159,7 +159,7 @@ function Render3D(canvas) {
             point[2] >= 0
         ])
         ctx.beginPath()
-        let draw = false
+        // let draw = false
         for (let i=0; i<points_.length; i++) {
             if (points_[i][2]) ctx.lineTo(x0+points_[i][0]*zoom, y0-points_[i][1]*zoom)
             else ctx.lineTo(x0+points_[i][0]*zoom, y0-points_[i][1]*zoom)

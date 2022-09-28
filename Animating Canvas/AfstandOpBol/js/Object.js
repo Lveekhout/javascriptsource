@@ -1,4 +1,4 @@
-function Object(canvas) {
+function Object(canvas) { console.log('123')
     canvas.addEventListener("mousewheel", e => {
         let _zoom = zoom - e.deltaY/10
         if (_zoom<10) _zoom = 10

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Flexbox Grid</title>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    .flex-table-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+    .flex-table-row .flex-table-cell {
+      background-color: #0074D9;
+      width: 100%;
+    }
+    .flex-column {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      /*padding: 10px;*/
+    }
+    .flex-column .flex-column-item {
+      background-color: #00c82d;
+    }
+    input {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="flex-row">
+  <div class="flex-row-item">
+    <div class="flex-column">
+      <div class="flex-column-item">
+        <label>BSN</label>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+    </div>
+  </div>
+  <div class="flex-row-item">
+    <div class="flex-column">
+      <div class="flex-column-item">
+        <label>Naam</label>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+    </div>
+  </div>
+  <div class="flex-row-item">
+    <div class="flex-column">
+      <div class="flex-column-item">
+        <label>Adres</label>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+      <div class="flex-column-item">
+        <input>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

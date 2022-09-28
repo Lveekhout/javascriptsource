@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Grid</title>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    input {
+      width: 100%;
+      border: red 1px solid;
+      border-right: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background-color: black;
+      padding: 10px;
+    }
+    .grid .grid-element {
+      background-color: #2d00c8;
+      color: white;
+    }
+    .grid .grid-element:nth-child(even) {
+      background-color: #00c82d;
+    }
+  </style>
+</head>
+<body>
+<div class="grid">
+  <div class="grid-element">123</div>
+  <div class="grid-element">ABC</div>
+  <div class="grid-element">Laurens</div>
+  <div class="grid-element"><input></div>
+  <div class="grid-element"><input></div>
+  <div class="grid-element"><input></div>
+</div>
+</body>
+</html>

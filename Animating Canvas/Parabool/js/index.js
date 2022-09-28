@@ -5,8 +5,8 @@
 // let zoom = 100
 // let ox, oy
 // let drag
-let a = 1
-let b = 0
+let a = 0
+let b = 1
 let c = 0
 let d = 0
 // function raster() {
@@ -92,6 +92,16 @@ const f = x => {
     else return -x*x + 4*x - 2
 }
 
+function l(x) {
+    return x*x
+}
+
+// https://www.youtube.com/watch?v=hL6MPoqgwHU
+// input: 3 * g(-x)  + g(1/x) + g(x)
+const g = x => {
+    return (-2 * Math.pow(x, 2) - 1) / (3 * x)
+}
+
 const at = (b, s, v) => {
     console.log(   (Math.pow(v,2)-Math.pow(b,2))   / (4*s)    )
     const t = 2*s/(v+b)
@@ -109,6 +119,28 @@ const stop = (x,s) => {
     else return a*t*t + b*t + x*s - t*s  + c // a*t*t + b*t + (x-t)*s + c // a*t*t + (b-s)*t + x*s + c
 }
 
+const cone = (x, a, b) => {
+    const x2 = x * x
+    const b2 = b * b
+    const a2_1 = a * a - 1
+    if (a2_1 === 0) {
+        if (b < 0) {
+            const z = (x2 - b2) / (2 * b)
+            const y = [a * z[0], a * z[1]]
+            const len = [Math.sqrt(Math.pow(y[0], 2) + Math.pow(z[0], 2)), Math.sqrt(Math.pow(y[1], 2) + Math.pow(z[1], 2))]
+            return [(z[0] < 0 ? -1 : 1) * len[0], (z[1] < 0 ? -1 : 1) * len[1]]
+        } else {
+
+        }
+    } else {
+        const ab = a * b
+        const z = [(-ab - Math.sqrt(a2_1 * x2 + b2)) / a2_1, (-ab + Math.sqrt(a2_1 * x2 + b2)) / a2_1]
+        const y = [a * z[0], a * z[1]]
+        const len = [Math.sqrt(Math.pow(y[0], 2) + Math.pow(z[0], 2)), Math.sqrt(Math.pow(y[1], 2) + Math.pow(z[1], 2))]
+        return [(z[0] < 0 ? -1 : 1) * len[0], (z[1] < 0 ? -1 : 1) * len[1]]
+    }
+}
+
 //console.log(new Date().getTime()); for (i=0;i<100000000;i++) ggd1(752,372); console.log(new Date().getTime())
 const ggd1 = (t, n) => {
     if (n==0) return t
@@ -122,6 +154,11 @@ const ggd2 = (a, b) => {
         else b -= a
     }
     return a
+}
+
+const bots = (b, b_, c_) => {
+    const t = c_ / (b - b_)
+    return ({duration: t, distance: b * t})
 }
 
 const handleEvent = e => {

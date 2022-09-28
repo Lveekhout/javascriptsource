@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Flexbox Rows</title>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    input {
+      width: 100%;
+    }
+
+    .flex-table-row {
+      display: flex;
+      justify-content: space-between;
+      font: italic bold 10pt Arial;
+      transition: width 1s;
+    }
+    .flex-table-row .flex-table-cell {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="flex-table-row">
+  <div class="flex-table-cell">
+    <label>BSN</label>
+  </div>
+  <div class="flex-table-cell">
+    <label>Naam</label>
+  </div>
+  <div class="flex-table-cell">
+    <label>Adres</label>
+  </div>
+</div>
+<div class="flex-table-row">
+  <div class="flex-table-cell">
+    <input>
+  </div>
+  <div class="flex-table-cell">
+    <input>
+  </div>
+  <div class="flex-table-cell">
+    <input>
+  </div>
+</div>
+<div class="flex-table-row">
+  <div class="flex-table-cell">
+    <input>
+  </div>
+  <div class="flex-table-cell">
+    <input>
+  </div>
+  <div class="flex-table-cell">
+    <input>
+  </div>
+</div>
+</body>
+</html>

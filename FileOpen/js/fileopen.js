@@ -13,3 +13,7 @@ function displayContents(contents) {
     var element = document.getElementById('file-content');
     element.textContent = contents;
 }
+
+const test = () => {
+    const x = new File(null, '')
+}

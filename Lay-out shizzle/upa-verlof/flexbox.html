@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Flexbox</title>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font: 12pt "Verdana";
+    }
+    body {
+      padding: 20px 120px;
+    }
+
+    .grow {
+      background-color: rgb(220, 220, 220);
+      width: 100%;
+      transition: width 4s;
+    }
+    /*.grow:hover {*/
+    /*  width: 60%;*/
+    /*}*/
+
+    .flex-header-container {
+      display: flex;
+      padding: 6px;
+      padding-bottom: 0;
+    }
+    .flex-header-container .flex-header-item {
+      /*background-color: rgb(253, 254, 234);*/
+      background-color: slategray;
+      color: white;
+      padding: 5px;
+      border: black 1px solid;
+      white-space: nowrap;
+      overflow-x: hidden;
+      margin-right: 10px;
+      flex: 1 0 0;
+    }
+    .flex-header-container .flex-header-item:last-child {
+      margin-right: 0;
+    }
+
+    .flex-regelinggegevens-container {
+      display: flex;
+      padding: 6px;
+      padding-bottom: 0;
+    }
+    .flex-regelinggegevens-container .flex-regelinggegevens-item {
+      /*background-color: rgb(244, 247, 253);*/
+      min-width: 170px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .flex-regelinggegevens-container .flex-regelinggegevens-item-grow {
+      flex-grow: 1;
+      margin-right: 0;
+      border: black 1px solid;
+    }
+
+    .flex-verlofgegevens-container {
+      display: flex;
+      padding: 6px;
+    }
+    .flex-verlofgegevens-container .flex-verlofgegevens-item {
+      /*background-color: rgb(232, 219, 220);*/
+      min-width: 170px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .flex-verlofgegevens-container .flex-verlofgegevens-item-grow {
+      flex-grow: 1;
+      margin-right: 0;
+      border: black 1px solid;
+    }
+
+    table {
+      width: 100%;
+      text-align: left;
+    }
+    table tr th {
+      font: bold 10pt Arial;
+    }
+    input, select {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="grow">
+  <div class="flex-header-container">
+    <div class="flex-header-item">
+      BSN: 73485763487<br>Naam: Van Puffelen
+    </div>
+    <div class="flex-header-item">
+      Geboortedatum: 1984-03-12<br>Nummer inkomstenverhouding: 1
+    </div>
+    <div class="flex-header-item">
+      Datum aanvang regelinggegevens: 2022-01-01<br>Datum einde regelinggegevens: 2022-01-31
+    </div>
+  </div>
+  <div class="flex-regelinggegevens-container">
+    <div class="flex-regelinggegevens-item">Regelinggegevens</div>
+    <div class="flex-regelinggegevens-item flex-regelinggegevens-item-grow">
+      <table>
+        <tr>
+          <th nowrap>Regelingkenmerk</th>
+          <th nowrap>Indicatie einde deelname</th>
+          <th nowrap>Regelingloon</th>
+          <th nowrap>Verloonde uren voor regeling</th>
+          <th nowrap>Verloonde uren</th>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="flex-verlofgegevens-container">
+    <div class="flex-verlofgegevens-item">Verlofgegevens</div>
+    <div class="flex-verlofgegevens-item flex-verlofgegevens-item-grow">
+      <table>
+        <tr>
+          <th nowrap>Code soort verlof</th>
+          <th nowrap>Uren verlof</th>
+          <th nowrap>Percentage verlof</th>
+          <th nowrap>indicatie tijdvakcorrectie</th>
+        </tr>
+        <tr>
+          <td>
+            <select>
+              <option>Aanvullend geboorteverlof</option>
+              <option>Levensloopverlof</option>
+              <option>Onbetaald verlof</option>
+              <option>Ouderschapsverlof</option>
+              <option>Paid LOA (IBM)</option>
+              <option>Parttime verlof</option>
+              <option>Sabbatsverlof</option>
+            </select>
+          </td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>
+            <select>
+              <option>Aanvullend geboorteverlof</option>
+              <option>Levensloopverlof</option>
+              <option>Onbetaald verlof</option>
+              <option>Ouderschapsverlof</option>
+              <option>Paid LOA (IBM)</option>
+              <option>Parttime verlof</option>
+              <option>Sabbatsverlof</option>
+            </select>
+          </td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td>
+            <select>
+              <option>Aanvullend geboorteverlof</option>
+              <option>Levensloopverlof</option>
+              <option>Onbetaald verlof</option>
+              <option>Ouderschapsverlof</option>
+              <option>Paid LOA (IBM)</option>
+              <option>Parttime verlof</option>
+              <option>Sabbatsverlof</option>
+            </select>
+          </td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

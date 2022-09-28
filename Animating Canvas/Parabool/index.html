@@ -19,15 +19,18 @@
         <div class="top">
             <div>
                 <label style="color: white">expressie 1:</label>
-                <input id="expressie1" type="text" width="100%" value="stop(x, d)">
+                <input id="expressie1" type="text" width="100%" value="cone(x,a,b)[0]">
+<!--                <input id="expressie1" type="text" width="100%" value="stop(x, d)">-->
             </div>
             <div>
                 <label style="color: white">expressie 2:</label>
-                <input id="expressie2" type="text" width="100%" value="0.5*x*x">
+                <input id="expressie2" type="text" width="100%" value="cone(x,a,b)[1]">
+<!--                <input id="expressie2" type="text" width="100%" value="0.5*x*x">-->
             </div>
             <div>
                 <label style="color: white">expressie 3:</label>
-                <input id="expressie3" type="text" width="100%" value="(stop(x, d)) -  (0.5*x*x)">
+                <input id="expressie3" type="text" width="100%" value="">
+<!--                <input id="expressie3" type="text" width="100%" value="(stop(x, d)) -  (0.5*x*x)">-->
             </div>
         </div>
         <div class="left">
@@ -36,16 +39,16 @@
                 <label>min</label><input type="text">
                 <label>max</label><input type="text">
                 <label>step</label><input type="text">
-                <label>value</label><input type="text" disabled value="1.00">
-                <input type="range" oninput="handleEvent(event )" value="1" min="-5" max="5" step="0.01">
+                <label>value</label><input type="text" disabled value="0.00">
+                <input type="range" oninput="handleEvent(event )" value="0" min="-5" max="5" step="0.01">
             </div>
             <div class="listitem">
                 <label>naam</label><input type="text" value="b">
                 <label>min</label><input type="text">
                 <label>max</label><input type="text">
                 <label>step</label><input type="text">
-                <label>value</label><input type="text" disabled value="0.00">
-                <input type="range" oninput="handleEvent(event)" value="0" min="-5" max="5" step="0.01">
+                <label>value</label><input type="text" disabled value="1.00">
+                <input type="range" oninput="handleEvent(event)" value="1" min="-5" max="5" step="0.01">
             </div>
             <div class="listitem">
                 <label>naam</label><input type="text" value="c">

@@ -59,7 +59,7 @@ a{
 	color: #333;
 	text-decoration: none;
 }
-.container{
+.flex-column{
 	width: 100%;
 	position: relative;
 	text-align: center;
@@ -67,7 +67,7 @@ a{
 .clr{
 	clear: both;
 }
-.container > header{
+.flex-column > header{
 	padding: 20px 30px 10px 30px;
 	margin: 0px 20px 10px 20px;
 	position: relative;
@@ -75,7 +75,7 @@ a{
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
     text-align: center;
 }
-.container > header h1{
+.flex-column > header h1{
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	font-size: 35px;
 	line-height: 35px;
@@ -85,11 +85,11 @@ a{
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
     padding: 0px 0px 5px 0px;
 }
-.container > header h1 span{
+.flex-column > header h1 span{
 	color: #80B8CE;
 	text-shadow: 0px 1px 1px rgba(255,255,255,0.8);
 }
-.container > header h2{
+.flex-column > header h2{
 	font-size: 16px;
 	font-style: italic;
 	color: #82858e;
@@ -171,7 +171,7 @@ p.codrops-demos a.current-demo:hover{
 }
 /* Media Queries */
 @media screen and (max-width: 767px) {
-	.container > header{
+	.flex-column > header{
 		text-align: center;
 	}
 	p.codrops-demos {

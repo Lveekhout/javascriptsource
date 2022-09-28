@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bézier</title>
+    <style>
+        canvas {
+            background-color: #9bb7d4;
+        }
+    </style>
+    <script>
+        const grid = () => {
+            ctx.save()
+            const view = {x: canvas.width / 2 / scale, y: canvas.height / 2 / scale}
+            ctx.beginPath()
+            for (let x = -Math.trunc(view.x); x <= Math.trunc(view.x); x++) {
+                ctx.moveTo(x, view.y)
+                ctx.lineTo(x, -view.y)
+            }
+            for (let y = -Math.trunc(view.y); y <= Math.trunc(view.y); y++) {
+                ctx.moveTo(-view.x, y)
+                ctx.lineTo(view.x, y)
+            }
+            ctx.lineWidth = 1 / scale / 4
+            ctx.strokeStyle = 'gray'
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(0, view.y)
+            ctx.lineTo(0, -view.y)
+            ctx.moveTo(-view.x, 0)
+            ctx.lineTo(view.x, 0)
+            ctx.lineWidth = 1 / scale / 3
+            ctx.strokeStyle = 'LightCoral'
+            ctx.stroke()
+
+            ctx.restore()
+        }
+        const arrow2d = (fromX, fromY, toX, toY, color) => {
+            if (!color) color = 'red'
+            const size = 0.15
+            ctx.save()
+            ctx.strokeStyle = color
+            ctx.fillStyle = color
+            ctx.lineWidth = 0.01
+            // ctx.lineWidth = 2 / scale
+
+            ctx.translate(fromX, -fromY)
+            const angle = Math.atan2(toY - fromY, toX - fromX)
+            ctx.rotate(-angle)
+
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            const len = t * Math.sqrt(Math.pow(toX - fromX,  2) + Math.pow(toY - fromY,  2))
+            ctx.lineTo(len - size, 0)
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(len - size, 0)
+            ctx.lineTo(len - size, -size / 4)
+            ctx.lineTo(len, 0)
+            ctx.lineTo(len - size, size / 4)
+            ctx.closePath()
+            ctx.fill()
+            ctx.restore()
+        }
+        const point2d = (x, y, color, radius) => {
+            if (!color) color = 'red'
+            if (!radius) radius = 0.03
+            ctx.save()
+            ctx.translate(x, -y)
+            ctx.beginPath()
+            ctx.arc(0, 0, radius, 0, Math.PI * 2)
+            ctx.fillStyle = color
+            ctx.fill()
+            ctx.restore()
+        }
+        const drawScaled = (scale, call) => {
+            ctx.save()
+            ctx.translate(canvas.width / 2, canvas.height / 2)
+            ctx.scale(scale, scale)
+            call()
+            ctx.restore()
+        }
+        const draw = ms => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            layers.forEach(l => l())
+            if (update()) window.requestAnimationFrame(draw)
+        }
+        const update = () => {
+            const v = 0.005
+            if (t + v < 2) t += v
+            else t = 2
+            return t < 2
+        }
+    </script> <!-- context draw -->
+    <script>
+        window.onload = (event) => {
+            layers.push(() => {
+                drawScaled(scale, () => {
+                    grid()
+                    // arrow2d(-2, 1, -1, 2)
+                    // arrow2d(-1, 2, 0, 0)
+                    A = [(1-t) * P[0] + t * Q[0], (1-t) * P[1] + t * Q[1]]
+                    B = [(1-t) * Q[0] + t * R[0], (1-t) * Q[1] + t * R[1]]
+                    if (t < 1) {
+                        points.push([(1-t) * A[0] + t * B[0], (1-t) * A[1] + t * B[1]])
+                    }
+                    points.forEach(P => point2d(P[0], P[1], 'pink', 0.01))
+                    point2d(A[0], A[1], 'blue')
+                    point2d(B[0], B[1], 'blue')
+                    arrow2d(A[0], A[1], B[0], B[1])
+                    point2d(P[0], P[1], 'green')
+                    point2d(Q[0], Q[1], 'green')
+                    point2d(R[0], R[1], 'green')
+                })
+            })
+            draw()
+        }
+    </script> <!-- window.onload -->
+</head>
+<body>
+<canvas width="800" height="640"></canvas>
+<svg width="640" height="200" style="background-color: #9bb7d4" onload="console.log(this.children)">
+    <g fill="green" transform="translate(120,170) scale(100,100)">
+        <circle cx="-1" cy="1" r="0.03" />
+        <circle cx="-3" cy="-3" r="0.03" />
+        <circle cx="1" cy="-1" r="0.03" />
+        <path fill="none" stroke="pink" stroke-width="0.01" d="M0,-1 Q1,2 2,-3 Q3,-5 4 -5" />
+    </g>
+</svg>
+</body>
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    const layers = []
+    let scale = 100
+    let t = 0
+    const P = [-1, -1]
+    const Q = [-3, 3]
+    const R = [1, 1]
+    let A
+    let B
+    const points = []
+</script> <!-- global -->
+</html>

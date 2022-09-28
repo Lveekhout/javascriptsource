@@ -1,5 +1,5 @@
-const initial = 10.5
-const base = 900
+const initial = 10
+const base = 600
 const variantie = 300
 let cm
 
@@ -14,16 +14,20 @@ window.onload = () => {
         cm.startAnimation()
 
         addEventListener("keydown", e => {
-            switch(e.keyCode) {
-                case 17:
+            switch(e.code) {
+                case 'ArrowLeft':
+                    console.log('keyDown: ' + e.code)
+                    e.preventDefault()
                     cm.cars[0].setAcceleration(-5)
                     break;
-                case 39:
+                case 'ArrowRight':
+                    e.preventDefault()
                     cm.cars[0].setAcceleration(2)
               }
         })
         
         window.addEventListener("keyup", e => {
+            console.log('keyUp: ' + e.code)
             cm.cars[0].setAcceleration(0)
         })
         
@@ -51,8 +55,8 @@ const bots = (b, b_, c_) => {
     return ({ duration: t, distance: b*t })
 }
 
-var trial = function() {
-    for (var i=0; i<arguments.length; i++) console.log(arguments[i]);
+var trial = function () {
+    for (var i = 0; i < arguments.length; i++) console.log(arguments[i]);
 }
 
 const rimpel = () => {
