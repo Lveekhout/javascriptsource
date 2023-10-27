@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSD</title>
+    <script src="xsd-input.js"></script>
+    <script>
+        let types = new Set()
+        const getYear = xmlDoc => xmlDoc.querySelector('schema').attributes.getNamedItem('xmlns:upa').value.split('/')[4]
+
+        const handleVeld = veld => {
+            let content
+            xsds_base64
+                .map(xsd_base64 => atob(xsd_base64))
+                .forEach((xsd, idx) => {
+                    let year
+                    try {
+                        const parser = new DOMParser()
+                        const xmlDoc = parser.parseFromString(xsd, "text/xml")
+                        year = getYear(xmlDoc)
+                        const element = xmlDoc.querySelector(`*[name="${veld}"]`)
+                        if (element.attributes.hasOwnProperty('type')) {
+                            const type = element.attributes.getNamedItem('type').value
+                            if (type.split(':').length === 2) types.add(type.split(':')[1])
+                        }
+                        if (idx === 0) {
+                            console.dir(`${idx}\t${veld}\t${year}\tinit`)
+                        } else {
+                            if (content !== element.outerHTML) {
+                                console.dir(`${idx}\t${veld}\t${year}\tanders`)
+                            } else {
+                                console.dir(`${idx}\t${veld}\t${year}\tzelfde`)
+                            }
+                        }
+                        content = element.outerHTML
+                    } catch (e) {
+                        content = e.message
+                        console.dir(`${idx}\t${veld}\t${year}\t${e.message}`)
+                    }
+                })
+        }
+
+        window.onload = () => {
+            velden.forEach(veld => handleVeld(veld))
+            types.forEach(type => handleVeld(type))
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

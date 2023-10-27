@@ -92,8 +92,8 @@ const f = x => {
     else return -x*x + 4*x - 2
 }
 
-function l(x) {
-    return x*x
+function l(x) { // 2022-10-23 voor differentieren: (l(a+x)-l(a))/x
+    return Math.sqrt(1 - Math.pow(x, 2))
 }
 
 // https://www.youtube.com/watch?v=hL6MPoqgwHU
