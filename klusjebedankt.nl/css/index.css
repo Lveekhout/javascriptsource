@@ -1,0 +1,51 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0 auto;
+    padding: 0;
+    width: 1400px;
+    font: normal 18pt Verdana;
+}
+.header1 {
+    background-color: #1e4747;
+    color: white;
+    padding: 20px 33% 10px 0;
+    text-align: right;
+    font-weight: bold;
+    font-size: 36pt;
+}
+.header2 {
+    background-color: #1e4747;
+    color: white;
+    padding: 10px 33% 20px 0;
+    text-align: right;
+    font-size: 28pt;
+}
+
+/*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+.flex-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+}
+.flex-box-item {
+    padding: 20px;
+    font-size: 21pt;
+    flex: 1 1 0;
+    text-align: center;
+    background-color: #788e90;
+    color: white
+}
+.flex-box-item-bottom {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 28pt;
+}
+.kleiner-font {
+    font-size: 18pt;
+}
+
+ul li {
+    padding-left: 20px;
+}

@@ -53,7 +53,7 @@ function Car(id, position, speed, color, interval) {
         const t = result[1]
         this.history.push({interval: this.interval, b: b, s: s, v: v, a: a, t: t})
         if (isFinite(result[0])) {
-            if (result[0] < 0) {
+            if (result[0] <= 0) {
                 this.setAcceleration(result[0])
             } else if (isFinite(result[1])) {
                 if (result[1] > this.interval / 1000) {

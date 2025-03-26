@@ -27,9 +27,9 @@ function CarManager(canvas, tracklength, xbox) {
     this.startAnimation = () => {
         animating = true
         window.requestAnimationFrame(setInitialLastUpdate)
-        // this.cars.forEach((car, idx) => {
-        //     if (car.interval) intervals.push(setInterval(() => car.decide(nextCarArray(idx)), car.interval))
-        // })
+        this.cars.forEach((car, idx) => {
+            if (car.interval) intervals.push(setInterval(() => car.decide(nextCarArray(idx)), car.interval))
+        })
     }
 
     const setInitialLastUpdate = milli => {

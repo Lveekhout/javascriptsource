@@ -7,16 +7,16 @@ window.onload = () => {
     let xbox = new Image()
     xbox.onload = e => {
         cm = new CarManager(document.getElementById('canvas001'), 200, xbox)
-        cm.addCar(new Car(0, 50, 0, "red"))
-        cm.addCar(new Car(1,  0, 0, "blue", base + random(variantie)))
-        // cm.addCar(new Car(0, 190, initial, "red"))
-        // for (let i=180,p=1; i>=0; i-=10,p++) cm.addCar(new Car(p, i, initial, "blue", base + random(variantie)))
+        // cm.addCar(new Car(0, 50, 0, "red"))
+        // cm.addCar(new Car(1,  0, 0, "blue", base + random(variantie)))
+        cm.addCar(new Car(0, 190, initial, "red"))
+        for (let i=180,p=1; i>=0; i-=10,p++) cm.addCar(new Car(p, i, initial, "blue", base + random(variantie)))
+        // cm.addCar(new Car(1, 180, initial, "blue", base + random(variantie)))
         cm.startAnimation()
 
         addEventListener("keydown", e => {
             switch(e.code) {
                 case 'ArrowLeft':
-                    console.log('keyDown: ' + e.code)
                     e.preventDefault()
                     cm.cars[0].setAcceleration(-5)
                     break;
@@ -27,7 +27,6 @@ window.onload = () => {
         })
         
         window.addEventListener("keyup", e => {
-            console.log('keyUp: ' + e.code)
             cm.cars[0].setAcceleration(0)
         })
         
